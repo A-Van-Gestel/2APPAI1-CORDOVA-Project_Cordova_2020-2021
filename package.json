@@ -5,7 +5,9 @@
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "browser": "phonegap serve",
+    "android": "cordova run android",
+    "icon": "cordova-res android --type icon"
   },
   "keywords": [
     "ecosystem:cordova"
