@@ -1,12 +1,12 @@
 # Project Cordova 2020 - 2021
 
-- **Naam**: ......
-- **Klas**: (2APPAI A, 2APPAI B, 2APPAI C, 2OHO, 3IoT)
-- **Email**: <a href="mailto:demo@example.com">demo@example.com</a>
-- **Studentnr**: ......
+- **Naam**: Van Gestel Axel
+- **Klas**: (2APPAI A)
+- **Email**: <a href="mailto:r0784084@student.thomasmore.be">r0784084@student.thomasmore.be</a>
+- **Studentnr**: r0784084
 - **Download APK URL**: ......
 
-![Hier een link naar uw foto](https://cdn.iconscout.com/icon/free/png-256/user-2451533-2082543.png)
+![Hier een link naar uw foto](resources/A_Van_Gestel_FACE_400px.JPG)
 
 ## Korte omschrijving van de app
 
