@@ -1,7 +1,7 @@
 # Project Cordova 2020 - 2021
 
 - **Naam**: Van Gestel Axel
-- **Klas**: (2APPAI A)
+- **Klas**: 2 APPAI A
 - **Email**: <a href="mailto:r0784084@student.thomasmore.be">r0784084@student.thomasmore.be</a>
 - **Studentnr**: r0784084
 - **Download APK URL**: ......
