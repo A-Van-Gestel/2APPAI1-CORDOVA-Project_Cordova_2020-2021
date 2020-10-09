@@ -10,7 +10,9 @@
 
 ## Korte omschrijving van de app
 
-...............................
+Mijn plan is om een app te ontwikkelen waarmee de gebruiker snel informatie (naam, stats, skills, skins,...) over een bepaald T-doll (character) van de game “Girls Frontline” kan opzoeken. Om dit efficiënt te laten verlopen kan ik gebruik maken van de `girlsfrontline-core API` die deze info beheert en up-to-date houd. <br />
+De gebruiker kan dan bepaalde T-doll’s opslaan in een lokale lijst zodat ie snel toegang heeft tot hun informatie.
+
 
 ## Plug-ins in mijn app
 
