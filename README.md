@@ -27,6 +27,7 @@ Gebruikt voor de identifier, versie & build nummer van de applicatie op te halen
 ## To Do
 - [x] Idee vinden
 - [x] Minstens 4 Tabs aanmaken (Info, T-Doll, Equipment, Fairy, Favorites,...)
+- [x] Info Page (naam, e-mail, sms, tel, extra info app)
 - [x] Mintens 1 Cordova Plug-in
 - [ ] Data uitwisseling met JSON (AJAX) - API (girlsfrontline-core API)
 - [ ] Local storage (Laatste selectie, favoriete,...)
