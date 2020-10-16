@@ -24,34 +24,37 @@
 
     <!-- Fixed sideNav -->
     <ul id="nav-mobile" class="sidenav">
-        <li><a href="#!" data-show="tabAPPInfo"><i class="material-icons">smartphone</i>APP Info</a></li>
-        <li>
-            <div class="divider"></div>
-        </li>
-        <li><a href="#!" data-show="tab2"><i class="material-icons">build</i>Tab 2</a></li>
-        <li>
-            <div class="divider"></div>
-        </li>
-        <li><a href="#!" data-show="tab3"><i class="material-icons">build</i>Tab 3</a></li>
-        <li>
-            <div class="divider"></div>
-        </li>
-        <li><a href="#!" data-show="tab4"><i class="material-icons">build</i>Tab 4</a></li>
+    <!-- sideNav title -->
+        <li><div class="user-view blue">
+            <p class="white-text name">Girls Frontline Information Bank</p>
+            <p class="white-text email">GFIB ver. <span id="APP_info_version"></span></p>
+        </div></li>
+        <!-- sideNav Tab 1 -->
+        <li><a href="#!" data-show="tabAPPInfo" class="waves-effect"><i class="material-icons">smartphone</i>APP Info</a></li>
+        <li><div class="divider"></div></li>
+        <!-- sideNav Tab 2 -->
+        <li><a href="#!" data-show="tab2" class="waves-effect"><i class="material-icons">build</i>Tab 2</a></li>
+        <li><div class="divider"></div></li>
+        <!-- sideNav Tab 3 -->
+        <li><a href="#!" data-show="tab3" class="waves-effect"><i class="material-icons">build</i>Tab 3</a></li>
+        <li><div class="divider"></div></li>
+        <!-- sideNav Tab 4 -->
+        <li><a href="#!" data-show="tab4" class="waves-effect"><i class="material-icons">build</i>Tab 4</a></li>
     </ul>
 
 
     <!-- Grid -->
     <div class="container">
+        <!-- Main Tab 1 -->
         <div class="row spa" id="tabAPPInfo">
             <div class="col s12">
                 <h4><i class="material-icons">smartphone</i> APP Info</h4>
-                <p><a href="https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-device/index.html">cordova-plugin-device</a></p>
                 <p><a href="https://www.npmjs.com/package/cordova-plugin-appinfo">cordova-plugin-appinfo</a></p>
-                <div id="model"></div>
-                <div id="APPVersion"></div>
+                <div id="APP_info_all"></div>
             </div>
         </div>
 
+        <!-- Main Tab 2 -->
         <div class="row spa" id="tab2">
             <div class="col s12">
                 <h4><i class="material-icons">build</i> Tab 2</h4>
@@ -62,6 +65,7 @@
             </div>
         </div>
 
+        <!-- Main Tab 3 -->
         <div class="row spa" id="tab3">
             <div class="col s12">
                 <h4><i class="material-icons">build</i> Tab 3</h4>
@@ -81,6 +85,7 @@
             </div>
         </div>
 
+        <!-- Main Tab 4 -->
         <div class="row spa" id="tab4">
             <div class="col s12">
                 <h4><i class="material-icons">build</i> Tab 4</h4>
@@ -89,21 +94,6 @@
                 </p>
         </div>
     </div>
-
-    <div class="row">
-        <p>Custom + overwrite css styles: <b>css/app.css</b></p>
-        <hr>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam dignissimos nihil possimus, quidem
-            recusandae
-            velit! Alias aut deserunt ducimus iusto perspiciatis quam quo repellendus reprehenderit repudiandae
-            similique
-            ut, velit voluptatum!</p>
-        <p>Architecto assumenda consectetur eligendi eveniet facilis impedit in iste, maxime modi molestiae nesciunt non
-            optio praesentium quasi quia rem temporibus totam vitae voluptas voluptate? Amet cum id magnam nostrum
-            quam.</p>
-        <p>Accusantium aliquam consequuntur cumque cupiditate dolore dolorum ea eaque eligendi eos, exercitationem
-            itaque
-            iusto magni maxime minima molestiae molestias neque odio placeat quae, quam quas qui quis sed sunt unde.</p>
     </div>
 </main>
 <script src="js/jquery.3.5.1min.js"></script>

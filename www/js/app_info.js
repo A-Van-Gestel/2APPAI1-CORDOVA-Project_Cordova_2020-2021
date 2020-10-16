@@ -6,9 +6,13 @@ let AppInfo = function () {
             <b>Application Version: </b>${navigator.appInfo.version}<br>
             <b>Application Build: </b>${navigator.appInfo.build}<br>
         `;
-        $('#APPVersion').html(data);
+        $('#APP_info_all').html(data);
+        $('#APP_info_identifier').html(navigator.appInfo.identifier);
+        $('#APP_info_version').html(navigator.appInfo.version);
+        $('#APP_info_build').html(navigator.appInfo.build);
     };
+
     return {
-        init: init
+        init: init,
     };
 }();
