@@ -22,7 +22,7 @@ Gebruikt voor de identifier, versie & build nummer van de applicatie op te halen
 
 
 ## Tip: GitHub Markdown
-[https://docs.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax]()
+[https://docs.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax](https://docs.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax)
 
 ## To Do
 - [x] Idee vinden
