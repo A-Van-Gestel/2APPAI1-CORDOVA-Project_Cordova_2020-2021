@@ -8,9 +8,13 @@ $(function(){
         $('#' + $(this).data('show')).show();       // De huidige link dat je klikt wordt geshowed
         $('.sidenav').sidenav('close');             // De navbar sluit zichzelf
     });
+
+
 });
 
 function onDeviceReady() {
     console.log('Device is ready');
     AppInfo.init();
+    GirlsFrontlineCoreAPI.init();
+    GirlsFrontlineCoreAPI.example();
 };
