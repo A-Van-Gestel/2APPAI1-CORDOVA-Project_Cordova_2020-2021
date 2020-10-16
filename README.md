@@ -16,7 +16,7 @@ De gebruiker kan dan bepaalde T-doll’s opslaan in een lokale lijst, zodat hij 
 
 ## Plug-ins in mijn app
 
-- [cordova-plugin-appinfo](https://www.npmjs.com/package/cordova-plugin-appinfo">cordova-plugin-appinfo)  
+- [cordova-plugin-appinfo](https://www.npmjs.com/package/cordova-plugin-appinfo)  
 Gebruikt voor de identifier, versie & build nummer van de applicatie op te halen, op deze manier gebeurt dit automatisch en hoef je geen html code te wijzigen bij een update of versie verandering.
 
 
