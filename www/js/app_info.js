@@ -2,9 +2,9 @@ let AppInfo = function () {
     let init = function () {
 
         let data = `
-            <b>Application Identifier: </b>${navigator.appInfo.identifier}<br>
-            <b>Application Version: </b>${navigator.appInfo.version}<br>
-            <b>Application Build: </b>${navigator.appInfo.build}<br>
+            <b>Identifier: </b>${navigator.appInfo.identifier}<br>
+            <b>Version: </b>${navigator.appInfo.version}<br>
+            <b>Build: </b>${navigator.appInfo.build}<br>
         `;
         $('#APP_info_all').html(data);
         $('#APP_info_identifier').html(navigator.appInfo.identifier);
