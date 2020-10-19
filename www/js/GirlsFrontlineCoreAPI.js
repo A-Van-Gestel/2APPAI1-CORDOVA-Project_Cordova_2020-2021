@@ -1,14 +1,25 @@
 let GirlsFrontlineCoreAPI = function () {
     const doll_types = ['hg', 'smg', 'rf', 'ar', 'mg', 'sg']
+    // console.log("Types: ", doll_types)
 
     $('#tdoll_selection').on('change', function() {
         let id = this.value;
-        console.log(this.value);
+        console.log("Dropdown: Value = ", this.value);
         if (id !== "") {
             _set_html_doll_data(parseInt(id))
         }
-
     })
+
+    $('#btns_doll_type').children().on('click', function() {
+        let doll_type = $(this).data('type');
+        console.log('Button: type = ', doll_type);
+        $(this).siblings().addBack().removeClass("active");
+        $(this).addClass("active");
+
+        get_dolls_by_type(doll_type.toLowerCase())
+    })
+
+
 
     let init = function () {
     };
@@ -41,8 +52,6 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     let get_dolls_by_type = function (input_type) {
-
-        console.log("Types: ", doll_types)
         console.log("Input: Type = ", input_type)
 
         if (doll_types.includes(input_type)) {
@@ -52,14 +61,11 @@ let GirlsFrontlineCoreAPI = function () {
                     // console.log(tdoll.type + " - " + tdoll.codename, tdoll)
                     dolls_by_type.push([tdoll.id, tdoll.codename]);
                 }
-
-
             });
 
             console.log("T-Doll of type = " + input_type, dolls_by_type);
             _set_doll_selection_dropdown(dolls_by_type);
         }
-
     }
 
     let _set_doll_selection_dropdown = function (input_doll_list) {
@@ -68,6 +74,8 @@ let GirlsFrontlineCoreAPI = function () {
         input_doll_list.forEach(function (doll) {       // Dynamically add Dolls to the list
             $('#tdoll_selection').append("<option value='" + doll[0] + "'>" + doll[1] + "</option>");
         })
+        // Form Selection ReInitialization
+        $('select').formSelect();
     }
 
     let _set_html_doll_data = function (input_id) {
