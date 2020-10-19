@@ -33,7 +33,7 @@
         <li><a href="#!" data-show="tabAPPInfo" class="waves-effect"><i class="material-icons">smartphone</i>Info</a></li>
         <li><div class="divider"></div></li>
         <!-- sideNav Tab 2 -->
-        <li><a href="#!" data-show="tab2" class="waves-effect"><i class="material-icons">build</i>Tab 2</a></li>
+        <li><a href="#!" data-show="tabTDollData" class="waves-effect"><i class="material-icons">build</i>T-Doll Data</a></li>
         <li><div class="divider"></div></li>
         <!-- sideNav Tab 3 -->
         <li><a href="#!" data-show="tab3" class="waves-effect"><i class="material-icons">build</i>Tab 3</a></li>
@@ -65,13 +65,33 @@
         </div>
 
         <!-- Main Tab 2 -->
-        <div class="row spa" id="tab2">
+        <div class="row spa" id="tabTDollData">
             <div class="col s12">
-                <h4><i class="material-icons">build</i> Tab 2</h4>
-                <p>
-                    <a href="https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-network-information/index.html">cordova-plugin-network-information</a>
-                </p>
-                <h5 id="networkState"></h5>
+                <h4><i class="material-icons">build</i> T-Doll Data</h4>
+                <div class="row">
+                    <a id="btn_HG" data-type="HG" class="waves-effect waves-light btn-small col s4">HG</a>
+                    <a id="btn_SMG" data-type="SMG" class="waves-effect waves-light btn-small col s4">SMG</a>
+                    <a id="btn_RF" data-type="RF" class="waves-effect waves-light btn-small col s4">RF</a>
+                    <a id="btn_AR" data-type="AR" class="waves-effect waves-light btn-small col s4">AR</a>
+                    <a id="btn_MG" data-type="MG" class="waves-effect waves-light btn-small col s4">MG</a>
+                    <a id="btn_SG" data-type="SG" class="waves-effect waves-light btn-small col s4">SG</a>
+                </div>
+
+                <div class="input-field">
+                    <select id="tdoll_selection">
+                        <option value="" disabled selected>Choose a Type</option>
+                    </select>
+                    <label for="tdoll_selection">T-Doll Selection</label>
+                </div>
+                <h5>Doll Data</h5>
+                <div id="Doll_Data">
+                    <b>Name: </b>No Data<br>
+                    <b>ID: </b>No Data<br>
+                    <b>Type: </b>No Data<br>
+                    <b>Rank: </b>No Data<br>
+                    <b>BuildTime: </b>No Data<br>
+                    <b>Skins: </b>No Data<br>
+                </div>
             </div>
         </div>
 
@@ -115,3 +135,6 @@
 <script defer src="js/GirlsFrontlineCoreAPI.js"></script>
 </body>
 </html>
+
+<!--TODO: Implement Network check (Modal)-->
+<!--TODO: Code selector Buttons in (or replace with dropdown)-->

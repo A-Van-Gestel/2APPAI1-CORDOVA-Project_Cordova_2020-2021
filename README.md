@@ -29,7 +29,7 @@ Gebruikt voor de identifier, versie & build nummer van de applicatie op te halen
 - [x] Minstens 4 Tabs aanmaken (Info, T-Doll, Equipment, Fairy, Favorites,...)
 - [x] Info Page (naam, e-mail, sms, tel, extra info app)
 - [x] Mintens 1 Cordova Plug-in
-- [ ] Data uitwisseling met JSON (AJAX) - API (girlsfrontline-core API)
+- [x] Data uitwisseling met JSON (AJAX) - API (girlsfrontline-core API)
 - [ ] Local storage (Laatste selectie, favoriete,...)
 - [ ] Applicatie publiceren ([Sinners - Cordova Project (WIP)](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/))
 - [ ] ...

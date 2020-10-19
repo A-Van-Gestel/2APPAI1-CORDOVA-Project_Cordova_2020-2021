@@ -9,6 +9,14 @@ $(function(){
         $('.sidenav').sidenav('close');             // De navbar sluit zichzelf
     });
 
+    // Form Selection Initialization
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
+
+
+
+
 
 });
 
@@ -16,5 +24,6 @@ function onDeviceReady() {
     console.log('Device is ready');
     AppInfo.init();
     GirlsFrontlineCoreAPI.init();
-    GirlsFrontlineCoreAPI.example();
+    // GirlsFrontlineCoreAPI.example();
+    GirlsFrontlineCoreAPI.get_dolls_by_type('hg');
 };
