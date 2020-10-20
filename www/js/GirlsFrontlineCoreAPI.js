@@ -1,6 +1,10 @@
+// TODO: Remove unneeded code (loaded_dynamically)
+// TODO: Remove unneeded function (Example)
+
 let GirlsFrontlineCoreAPI = function () {
     const doll_types = ['hg', 'smg', 'rf', 'ar', 'mg', 'sg']
     // console.log("Types: ", doll_types)
+    let loaded_dynamically = false;
 
     $('#tdoll_selection').on('change', function() {
         let id = this.value;
@@ -21,8 +25,33 @@ let GirlsFrontlineCoreAPI = function () {
 
 
 
-    let init = function () {
+    let _init = function () {
+        get_dolls_by_type();
     };
+
+    let get_loaded_dynamically = function () {
+        _init_script()
+        return loaded_dynamically;
+    }
+
+    let _init_script = function () {
+        $.getScript( "https://unpkg.com/girlsfrontline-core/umd/gfcore.min.js")
+            .done(function(script, textStatus, jqxhr) {
+                console.log( "GirlsFrontlineCore-API loaded successfully: ", jqxhr.status + " - " + textStatus);
+                loaded_dynamically = true;
+                console.log("Loaded - done: loaded_dynamically = ", loaded_dynamically)
+                $('#GFLC_API_Loaded').html(`<b>GFL-Core API: </b>Loaded`);
+                NetworkState.close_modal();
+                _init();
+            })
+            .fail(function(jqxhr, settings, exception) {
+                console.error("GirlsFrontlineCore-Api failed to load: ", jqxhr.status + " - " + exception);
+                loaded_dynamically =  false;
+                console.log("Loaded - fail: loaded_dynamically = ", loaded_dynamically)
+                $('#GFLC_API_Loaded').html(`<b>GFL-Core API: </b> ${exception}`);
+            })
+    };
+
 
     let example = function () {
         const g36 = gfcore.dolls.find(({codename}) => codename === 'G36');
@@ -51,20 +80,24 @@ let GirlsFrontlineCoreAPI = function () {
     }
 
 
-    let get_dolls_by_type = function (input_type) {
+    let get_dolls_by_type = function (input_type = 'hg') {
         console.log("Input: Type = ", input_type)
+        try {
+            if (doll_types.includes(input_type)) {
+                let dolls_by_type = []
+                gfcore.dolls.forEach(function (tdoll) {
+                    if (tdoll.type === input_type) {
+                        // console.log(tdoll.type + " - " + tdoll.codename, tdoll)
+                        dolls_by_type.push([tdoll.id, tdoll.codename]);
+                    }
+                });
 
-        if (doll_types.includes(input_type)) {
-            let dolls_by_type = []
-            gfcore.dolls.forEach(function (tdoll) {
-                if (tdoll.type === input_type) {
-                    // console.log(tdoll.type + " - " + tdoll.codename, tdoll)
-                    dolls_by_type.push([tdoll.id, tdoll.codename]);
-                }
-            });
-
-            console.log("T-Doll of type = " + input_type, dolls_by_type);
-            _set_doll_selection_dropdown(dolls_by_type);
+                console.log("T-Doll of type = " + input_type, dolls_by_type);
+                _set_doll_selection_dropdown(dolls_by_type);
+            }
+        }
+        catch (err) {
+            console.error("get_dolls_by_type: Failed")
         }
     }
 
@@ -103,7 +136,9 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     return {
-        init: init,
+        // init: init,
+        // init_script: init_script,
+        get_loaded_dynamically: get_loaded_dynamically,
         example: example,
         get_dolls_by_type: get_dolls_by_type,
     };

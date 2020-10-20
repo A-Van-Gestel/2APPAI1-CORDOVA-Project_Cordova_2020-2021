@@ -23,7 +23,8 @@ $(function(){
 function onDeviceReady() {
     console.log('Device is ready');
     AppInfo.init();
-    GirlsFrontlineCoreAPI.init();
+    // GirlsFrontlineCoreAPI.init();
     // GirlsFrontlineCoreAPI.example();
-    GirlsFrontlineCoreAPI.get_dolls_by_type('hg');
+    GirlsFrontlineCoreAPI.get_dolls_by_type();
+    NetworkState.init();
 };
