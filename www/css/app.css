@@ -16,3 +16,18 @@ p {
     margin-top: 0;
 }
 
+.btn-small {
+
+}
+
+.btn-small.active {
+    !important;background-color: #ffb608;
+}
+
+.orange_gfl-text {
+    color: #ffb608;
+}
+
+.grey_gfl {
+    background-color: #424942;
+}
