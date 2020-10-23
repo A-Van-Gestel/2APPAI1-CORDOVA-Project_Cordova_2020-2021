@@ -29,6 +29,27 @@ let GirlsFrontlineCoreAPI = function () {
     })
 
 
+    // Get selected T-Doll data from dropdown
+    $('#tdoll_selection_favorite').on('change', function() {
+        let id = this.value;
+        console.log("Dropdown: Value = ", this.value);
+        if (id !== "") {
+            _set_html_doll_data(parseInt(id))
+        }
+    })
+
+
+    // T-Doll type button array selection (for dropdown)
+    $('#btns_favorite').children().on('click', function() {
+        let doll_type = $(this).data('type');
+        console.log('Button: type = ', doll_type);
+        $(this).siblings().addBack().removeClass("active");
+        $(this).addClass("active");
+
+        get_dolls_by_type(doll_type.toLowerCase(), true)
+    })
+
+
 
     // ---------- Function Stuff ----------
     // initialise the systems using the API
@@ -105,7 +126,7 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     // Sets the T-Doll HTML Data on screen
-    let _set_html_doll_data = function (input_id) {
+    let _set_html_doll_data = function (input_id, favorite = false) {
         console.log("Input_ID = ", input_id)
         let doll = gfcore.dolls.find(({id}) => id === input_id);
         console.log("Doll_Data = ", doll);
@@ -126,7 +147,13 @@ let GirlsFrontlineCoreAPI = function () {
             <b>BuildTime: </b>${BuildTimeString}<br>
             <b>Skins: </b>${doll.skins.length}<br>
         `;
-        $('#Doll_Data').html(doll_data);
+        if (favorite) {
+            $('#Doll_Data_favorite').html(doll_data);
+        }
+        else {
+            $('#Doll_Data').html(doll_data);
+        }
+
     }
 
 
