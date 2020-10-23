@@ -31,7 +31,7 @@ let NetworkState = function () {
         states[Connection.CELL_4G]  = 'Cell 4G connection';
         states[Connection.CELL]     = 'Cell generic connection';
         states[Connection.NONE]     = 'No network connection';
-        console.log('states', states);
+        // console.log('states', states);
 
         // Get current Network State
         let networkState = _getState()

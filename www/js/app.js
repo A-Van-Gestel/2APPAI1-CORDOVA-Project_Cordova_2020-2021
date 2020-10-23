@@ -28,7 +28,5 @@ function onDeviceReady() {
     console.log('Device is ready');
     AppInfo.init();                                  // Get & Set the APP Info
     NetworkState.init();                            // Get the Network State on Launch
-    // GirlsFrontlineCoreAPI.init();
-    // GirlsFrontlineCoreAPI.example();
-    GirlsFrontlineCoreAPI.get_dolls_by_type();      // Get T-Doll by Type & Set the T-Doll Dropdown
+    GirlsFrontlineCoreAPI.init();
 };
