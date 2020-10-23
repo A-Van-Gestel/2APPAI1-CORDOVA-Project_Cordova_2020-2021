@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="be.axelvangestel.project" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Project Cordova</name>
+    <name>Girls Frontline Information Bank</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        A wiki like APP to get quickly get information about T-Dolls.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="r0784084@student.thomasmore.be" href="https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/">
+        Van Gestel Axel
     </author>
     <content src="index.html" />
     <access origin="*" />
