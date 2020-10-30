@@ -88,6 +88,23 @@ let GirlsFrontlineCoreAPI = function () {
     })
 
 
+    // --- Build Time tab ---
+    // Open TimePicker on clicking the Build Time text field
+    $('#tdoll_BuildTime').on('click', function() {
+        MaterialDateTimePicker.showTimePicker()
+    })
+
+
+    // Get selected T-Doll data from dropdown
+    $('#tdoll_selection_BuildTime').on('change', function() {
+        let id = this.value;
+        // console.log("Dropdown: Value = ", this.value);
+        if (id !== "") {
+            _set_html_doll_data(parseInt(id), undefined, true)
+        }
+    })
+
+
 
     // ---------- Function Stuff ----------
     // initialise the systems using the API
@@ -166,17 +183,45 @@ let GirlsFrontlineCoreAPI = function () {
             }
         }
         catch (err) {
-            console.error("get_dolls_by_type: Failed")
+            console.error("get_dolls_by_type: Failed:", err)
+        }
+    }
+
+
+    // Get a List of all T-Dolls with a certain Build Time
+    let get_dolls_by_buildTime = function (input_buildTime) {
+        console.log("Build Time = " + input_buildTime);
+        try {
+            let dolls_by_buildTime = []
+            gfcore.dolls.forEach(function (tdoll) {
+                    if (tdoll.buildTime === input_buildTime) {
+                        // console.log(tdoll.buildTime + " - " + tdoll.codename)
+                        dolls_by_buildTime.push([tdoll.id, tdoll.codename]);
+                    }
+                }
+            );
+
+            console.log("dolls_by_buildTime = ", dolls_by_buildTime)
+            console.log("dolls_by_buildTime.length = " + dolls_by_buildTime.length)
+            if (dolls_by_buildTime.length > 0) {
+                _set_doll_selection_dropdown(dolls_by_buildTime, undefined, true);;
+            }
+        }
+        catch (err) {
+            console.error("get_dolls_by_buildTime: Failed:", err)
         }
     }
 
 
     // Sets the T-Doll Dropdown content
-    let _set_doll_selection_dropdown = function (input_doll_list, favorite = false) {
+    let _set_doll_selection_dropdown = function (input_doll_list, favorite = false, buildTime = false) {
         let selector = "";
-        switch (favorite) {
-            case true:
+        switch (true) {
+            case favorite === true:
                 selector = "#tdoll_selection_favorite"
+                break;
+            case buildTime === true:
+                selector = "#tdoll_selection_BuildTime"
                 break;
             default:
                 selector = "#tdoll_selection";
@@ -193,7 +238,7 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     // Sets the T-Doll HTML Data on screen
-    let _set_html_doll_data = function (input_id, favorite = false) {
+    let _set_html_doll_data = function (input_id, favorite = false, buildTime = false) {
         // console.log("Input_ID = ", input_id)
         let doll = gfcore.dolls.find(({id}) => id === input_id);
         // console.log("Doll_Data = ", doll);
@@ -215,9 +260,12 @@ let GirlsFrontlineCoreAPI = function () {
             <b>Skins: </b>${doll.skins.length}
         `;
 
-        switch (favorite) {
-            case true:
+        switch (true) {
+            case favorite === true:
                 $('#Doll_Data_favorite').html(doll_data);
+                break;
+            case buildTime === true:
+                $('#Doll_Data_BuildTime').html(doll_data);
                 break;
             default:
                 $('#Doll_Data').html(doll_data);
@@ -323,5 +371,6 @@ let GirlsFrontlineCoreAPI = function () {
         get_loaded_dynamically: get_loaded_dynamically,
         example: example,
         get_dolls_by_type: get_dolls_by_type,
+        get_dolls_by_buildTime: get_dolls_by_buildTime,
     };
 }();

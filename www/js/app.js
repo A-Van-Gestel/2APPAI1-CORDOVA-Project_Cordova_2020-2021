@@ -1,6 +1,5 @@
-$(function(){
+$(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
-
 
 
     // ---------- Button Stuff ----------
@@ -15,12 +14,16 @@ $(function(){
 
 
     // Form Selection Initialization (dropdowns)
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('select').formSelect();
+        $('.timepicker').timepicker({
+            defaultTime: '00:20:00',
+            twelveHour: false, // change to 12 hour AM/PM clock from 24 hour
+            autoClose: false,
+            vibrate: true
+        });
     });
-
 });
-
 
 
 // ---------- Function Stuff ----------
@@ -29,4 +32,5 @@ function onDeviceReady() {
     AppInfo.init();                                  // Get & Set the APP Info
     NetworkState.init();                            // Get the Network State on Launch
     GirlsFrontlineCoreAPI.init();
-};
+    MaterialDateTimePicker.init();
+}
