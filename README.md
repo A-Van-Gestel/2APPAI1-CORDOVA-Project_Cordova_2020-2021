@@ -20,6 +20,8 @@ De gebruiker kan dan bepaalde T-doll’s opslaan in een lokale lijst, zodat hij 
 Gebruikt voor de identifier, versie & build nummer van de applicatie op te halen, op deze manier gebeurt dit automatisch en hoef je geen html code te wijzigen bij een update of versie verandering.
 - [cordova-plugin-network-information](https://www.npmjs.com/package/@osvlabs/cordova-plugin-network-information)  
 Gebruikt voor het controleren of de app online kan tijdens het opstarten, zo niet dan krijgt de gebruiker een melding dat deze app internet toegang nodig heeft om correct te werken.
+- [skwas-cordova-plugin-datetimepicker](https://www.npmjs.com/package/skwas-cordova-plugin-datetimepicker)  
+Gebruikt voor de input van de Build Time, deze plugin geeft me meer vrijheid over hoe de time picker eruit ziet en functioneert tegenover de standaard MaterializeCSS time picker.
 
 
 ## Tip: GitHub Markdown
