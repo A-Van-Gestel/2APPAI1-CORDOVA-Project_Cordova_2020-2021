@@ -33,4 +33,6 @@ function onDeviceReady() {
     NetworkState.init();                            // Get the Network State on Launch
     GirlsFrontlineCoreAPI.init();
     MaterialDateTimePicker.init();
+
+    GirlsFrontlineCoreAPI.example();
 }

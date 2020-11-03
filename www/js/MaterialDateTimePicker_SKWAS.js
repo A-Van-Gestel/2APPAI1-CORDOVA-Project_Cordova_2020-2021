@@ -16,8 +16,8 @@ let MaterialDateTimePicker = function () {
 
     // ---------- Function Stuff ----------
     let init = function () {
-        console.log("baseline Date = ", _dateTimetoSeconds(myDate))
-        console.log("baseline Date: HH:MM:SS", _dateTimetoString(myDate))
+        // console.log("baseline Date = ", _dateTimetoSeconds(myDate))
+        // console.log("baseline Date: HH:MM:SS", _dateTimetoString(myDate))
 
         _getInputDate()
         GirlsFrontlineCoreAPI.get_dolls_by_buildTime(_dateTimetoSeconds(myDate));
@@ -41,13 +41,13 @@ let MaterialDateTimePicker = function () {
 
     let _getInputDate = function () {
         let buildTime_input = $('#tdoll_BuildTime').val()
-        console.log("buildTime_input", buildTime_input)
+        // console.log("buildTime_input", buildTime_input)
         let [hours, minutes, seconds] = buildTime_input.split(':');
         myDate.setHours(parseInt(hours))
         myDate.setMinutes(parseInt(minutes))
         myDate.setSeconds(parseInt(seconds))
-        console.log("myDate: HH:MM:SS", _dateTimetoString(myDate))
-        console.log("myDate.getTime()", _dateTimetoSeconds(myDate))
+        // console.log("myDate: HH:MM:SS", _dateTimetoString(myDate))
+        // console.log("myDate.getTime()", _dateTimetoSeconds(myDate))
     }
 
 

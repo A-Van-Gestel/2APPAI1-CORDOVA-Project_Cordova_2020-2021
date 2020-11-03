@@ -119,6 +119,10 @@ let GirlsFrontlineCoreAPI = function () {
 
         get_dolls_by_type();      // Get T-Doll by Type & Set the T-Doll Dropdown
         get_dolls_by_type(undefined,true);      // Get T-Doll by Type and Favorite & Set the T-Doll Favorites Dropdown
+
+        reset_html_doll_data();
+        reset_html_doll_data(true,undefined);
+        reset_html_doll_data(undefined,true);
     };
 
 
@@ -190,19 +194,19 @@ let GirlsFrontlineCoreAPI = function () {
 
     // Get a List of all T-Dolls with a certain Build Time
     let get_dolls_by_buildTime = function (input_buildTime) {
-        console.log("Build Time = " + input_buildTime);
+        // console.log("Build Time = " + input_buildTime);
         try {
             let dolls_by_buildTime = []
             gfcore.dolls.forEach(function (tdoll) {
-                    if (tdoll.buildTime === input_buildTime) {
+                    if (tdoll.buildTime === input_buildTime && tdoll.id < 20000) {
                         // console.log(tdoll.buildTime + " - " + tdoll.codename)
                         dolls_by_buildTime.push([tdoll.id, tdoll.codename]);
                     }
                 }
             );
 
-            console.log("dolls_by_buildTime = ", dolls_by_buildTime)
-            console.log("dolls_by_buildTime.length = " + dolls_by_buildTime.length)
+            // console.log("dolls_by_buildTime = ", dolls_by_buildTime)
+            // console.log("dolls_by_buildTime.length = " + dolls_by_buildTime.length)
             if (dolls_by_buildTime.length > 0) {
                 _set_doll_selection_dropdown(dolls_by_buildTime, undefined, true);
             }
@@ -241,23 +245,58 @@ let GirlsFrontlineCoreAPI = function () {
     let _set_html_doll_data = function (input_id, favorite = false, buildTime = false) {
         // console.log("Input_ID = ", input_id)
         let doll = gfcore.dolls.find(({id}) => id === input_id);
-        // console.log("Doll_Data = ", doll);
+        console.log(doll.codename + "_Data = ", doll);
+
+        // Rank conversion
+        let Rank = doll.rank;
+        let Rank_str;
+        if (Rank === 7) {
+            Rank_str = "&#10029;"    // Special
+        } else {
+            Rank_str = "&#9733;".repeat(Rank);
+            // Rank_str = "&#9734;".repeat(Rank);
+        }
 
         // Convert seconds to Time
-        BuildTimeOBJ = new Date(doll.buildTime * 1000);
-        hours = BuildTimeOBJ.getUTCHours()
-        minutes = BuildTimeOBJ.getUTCMinutes()
-        seconds = BuildTimeOBJ.getSeconds()
-        BuildTimeString = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+        let BuildTimeOBJ = new Date(doll.buildTime * 1000);
+        let hours = BuildTimeOBJ.getUTCHours()
+        let minutes = BuildTimeOBJ.getUTCMinutes()
+        let seconds = BuildTimeOBJ.getSeconds()
+        let BuildTimeString = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+
+        // Check if Armor is 'undefined', if so set to 0
+        let stats_armor = doll.stats.armor
+        if (stats_armor === undefined) {
+            stats_armor = 0;
+        }
 
         // Data to HTML
         let doll_data = `
             <b>Name: </b>${doll.codename}<br>
             <b>ID: </b>${doll.id}<br>
             <b>Type: </b>${doll.type.toUpperCase()}<br>
-            <b>Rank: </b>${"&#9734;".repeat(doll.rank)}<br>
+            <b>Rank: </b>${Rank_str}<br>
             <b>BuildTime: </b>${BuildTimeString}<br>
             <b>Skins: </b>${doll.skins.length}
+            <br>
+            <h5>Stats</h5>
+             <table style="width:100%">
+              <tr>
+                <td><b>HP: </b>${doll.stats.hp}</td>
+                <td><b>DMG: </b>${doll.stats.pow}</td>
+                <td><b>ACC: </b>${doll.stats.hit}</td>
+              </tr>
+              <tr>
+                <td><b>EVA: </b>${doll.stats.dodge}</td>
+                <td><b>MOBILITY: </b>${doll.stats.speed}</td>
+                <td><b>ROF: </b>${doll.stats.rate}</td>
+              </tr>
+              <tr>
+                <td><b>AP: </b>${doll.stats.armorPiercing}</td>
+                <td><b>CRIT: </b>${doll.stats.criticalPercent}</td>
+                <td><b>ARMOR: </b>${stats_armor}</td>
+              </tr>
+            </table>
         `;
 
             if (favorite === true) {
@@ -281,6 +320,25 @@ let GirlsFrontlineCoreAPI = function () {
             <b>Rank: </b>No Data<br>
             <b>BuildTime: </b>No Data<br>
             <b>Skins: </b>No Data
+            <br>
+            <h5>Stats</h5>
+             <table style="width:100%">
+              <tr>
+                <td><b>HP: </b>0</td>
+                <td><b>DMG: </b>0</td>
+                <td><b>ACC: </b>0</td>
+              </tr>
+              <tr>
+                <td><b>EVA: </b>0</td>
+                <td><b>MOBILITY: </b>0</td>
+                <td><b>ROF: </b>0</td>
+              </tr>
+              <tr>
+                <td><b>AP: </b>0</td>
+                <td><b>CRIT: </b>0</td>
+                <td><b>ARMOR: </b>0</td>
+              </tr>
+            </table>
         `;
 
         if (favorite === true) {
@@ -298,29 +356,33 @@ let GirlsFrontlineCoreAPI = function () {
     // TODO: Remove unneeded function (Example)
     // Example Script
     let example = function () {
+        // console.log("gfcore", gfcore)
+
         const g36 = gfcore.dolls.find(({codename}) => codename === 'G36');
         g36.level = 70;
         g36.dummyLink = 3;
         g36.favor = 50;
-        console.log("Doll G36: ", g36.stats);
-        var skins = g36.skins;
-        skins.forEach(function (skin) {
-            console.log(skin.name);
-        });
+        console.log("Doll G36: ", g36);
+        console.log("Doll G36 Stats: ", g36.stats);
+
+        // var skins = g36.skins;
+        // skins.forEach(function (skin) {
+        //     console.log(skin.name);
+        // });
 
 
-        const equip = gfcore.equips.find(({buildTime}) => buildTime === 2100);
-        console.log("Equipment BT = 2100: ", equip.stats);
+        // const equip = gfcore.equips.find(({buildTime}) => buildTime === 2100);
+        // console.log("Equipment BT = 2100: ", equip.stats);
 
 
-        const DJMAXSEHRA = gfcore.fairies.find(({codename}) => codename === 'DJMAXSEHRA');
-        DJMAXSEHRA.skillLevel = 7;
-        console.log("Fairy DJMAXSEHRA: ", DJMAXSEHRA.skill);
-
-        gfcore.dolls.forEach(function (tdoll)
-        {
-            console.log(tdoll.type + " - " + tdoll.codename, tdoll);
-        });
+        // const DJMAXSEHRA = gfcore.fairies.find(({codename}) => codename === 'DJMAXSEHRA');
+        // DJMAXSEHRA.skillLevel = 7;
+        // console.log("Fairy DJMAXSEHRA: ", DJMAXSEHRA.skill);
+        //
+        // gfcore.dolls.forEach(function (tdoll)
+        // {
+        //     console.log(tdoll.type + " - " + tdoll.codename, tdoll);
+        // });
     }
 
 

@@ -33,7 +33,7 @@ Gebruikt voor de input van de Build Time, deze plugin geeft me meer vrijheid ove
 - [x] Info Page (naam, e-mail, sms, tel, extra info app)
 - [x] Mintens 1 Cordova Plug-in
 - [x] Data uitwisseling met JSON (AJAX) - API (girlsfrontline-core API)
-- [ ] Local storage (Laatste selectie, favoriete,...)
+- [x] Local storage (Laatste selectie, favoriete,...)
 - [ ] Applicatie publiceren ([Sinners - Cordova Project (WIP)](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/))
 - [ ] ...
 
