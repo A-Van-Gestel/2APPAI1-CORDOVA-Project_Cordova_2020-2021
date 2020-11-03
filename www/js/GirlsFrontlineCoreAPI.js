@@ -36,7 +36,7 @@ let GirlsFrontlineCoreAPI = function () {
         $(this).addClass("active");
 
         get_dolls_by_type(doll_type.toLowerCase());
-        _reset_html_doll_data();
+        reset_html_doll_data();
     })
 
     // Get selected T-Doll data from dropdown and add to Favorites
@@ -71,7 +71,7 @@ let GirlsFrontlineCoreAPI = function () {
         $(this).addClass("active");
 
         get_dolls_by_type(doll_type.toLowerCase(), true);
-        _reset_html_doll_data(true);
+        reset_html_doll_data(true);
     })
 
 
@@ -204,7 +204,7 @@ let GirlsFrontlineCoreAPI = function () {
             console.log("dolls_by_buildTime = ", dolls_by_buildTime)
             console.log("dolls_by_buildTime.length = " + dolls_by_buildTime.length)
             if (dolls_by_buildTime.length > 0) {
-                _set_doll_selection_dropdown(dolls_by_buildTime, undefined, true);;
+                _set_doll_selection_dropdown(dolls_by_buildTime, undefined, true);
             }
         }
         catch (err) {
@@ -216,15 +216,15 @@ let GirlsFrontlineCoreAPI = function () {
     // Sets the T-Doll Dropdown content
     let _set_doll_selection_dropdown = function (input_doll_list, favorite = false, buildTime = false) {
         let selector = "";
-        switch (true) {
-            case favorite === true:
-                selector = "#tdoll_selection_favorite"
-                break;
-            case buildTime === true:
-                selector = "#tdoll_selection_BuildTime"
-                break;
-            default:
-                selector = "#tdoll_selection";
+
+        if (favorite === true) {
+            selector = "#tdoll_selection_favorite"
+        }
+        else if (buildTime === true) {
+            selector = "#tdoll_selection_BuildTime"
+        }
+        else {
+            selector = "#tdoll_selection";
         }
 
         $(selector).empty()                  // Empty current dropdown list
@@ -260,20 +260,19 @@ let GirlsFrontlineCoreAPI = function () {
             <b>Skins: </b>${doll.skins.length}
         `;
 
-        switch (true) {
-            case favorite === true:
+            if (favorite === true) {
                 $('#Doll_Data_favorite').html(doll_data);
-                break;
-            case buildTime === true:
+            }
+            else if (buildTime === true) {
                 $('#Doll_Data_BuildTime').html(doll_data);
-                break;
-            default:
+            }
+            else {
                 $('#Doll_Data').html(doll_data);
-        }
+            }
     }
 
 
-    let _reset_html_doll_data = function (favorite = false) {
+    let reset_html_doll_data = function (favorite = false, buildTime = false) {
         // Data to HTML
         let doll_data = `
             <b>Name: </b>No Data<br>
@@ -284,12 +283,14 @@ let GirlsFrontlineCoreAPI = function () {
             <b>Skins: </b>No Data
         `;
 
-        switch (favorite) {
-            case true:
-                $('#Doll_Data_favorite').html(doll_data);
-                break;
-            default:
-                $('#Doll_Data').html(doll_data);
+        if (favorite === true) {
+            $('#Doll_Data_favorite').html(doll_data);
+        }
+        else if (buildTime === true) {
+            $('#Doll_Data_BuildTime').html(doll_data);
+        }
+        else {
+            $('#Doll_Data').html(doll_data);
         }
     }
 
@@ -358,7 +359,7 @@ let GirlsFrontlineCoreAPI = function () {
             }
             _setLocalStorage();
             get_dolls_by_type(selected_type_favorited, true)
-            _reset_html_doll_data(true)
+            reset_html_doll_data(true)
             M.toast({html: 'T-Doll removed from Favorites', displayLength: 2000, classes: 'grey_gfl'})
         }
     };
@@ -372,5 +373,6 @@ let GirlsFrontlineCoreAPI = function () {
         example: example,
         get_dolls_by_type: get_dolls_by_type,
         get_dolls_by_buildTime: get_dolls_by_buildTime,
+        reset_html_doll_data: reset_html_doll_data,
     };
 }();

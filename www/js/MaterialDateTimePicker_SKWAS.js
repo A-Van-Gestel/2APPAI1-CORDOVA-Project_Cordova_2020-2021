@@ -33,6 +33,7 @@ let MaterialDateTimePicker = function () {
                 // Handle new time.
                 _setInputDate(newDate);
                 GirlsFrontlineCoreAPI.get_dolls_by_buildTime(_dateTimetoSeconds(newDate));
+                GirlsFrontlineCoreAPI.reset_html_doll_data(undefined,true);
             }
         })
     }
