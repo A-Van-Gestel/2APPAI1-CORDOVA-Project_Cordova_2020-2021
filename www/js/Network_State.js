@@ -3,15 +3,22 @@ let NetworkState = function () {
     let states = {};
 
 
+    // Cache DOM for performance
+    let $NetworkModal_Retry = $('#NetworkModal_Retry');
+    let $GFLC_API_Loaded = $('#GFLC_API_Loaded');
+    let $networkState = $('#networkState');
+    let $NetworkModal = $('#NetworkModal');
+
+
 
     // ---------- Button Stuff ----------
     // Checks the network state and if not offline reloads the app (Index.html)
-    $('#NetworkModal_Retry').on('click', function() {
+    $NetworkModal_Retry.on('click', function() {
         // console.log("Button: NetworkModal_Retry");
         let NetworkState = _getState();
 
         if (NetworkState !== 'none') {
-            $('#GFLC_API_Loaded').html(`<b>GFL-Core API: </b>Loading`);
+            $GFLC_API_Loaded.html(`<b>GFL-Core API: </b>Loading`);
             // let GirlsFrontlineCoreAPI_state = GirlsFrontlineCoreAPI.get_loaded_dynamically();
             // console.log('Button: Retry: GirlsFrontlineCoreAPI_state = ', GirlsFrontlineCoreAPI_state);
             location.reload();
@@ -47,20 +54,20 @@ let NetworkState = function () {
     let _getState = function(){
         let networkState = navigator.connection.type;
         console.log('Connection type: ', networkState);
-        $('#networkState').html(`<b>Netwerk: </b>${states[networkState]}`);
+        $networkState.html(`<b>Netwerk: </b>${states[networkState]}`);
         return networkState;
     };
 
 
     // Show "No network connection" Modal
     let _show_modal = function () {
-        $('#NetworkModal').modal().modal('open');
+        $NetworkModal.modal().modal('open');
     }
 
 
     // Close "No network connection" Modal
     let close_modal = function () {
-        $('#NetworkModal').modal().modal('close');
+        $NetworkModal.modal().modal('close');
     }
 
 

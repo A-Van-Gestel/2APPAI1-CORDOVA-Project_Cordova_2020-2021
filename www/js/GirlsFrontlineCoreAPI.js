@@ -2,8 +2,25 @@ let GirlsFrontlineCoreAPI = function () {
     // ---------- Global Variables & Stuff ----------
     const doll_types = ['hg', 'smg', 'rf', 'ar', 'mg', 'sg']
     // console.log("Types: ", doll_types)
+
+
+    // DONE: add a DOM Cache for jQuery Selectors
+    // Cache DOM for performance
+    let $tdoll_selection = $('#tdoll_selection');
+    let $btns_doll_type = $('#btns_doll_type');
+    let $btnFloat_favorite = $('#btnFloat_favorite');
+    let $tdoll_selection_favorite = $('#tdoll_selection_favorite');
+    let $btns_favorite = $('#btns_favorite');
+    let $btnFloat_Unfavorite = $('#btnFloat_Unfavorite');
+    let $tdoll_BuildTime = $('#tdoll_BuildTime');
+    let $tdoll_selection_BuildTime = $('#tdoll_selection_BuildTime');
+    let $Doll_Data_favorite = $('#Doll_Data_favorite');
+    let $Doll_Data_BuildTime = $('#Doll_Data_BuildTime');
+    let $Doll_Data = $('#Doll_Data');
+
+
     // TODO: Remove unneeded code (loaded_dynamically)
-    let loaded_dynamically = false;
+    // let loaded_dynamically = false;
 
     // Stores the last selected Type
     let selected_type = "";
@@ -19,7 +36,7 @@ let GirlsFrontlineCoreAPI = function () {
     // ---------- Button Stuff ----------
     // --- T-Doll Data tab ---
     // Get selected T-Doll data from dropdown
-    $('#tdoll_selection').on('change', function() {
+    $tdoll_selection.on('change', function() {
         let id = this.value;
         // console.log("Dropdown: Value = ", this.value);
         if (id !== "") {
@@ -29,32 +46,34 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     // T-Doll type button array selection (for dropdown)
-    $('#btns_doll_type').children().on('click', function() {
-        let doll_type = $(this).data('type');
+    $btns_doll_type.children().on('click', function() {
+        let $btn_pressed = $(this);        // Cache pressed button
+        let doll_type = $btn_pressed.data('type');
         // console.log('Button: type = ', doll_type);
-        $(this).siblings().addBack().removeClass("active");
-        $(this).addClass("active");
+        $btn_pressed.siblings().addBack().removeClass("active");
+        $btn_pressed.addClass("active");
 
         get_dolls_by_type(doll_type.toLowerCase());
         reset_html_doll_data();
     })
 
     // Get selected T-Doll data from dropdown and add to Favorites
-    $('#btnFloat_favorite').on('click', function() {
-        let id = $('#tdoll_selection').val();
+    $btnFloat_favorite.on('click', function() {
+        let id = $tdoll_selection.val();
         // console.log("Favorite Button: adding ID = ", id)
         if (id !== null) {
             _addFavoriteDoll(parseInt(id));
         }
         else {
             console.error("Favorite Button: " + id + " is NaN!");
+            M.toast({html: 'No T-Doll selected to Favorite!', displayLength: 2000, classes: 'red accent-4'})
         }
     })
 
 
     // --- Favorite Tab ---
     // Get selected T-Doll data from favorites dropdown
-    $('#tdoll_selection_favorite').on('change', function() {
+    $tdoll_selection_favorite.on('change', function() {
         let id = this.value;
         // console.log("Dropdown: Value = ", this.value);
         if (id !== "") {
@@ -64,11 +83,12 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     // T-Doll type button array favorites selection (for dropdown)
-    $('#btns_favorite').children().on('click', function() {
-        let doll_type = $(this).data('type');
+    $btns_favorite.children().on('click', function() {
+        let $btn_pressed = $(this);        // Cache pressed button
+        let doll_type = $btn_pressed.data('type');
         // console.log('Button: type = ', doll_type);
-        $(this).siblings().addBack().removeClass("active");
-        $(this).addClass("active");
+        $btn_pressed.siblings().addBack().removeClass("active");
+        $btn_pressed.addClass("active");
 
         get_dolls_by_type(doll_type.toLowerCase(), true);
         reset_html_doll_data(true);
@@ -76,8 +96,8 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     // Get selected T-Doll data from dropdown and add to Favorites
-    $('#btnFloat_Unfavorite').on('click', function() {
-        let id = $('#tdoll_selection_favorite').val();
+    $btnFloat_Unfavorite.on('click', function() {
+        let id = $tdoll_selection_favorite.val();
         // console.log("UnFavorite Button: removing ID = ", id);
         if (id !== null) {
             _deleteFavoriteDoll(parseInt(id));
@@ -90,13 +110,13 @@ let GirlsFrontlineCoreAPI = function () {
 
     // --- Build Time tab ---
     // Open TimePicker on clicking the Build Time text field
-    $('#tdoll_BuildTime').on('click', function() {
+    $tdoll_BuildTime.on('click', function() {
         MaterialDateTimePicker.showTimePicker()
     })
 
 
     // Get selected T-Doll data from dropdown
-    $('#tdoll_selection_BuildTime').on('change', function() {
+    $tdoll_selection_BuildTime.on('change', function() {
         let id = this.value;
         // console.log("Dropdown: Value = ", this.value);
         if (id !== "") {
@@ -128,34 +148,34 @@ let GirlsFrontlineCoreAPI = function () {
 
     // TODO: Remove unneeded Function (get_loaded_dynamically)
     // Runs the function to load the API and returns if the script loaded correctly
-    let get_loaded_dynamically = function () {
-        _init_script()
-        return loaded_dynamically;
-    }
+    // let get_loaded_dynamically = function () {
+    //     _init_script()
+    //     return loaded_dynamically;
+    // }
 
 
     // TODO: Remove unneeded Function (_init_script)
     // Dynamically loads the GirlsFrontline-Core API using jQuery
     // After loading, initialise the systems using the API
-    let _init_script = function () {
-        $.getScript( "https://unpkg.com/girlsfrontline-core/umd/gfcore.min.js")
-            // If loaded correctly
-            .done(function(script, textStatus, jqxhr) {
-                console.log( "GirlsFrontlineCore-API loaded successfully: ", jqxhr.status + " - " + textStatus);
-                loaded_dynamically = true;
-                console.log("Loaded - done: loaded_dynamically = ", loaded_dynamically)
-                $('#GFLC_API_Loaded').html(`<b>GFL-Core API: </b>Loaded`);
-                NetworkState.close_modal();
-                _init();
-            })
-            // If failed to load
-            .fail(function(jqxhr, settings, exception) {
-                console.error("GirlsFrontlineCore-Api failed to load: ", jqxhr.status + " - " + exception);
-                loaded_dynamically =  false;
-                console.log("Loaded - fail: loaded_dynamically = ", loaded_dynamically)
-                $('#GFLC_API_Loaded').html(`<b>GFL-Core API: </b> ${exception}`);
-            })
-    };
+    // let _init_script = function () {
+    //     $.getScript( "https://unpkg.com/girlsfrontline-core/umd/gfcore.min.js")
+    //         // If loaded correctly
+    //         .done(function(script, textStatus, jqxhr) {
+    //             console.log( "GirlsFrontlineCore-API loaded successfully: ", jqxhr.status + " - " + textStatus);
+    //             loaded_dynamically = true;
+    //             console.log("Loaded - done: loaded_dynamically = ", loaded_dynamically)
+    //             $('#GFLC_API_Loaded').html(`<b>GFL-Core API: </b>Loaded`);
+    //             NetworkState.close_modal();
+    //             _init();
+    //         })
+    //         // If failed to load
+    //         .fail(function(jqxhr, settings, exception) {
+    //             console.error("GirlsFrontlineCore-Api failed to load: ", jqxhr.status + " - " + exception);
+    //             loaded_dynamically =  false;
+    //             console.log("Loaded - fail: loaded_dynamically = ", loaded_dynamically)
+    //             $('#GFLC_API_Loaded').html(`<b>GFL-Core API: </b> ${exception}`);
+    //         })
+    // };
 
 
     // Get a list of all T-Dolls of a certain Type
@@ -207,9 +227,7 @@ let GirlsFrontlineCoreAPI = function () {
 
             // console.log("dolls_by_buildTime = ", dolls_by_buildTime)
             // console.log("dolls_by_buildTime.length = " + dolls_by_buildTime.length)
-            if (dolls_by_buildTime.length > 0) {
-                _set_doll_selection_dropdown(dolls_by_buildTime, undefined, true);
-            }
+            _set_doll_selection_dropdown(dolls_by_buildTime, undefined, true);
         }
         catch (err) {
             console.error("get_dolls_by_buildTime: Failed:", err)
@@ -219,28 +237,29 @@ let GirlsFrontlineCoreAPI = function () {
 
     // Sets the T-Doll Dropdown content
     let _set_doll_selection_dropdown = function (input_doll_list, favorite = false, buildTime = false) {
-        let selector = "";
+        let selector = undefined;
 
         if (favorite === true) {
-            selector = "#tdoll_selection_favorite"
+            selector = $tdoll_selection_favorite;
         }
         else if (buildTime === true) {
-            selector = "#tdoll_selection_BuildTime"
+            selector = $tdoll_selection_BuildTime;
         }
         else {
-            selector = "#tdoll_selection";
+            selector = $tdoll_selection;
         }
 
-        $(selector).empty()                  // Empty current dropdown list
+        selector.empty()                  // Empty current dropdown list
             .append("<option value='' disabled selected>Choose a T-Doll</option>");
         input_doll_list.forEach(function (doll) {       // Dynamically add Dolls to the list
-            $(selector).append("<option value='" + doll[0] + "'>" + doll[1] + "</option>");
+            selector.append("<option value='" + doll[0] + "'>" + doll[1] + "</option>");
         })
         // Form Selection ReInitialization
         $('select').formSelect();
     }
 
 
+    // TODO: Rename to "render"
     // Sets the T-Doll HTML Data on screen
     let _set_html_doll_data = function (input_id, favorite = false, buildTime = false) {
         // console.log("Input_ID = ", input_id)
@@ -300,13 +319,13 @@ let GirlsFrontlineCoreAPI = function () {
         `;
 
             if (favorite === true) {
-                $('#Doll_Data_favorite').html(doll_data);
+                $Doll_Data_favorite.html(doll_data);
             }
             else if (buildTime === true) {
-                $('#Doll_Data_BuildTime').html(doll_data);
+                $Doll_Data_BuildTime.html(doll_data);
             }
             else {
-                $('#Doll_Data').html(doll_data);
+                $Doll_Data.html(doll_data);
             }
     }
 
@@ -314,13 +333,16 @@ let GirlsFrontlineCoreAPI = function () {
     let reset_html_doll_data = function (favorite = false, buildTime = false) {
         // Data to HTML
         let doll_data = `
-            <b>Name: </b>No Data<br>
-            <b>ID: </b>No Data<br>
-            <b>Type: </b>No Data<br>
-            <b>Rank: </b>No Data<br>
-            <b>BuildTime: </b>No Data<br>
-            <b>Skins: </b>No Data
+            <div>
+                <b>Name: </b>No Data<br>
+                <b>ID: </b>No Data<br>
+                <b>Type: </b>No Data<br>
+                <b>Rank: </b>No Data<br>
+                <b>BuildTime: </b>No Data<br>
+                <b>Skins: </b>No Data
+            </div>
             <br>
+            
             <h5>Stats</h5>
              <table style="width:100%">
               <tr>
@@ -342,13 +364,13 @@ let GirlsFrontlineCoreAPI = function () {
         `;
 
         if (favorite === true) {
-            $('#Doll_Data_favorite').html(doll_data);
+            $Doll_Data_favorite.html(doll_data);
         }
         else if (buildTime === true) {
-            $('#Doll_Data_BuildTime').html(doll_data);
+            $Doll_Data_BuildTime.html(doll_data);
         }
         else {
-            $('#Doll_Data').html(doll_data);
+            $Doll_Data.html(doll_data);
         }
     }
 
@@ -431,10 +453,14 @@ let GirlsFrontlineCoreAPI = function () {
     // ---------- Global Function returns (outside name : inside name) ----------
     return {
         init: init,
-        get_loaded_dynamically: get_loaded_dynamically,
-        example: example,
         get_dolls_by_type: get_dolls_by_type,
         get_dolls_by_buildTime: get_dolls_by_buildTime,
         reset_html_doll_data: reset_html_doll_data,
+
+
+        // TODO: Remove unneeded Function (get_loaded_dynamically)
+        // get_loaded_dynamically: get_loaded_dynamically,
+        // TODO: Remove unneeded function (Example)
+        example: example,
     };
 }();

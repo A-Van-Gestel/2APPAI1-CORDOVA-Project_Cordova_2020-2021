@@ -3,12 +3,8 @@ let MaterialDateTimePicker = function () {
     let myDate = new Date(1970,1,1,0,0,0,0); // our baseline Date (00:00:00)
 
 
-
-
-
-    // ---------- Button Stuff ----------
-
-
+    // Cache DOM for performance
+    let $tdoll_BuildTime = $('#tdoll_BuildTime');
 
 
 
@@ -40,7 +36,7 @@ let MaterialDateTimePicker = function () {
 
 
     let _getInputDate = function () {
-        let buildTime_input = $('#tdoll_BuildTime').val()
+        let buildTime_input = $tdoll_BuildTime.val()
         // console.log("buildTime_input", buildTime_input)
         let [hours, minutes, seconds] = buildTime_input.split(':');
         myDate.setHours(parseInt(hours))
@@ -53,7 +49,7 @@ let MaterialDateTimePicker = function () {
 
     let _setInputDate = function (date_input) {
         myDate = date_input
-        $('#tdoll_BuildTime').val(_dateTimetoString(myDate))
+        $tdoll_BuildTime.val(_dateTimetoString(myDate))
     }
 
 
