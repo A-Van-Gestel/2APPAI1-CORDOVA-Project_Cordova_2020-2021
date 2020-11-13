@@ -67,3 +67,15 @@ p {
 .grey_gfl-text {
     color: var(--grey_gfl-color);
 }
+
+/* ----- Override Materialize CSS ----- */
+.toast {
+    justify-content: center;
+}
+
+table {
+     border-collapse: separate;
+}
+td, th {
+    padding: 0;
+}

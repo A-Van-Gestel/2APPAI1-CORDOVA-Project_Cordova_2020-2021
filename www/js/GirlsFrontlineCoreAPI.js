@@ -189,6 +189,9 @@ let GirlsFrontlineCoreAPI = function () {
 
             // console.log("dolls_by_buildTime = ", dolls_by_buildTime)
             // console.log("dolls_by_buildTime.length = " + dolls_by_buildTime.length)
+            if (dolls_by_buildTime.length === 0) {
+                M.toast({html: 'No T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'grey_gfl'});
+            }
             _set_doll_selection_dropdown(dolls_by_buildTime, undefined, true);
         }
         catch (err) {
@@ -225,7 +228,7 @@ let GirlsFrontlineCoreAPI = function () {
     let _render_doll_data = function (input_id, favorite = false, buildTime = false) {
         // console.log("Input_ID = ", input_id)
         let doll = gfcore.dolls.find(({id}) => id === input_id);
-        console.log(doll.codename + "_Data = ", doll);
+        // (doll.codename + "_Data = ", doll);
 
         // Rank conversion
         let Rank = doll.rank;
@@ -235,6 +238,29 @@ let GirlsFrontlineCoreAPI = function () {
         } else {
             Rank_str = "&#9733;".repeat(Rank);
             // Rank_str = "&#9734;".repeat(Rank);
+        }
+
+        // Check if Mindupdate is 'undefined', if so set to No
+        let digimind_upgrade = doll.mindupdate
+        if (digimind_upgrade === undefined) {
+            digimind_upgrade = "No";
+        } else {
+            // console.log("Digimind = ", digimind_upgrade)
+            digimind_upgrade = `
+             <table>
+              <tr>
+                <td><b>Mod 1: </b>
+                    <br>Cores: ${doll.mindupdate[0].core}
+                    <br>Fragments: ${doll.mindupdate[0].mempiece}</td>
+                <td><b>Mod 2: </b>
+                    <br>Cores: ${doll.mindupdate[1].core}
+                    <br>Fragments: ${doll.mindupdate[1].mempiece}</td>
+                <td><b>Mod 3: </b>
+                    <br>Cores: ${doll.mindupdate[2].core}
+                    <br>Fragments: ${doll.mindupdate[2].mempiece}</td>
+              </tr>
+            </table>
+        `;
         }
 
         // Convert seconds to Time
@@ -257,10 +283,12 @@ let GirlsFrontlineCoreAPI = function () {
             <b>Type: </b>${doll.type.toUpperCase()}<br>
             <b>Rank: </b>${Rank_str}<br>
             <b>BuildTime: </b>${BuildTimeString}<br>
-            <b>Skins: </b>${doll.skins.length}
+            <b>Skins: </b>${doll.skins.length}<br>
+            <b>Digimind: </b>${digimind_upgrade}
             <br>
+            
             <h5>Stats</h5>
-             <table style="width:100%">
+             <table>
               <tr>
                 <td><b>HP: </b>${doll.stats.hp}</td>
                 <td><b>DMG: </b>${doll.stats.pow}</td>
@@ -294,14 +322,13 @@ let GirlsFrontlineCoreAPI = function () {
     let reset_html_doll_data = function (favorite = false, buildTime = false) {
         // Data to HTML
         let doll_data = `
-            <div>
                 <b>Name: </b>No Data<br>
                 <b>ID: </b>No Data<br>
                 <b>Type: </b>No Data<br>
                 <b>Rank: </b>No Data<br>
                 <b>BuildTime: </b>No Data<br>
-                <b>Skins: </b>No Data
-            </div>
+                <b>Skins: </b>No Data<br>
+                <b>Digimind: </b>No Data
             <br>
             
             <h5>Stats</h5>
@@ -339,7 +366,7 @@ let GirlsFrontlineCoreAPI = function () {
     // TODO: Remove unneeded function (Example)
     // Example Script
     let example = function () {
-        // console.log("gfcore", gfcore)
+        console.log("gfcore", gfcore)
 
         const g36 = gfcore.dolls.find(({codename}) => codename === 'G36');
         g36.level = 70;
