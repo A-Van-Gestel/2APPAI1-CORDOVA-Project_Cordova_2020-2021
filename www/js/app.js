@@ -14,15 +14,7 @@ $(function () {
 
 
     // Form Selection Initialization (dropdowns)
-    $(document).ready(function () {
-        $('select').formSelect();
-        $('.timepicker').timepicker({
-            defaultTime: '00:20:00',
-            twelveHour: false, // change to 12 hour AM/PM clock from 24 hour
-            autoClose: false,
-            vibrate: true
-        });
-    });
+    $('select').formSelect();
 });
 
 
