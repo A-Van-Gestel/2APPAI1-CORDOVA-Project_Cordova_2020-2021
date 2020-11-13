@@ -1,10 +1,14 @@
 let GirlsFrontlineCoreAPI = function () {
     // ---------- Global Variables & Stuff ----------
     const doll_types = ['hg', 'smg', 'rf', 'ar', 'mg', 'sg']
-    // console.log("Types: ", doll_types)
 
+    // Local Storage: Favorite dolls list
+    let favorite_doll_ids = [];
 
-    // DONE: add a DOM Cache for jQuery Selectors
+    // Cache last selected Type
+    let selected_type = "";
+    let selected_type_favorited = "";
+
     // Cache DOM for performance
     let $tdoll_selection = $('#tdoll_selection');
     let $btns_doll_type = $('#btns_doll_type');
@@ -19,14 +23,6 @@ let GirlsFrontlineCoreAPI = function () {
     let $Doll_Data = $('#Doll_Data');
 
 
-    // Stores the last selected Type
-    let selected_type = "";
-    let selected_type_favorited = "";
-
-    // Favorite dolls list
-    let favorite_doll_ids = [];
-
-
 
 
 
@@ -37,7 +33,7 @@ let GirlsFrontlineCoreAPI = function () {
         let id = this.value;
         // console.log("Dropdown: Value = ", this.value);
         if (id !== "") {
-            _set_html_doll_data(parseInt(id))
+            _render_doll_data(parseInt(id))
         }
     })
 
@@ -74,7 +70,7 @@ let GirlsFrontlineCoreAPI = function () {
         let id = this.value;
         // console.log("Dropdown: Value = ", this.value);
         if (id !== "") {
-            _set_html_doll_data(parseInt(id),true)
+            _render_doll_data(parseInt(id),true)
         }
     })
 
@@ -101,6 +97,7 @@ let GirlsFrontlineCoreAPI = function () {
         }
         else {
             console.error("UnFavorite Button: " + id + " is NaN!");
+            M.toast({html: 'No T-Doll selected to Unfavorite!', displayLength: 2000, classes: 'red accent-4'})
         }
     })
 
@@ -117,7 +114,7 @@ let GirlsFrontlineCoreAPI = function () {
         let id = this.value;
         // console.log("Dropdown: Value = ", this.value);
         if (id !== "") {
-            _set_html_doll_data(parseInt(id), undefined, true)
+            _render_doll_data(parseInt(id), undefined, true)
         }
     })
 
@@ -141,15 +138,6 @@ let GirlsFrontlineCoreAPI = function () {
         reset_html_doll_data(true,undefined);
         reset_html_doll_data(undefined,true);
     };
-
-
-    // TODO: Remove unneeded Function (get_loaded_dynamically)
-    // Runs the function to load the API and returns if the script loaded correctly
-    // let get_loaded_dynamically = function () {
-    //     _init_script()
-    //     return loaded_dynamically;
-    // }
-
 
 
     // Get a list of all T-Dolls of a certain Type
@@ -233,9 +221,8 @@ let GirlsFrontlineCoreAPI = function () {
     }
 
 
-    // TODO: Rename to "render"
     // Sets the T-Doll HTML Data on screen
-    let _set_html_doll_data = function (input_id, favorite = false, buildTime = false) {
+    let _render_doll_data = function (input_id, favorite = false, buildTime = false) {
         // console.log("Input_ID = ", input_id)
         let doll = gfcore.dolls.find(({id}) => id === input_id);
         console.log(doll.codename + "_Data = ", doll);
