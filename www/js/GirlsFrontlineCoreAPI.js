@@ -19,9 +19,6 @@ let GirlsFrontlineCoreAPI = function () {
     let $Doll_Data = $('#Doll_Data');
 
 
-    // TODO: Remove unneeded code (loaded_dynamically)
-    // let loaded_dynamically = false;
-
     // Stores the last selected Type
     let selected_type = "";
     let selected_type_favorited = "";
@@ -153,29 +150,6 @@ let GirlsFrontlineCoreAPI = function () {
     //     return loaded_dynamically;
     // }
 
-
-    // TODO: Remove unneeded Function (_init_script)
-    // Dynamically loads the GirlsFrontline-Core API using jQuery
-    // After loading, initialise the systems using the API
-    // let _init_script = function () {
-    //     $.getScript( "https://unpkg.com/girlsfrontline-core/umd/gfcore.min.js")
-    //         // If loaded correctly
-    //         .done(function(script, textStatus, jqxhr) {
-    //             console.log( "GirlsFrontlineCore-API loaded successfully: ", jqxhr.status + " - " + textStatus);
-    //             loaded_dynamically = true;
-    //             console.log("Loaded - done: loaded_dynamically = ", loaded_dynamically)
-    //             $('#GFLC_API_Loaded').html(`<b>GFL-Core API: </b>Loaded`);
-    //             NetworkState.close_modal();
-    //             _init();
-    //         })
-    //         // If failed to load
-    //         .fail(function(jqxhr, settings, exception) {
-    //             console.error("GirlsFrontlineCore-Api failed to load: ", jqxhr.status + " - " + exception);
-    //             loaded_dynamically =  false;
-    //             console.log("Loaded - fail: loaded_dynamically = ", loaded_dynamically)
-    //             $('#GFLC_API_Loaded').html(`<b>GFL-Core API: </b> ${exception}`);
-    //         })
-    // };
 
 
     // Get a list of all T-Dolls of a certain Type
@@ -458,8 +432,6 @@ let GirlsFrontlineCoreAPI = function () {
         reset_html_doll_data: reset_html_doll_data,
 
 
-        // TODO: Remove unneeded Function (get_loaded_dynamically)
-        // get_loaded_dynamically: get_loaded_dynamically,
         // TODO: Remove unneeded function (Example)
         example: example,
     };

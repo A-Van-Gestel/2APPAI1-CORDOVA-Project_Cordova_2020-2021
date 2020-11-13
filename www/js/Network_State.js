@@ -19,8 +19,6 @@ let NetworkState = function () {
 
         if (NetworkState !== 'none') {
             $GFLC_API_Loaded.html(`<b>GFL-Core API: </b>Loading`);
-            // let GirlsFrontlineCoreAPI_state = GirlsFrontlineCoreAPI.get_loaded_dynamically();
-            // console.log('Button: Retry: GirlsFrontlineCoreAPI_state = ', GirlsFrontlineCoreAPI_state);
             location.reload();
         }
     })
