@@ -10,17 +10,20 @@ let GirlsFrontlineCoreAPI = function () {
     let selected_type_favorited = "";
 
     // Cache DOM for performance
-    let $tdoll_selection = $('#tdoll_selection');
-    let $btns_doll_type = $('#btns_doll_type');
-    let $btnFloat_favorite = $('#btnFloat_favorite');
-    let $tdoll_selection_favorite = $('#tdoll_selection_favorite');
-    let $btns_favorite = $('#btns_favorite');
-    let $btnFloat_Unfavorite = $('#btnFloat_Unfavorite');
-    let $tdoll_BuildTime = $('#tdoll_BuildTime');
-    let $tdoll_selection_BuildTime = $('#tdoll_selection_BuildTime');
-    let $Doll_Data_favorite = $('#Doll_Data_favorite');
-    let $Doll_Data_BuildTime = $('#Doll_Data_BuildTime');
-    let $Doll_Data = $('#Doll_Data');
+    let $tabTDollData = $('#tabTDollData');
+    let $tabBuildTime = $('#tabBuildTime');
+    let $tabFavorite = $('#tabFavorite');
+    let $tdoll_selection = $tabTDollData.find('#tdoll_selection');
+    let $btns_doll_type = $tabTDollData.find('#btns_doll_type');
+    let $btnFloat_favorite = $tabTDollData.find('#btnFloat_favorite');
+    let $tdoll_selection_favorite = $tabFavorite.find('#tdoll_selection_favorite');
+    let $btns_favorite = $tabFavorite.find('#btns_favorite');
+    let $btnFloat_Unfavorite = $tabFavorite.find('#btnFloat_Unfavorite');
+    let $tdoll_BuildTime = $tabBuildTime.find('#tdoll_BuildTime');
+    let $tdoll_selection_BuildTime = $tabBuildTime.find('#tdoll_selection_BuildTime');
+    let $Doll_Data = $tabTDollData.find('#Doll_Data');
+    let $Doll_Data_favorite = $tabFavorite.find('#Doll_Data_favorite');
+    let $Doll_Data_BuildTime = $tabBuildTime.find('#Doll_Data_BuildTime');
 
 
 
@@ -33,7 +36,7 @@ let GirlsFrontlineCoreAPI = function () {
         let id = this.value;
         // console.log("Dropdown: Value = ", this.value);
         if (id !== "") {
-            _render_doll_data(parseInt(id))
+            _render_html_doll_data(parseInt(id))
         }
     })
 
@@ -70,7 +73,7 @@ let GirlsFrontlineCoreAPI = function () {
         let id = this.value;
         // console.log("Dropdown: Value = ", this.value);
         if (id !== "") {
-            _render_doll_data(parseInt(id),true)
+            _render_html_doll_data(parseInt(id),true)
         }
     })
 
@@ -114,7 +117,7 @@ let GirlsFrontlineCoreAPI = function () {
         let id = this.value;
         // console.log("Dropdown: Value = ", this.value);
         if (id !== "") {
-            _render_doll_data(parseInt(id), undefined, true)
+            _render_html_doll_data(parseInt(id), undefined, true)
         }
     })
 
@@ -224,7 +227,7 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     // Sets the T-Doll HTML Data on screen
-    let _render_doll_data = function (input_id, favorite = false, buildTime = false) {
+    let _render_html_doll_data = function (input_id, favorite = false, buildTime = false) {
         // console.log("Input_ID = ", input_id)
         let doll = gfcore.dolls.find(({id}) => id === input_id);
         // console.log(doll.codename + "_Data = ", doll);
