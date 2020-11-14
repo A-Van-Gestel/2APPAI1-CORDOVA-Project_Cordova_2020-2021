@@ -13,7 +13,7 @@ let MaterialDateTimePicker = function () {
     // ---------- Function Stuff ----------
     let init = function () {
         // console.log("baseline Date = ", _dateTimetoSeconds(myDate))
-        // console.log("baseline Date: HH:MM:SS", _dateTimetoString(myDate))
+        // console.log("baseline Date: HH:MM:SS", dateTimetoString(myDate))
 
         _getInputDate()
         GirlsFrontlineCoreAPI.get_dolls_by_buildTime(_dateTimetoSeconds(myDate));
@@ -42,18 +42,18 @@ let MaterialDateTimePicker = function () {
         myDate.setHours(parseInt(hours))
         myDate.setMinutes(parseInt(minutes))
         myDate.setSeconds(parseInt(seconds))
-        // console.log("myDate: HH:MM:SS", _dateTimetoString(myDate))
+        // console.log("myDate: HH:MM:SS", dateTimetoString(myDate))
         // console.log("myDate.getTime()", _dateTimetoSeconds(myDate))
     }
 
 
     let _setInputDate = function (date_input) {
         myDate = date_input
-        $tdoll_BuildTime.val(_dateTimetoString(myDate))
+        $tdoll_BuildTime.val(dateTimetoString(myDate))
     }
 
 
-    let _dateTimetoString = function (date_input) {
+    let dateTimetoString = function (date_input) {
         return date_input.getHours().toString().padStart(2, '0') + ":" + date_input.getMinutes().toString().padStart(2, '0') + ":" + date_input.getSeconds().toString().padStart(2, '0');
     }
 
@@ -70,5 +70,6 @@ let MaterialDateTimePicker = function () {
     return {
         init: init,
         showTimePicker: showTimePicker,
+        dateTimetoString: dateTimetoString,
     };
 }()

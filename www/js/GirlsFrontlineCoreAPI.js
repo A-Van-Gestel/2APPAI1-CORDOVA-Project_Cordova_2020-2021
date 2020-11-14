@@ -180,7 +180,7 @@ let GirlsFrontlineCoreAPI = function () {
         try {
             let dolls_by_buildTime = []
             gfcore.dolls.forEach(function (tdoll) {
-                    if (tdoll.buildTime === input_buildTime && tdoll.id < 20000) {
+                    if (tdoll.buildTime === input_buildTime && tdoll.id < 20000 && tdoll.rank !== 7) {
                         // console.log(tdoll.buildTime + " - " + tdoll.codename)
                         dolls_by_buildTime.push([tdoll.id, tdoll.codename]);
                     }
@@ -188,7 +188,6 @@ let GirlsFrontlineCoreAPI = function () {
             );
 
             // console.log("dolls_by_buildTime = ", dolls_by_buildTime)
-            // console.log("dolls_by_buildTime.length = " + dolls_by_buildTime.length)
             if (dolls_by_buildTime.length === 0) {
                 M.toast({html: 'No T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'grey_gfl'});
             }
@@ -228,7 +227,7 @@ let GirlsFrontlineCoreAPI = function () {
     let _render_doll_data = function (input_id, favorite = false, buildTime = false) {
         // console.log("Input_ID = ", input_id)
         let doll = gfcore.dolls.find(({id}) => id === input_id);
-        // (doll.codename + "_Data = ", doll);
+        // console.log(doll.codename + "_Data = ", doll);
 
         // Rank conversion
         let Rank = doll.rank;
@@ -237,7 +236,6 @@ let GirlsFrontlineCoreAPI = function () {
             Rank_str = "&#10029;"    // Special
         } else {
             Rank_str = "&#9733;".repeat(Rank);
-            // Rank_str = "&#9734;".repeat(Rank);
         }
 
         // Check if Mindupdate is 'undefined', if so set to No
@@ -264,11 +262,8 @@ let GirlsFrontlineCoreAPI = function () {
         }
 
         // Convert seconds to Time
-        let BuildTimeOBJ = new Date(doll.buildTime * 1000);
-        let hours = BuildTimeOBJ.getUTCHours()
-        let minutes = BuildTimeOBJ.getUTCMinutes()
-        let seconds = BuildTimeOBJ.getSeconds()
-        let BuildTimeString = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+        let BuildTimeOBJ = new Date((doll.buildTime - 3600) * 1000);        // -3600 seconds (1 hour) to count for timezone differences in calculations
+        let BuildTimeString = MaterialDateTimePicker.dateTimetoString(BuildTimeOBJ);
 
         // Check if Armor is 'undefined', if so set to 0
         let stats_armor = doll.stats.armor
@@ -369,30 +364,31 @@ let GirlsFrontlineCoreAPI = function () {
         console.log("gfcore", gfcore)
 
         const g36 = gfcore.dolls.find(({codename}) => codename === 'G36');
-        g36.level = 70;
-        g36.dummyLink = 3;
-        g36.favor = 50;
+        // g36.level = 70;
+        // g36.dummyLink = 3;
+        // g36.favor = 50;
         console.log("Doll G36: ", g36);
-        console.log("Doll G36 Stats: ", g36.stats);
+        // console.log("Doll G36 Stats: ", g36.stats);
+        console.log("Doll G36 Tiles: ", g36.effect);
 
         // var skins = g36.skins;
         // skins.forEach(function (skin) {
         //     console.log(skin.name);
         // });
 
+        // let obtain_methods = [];
+        // let id;
+        // gfcore.dolls.forEach(function (tdoll) {
+        //     tdoll.obtain.forEach(function (obtain_obj) {
+        //         id = obtain_obj.id;
+        //         if (!obtain_methods.includes(id)) {
+        //             obtain_methods.push(id);
+        //         }
+        //     })
+        // })
+        // console.log("Obtain methods = ", obtain_methods)
 
-        // const equip = gfcore.equips.find(({buildTime}) => buildTime === 2100);
-        // console.log("Equipment BT = 2100: ", equip.stats);
 
-
-        // const DJMAXSEHRA = gfcore.fairies.find(({codename}) => codename === 'DJMAXSEHRA');
-        // DJMAXSEHRA.skillLevel = 7;
-        // console.log("Fairy DJMAXSEHRA: ", DJMAXSEHRA.skill);
-        //
-        // gfcore.dolls.forEach(function (tdoll)
-        // {
-        //     console.log(tdoll.type + " - " + tdoll.codename, tdoll);
-        // });
     }
 
 

@@ -79,3 +79,26 @@ table {
 td, th {
     padding: 0;
 }
+
+
+
+/* Needs editing, copied from wiki */
+.tilegridtable {
+    background: rgb(62,62,62);
+    padding: 10px;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+.tilegridtable td {
+    background: rgba(0,0,0,0.5);
+    width: 30%;
+    padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
+}
+.tilegridtable td.buff {
+    background: rgba(0,255,222,1);
+}
+.tilegridtable td.standing {
+    background: rgba(255,255,255,1);
+}
