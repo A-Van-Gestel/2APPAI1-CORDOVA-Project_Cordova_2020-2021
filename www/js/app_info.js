@@ -15,9 +15,8 @@ let AppInfo = function () {
     let init = function () {
         // Get APP data
         let data = `
-            <b>Identifier: </b>${navigator.appInfo.identifier}<br>
-            <b>Version: </b>${navigator.appInfo.version}<br>
-            <b>Build: </b>${navigator.appInfo.build}
+            <p class="center-align" style="margin-top:0; margin-bottom: 0">${navigator.appInfo.identifier}</p>
+            <p class="center-align" style="margin-top: 0">Ver. ${navigator.appInfo.version} (Build ${navigator.appInfo.build})</p>
         `;
 
         // Set APP data as HTML
