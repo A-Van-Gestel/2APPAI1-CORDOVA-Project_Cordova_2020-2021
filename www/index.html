@@ -71,7 +71,7 @@
 
 
         <!-- Main Tab 2 - T-Doll Data -->
-        <div class="row spa" id="tabTDollData" style="padding-bottom: 56px">
+        <div class="row spa" id="tabTDollData">
             <div class="col s12">
                 <h4><i class="material-icons">contact_page</i> T-Doll Data</h4>
                 <div id="btns_doll_type" class="row">
@@ -92,36 +92,7 @@
                 <h5>Doll Data</h5>
                 <div id="Doll_Data"></div>
 
-                <h5>Tiles</h5>
-                <div class="row">
-                    <div class="col s6">
-                        <table class="tilegridtable">
-                            <tbody>
-                            <tr>
-                                <td data-type="7" class="buff"></td>
-                                <td data-type="8" class="standing"></td>
-                                <td data-type="9" class="buff"></td>
-                            </tr>
-                            <tr>
-                                <td data-type="4" class="buff"></td>
-                                <td data-type="5" class="buff"></td>
-                                <td data-type="6" class="buff"></td>
-                            </tr>
-                            <tr>
-                                <td data-type="1"></td>
-                                <td data-type="2" class="buff"></td>
-                                <td data-type="3"></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
 
-                    <div class="col s6">
-                        <p style="margin: 0"><b>Affects: </b>lorem</p>
-                        <p style="margin: 0"><b>Buff 1: </b>lorem</p>
-                        <p style="margin: 0"><b>Buff 2: </b>lorem</p>
-                    </div>
-                </div>
             </div>
             <!-- Floating Favorite Button -->
             <div id="btnFloat_favorite" class="fixed-action-btn">
@@ -154,7 +125,7 @@
 
 
         <!-- Main Tab 4 - Favorite -->
-        <div class="row spa" id="tabFavorite" style="padding-bottom: 56px">
+        <div class="row spa" id="tabFavorite">
             <div class="col s12">
                 <h4><i class="material-icons">bookmarks</i> Favorite</h4>
                 <div id="btns_favorite" class="row">
@@ -209,13 +180,13 @@
 <!-- TODO: .js to .min.js -->
 <script src="js/jquery.3.5.1min.js"></script>
 <script src="js/materialize.1.0.0.min.js"></script>
+<script crossorigin src="https://unpkg.com/girlsfrontline-core/umd/gfcore.min.js"></script>         <!-- Needed for API to work -->
 <script src="cordova.js"></script>
 <script defer src="js/app.js"></script>
-<script defer src="js/app_info.min.js"></script>
-<script crossorigin src="https://unpkg.com/girlsfrontline-core/umd/gfcore.min.js"></script>         <!-- Needed for API to work -->
+<script defer src="js/app_info.js"></script>
+<script defer src="js/Network_State.js"></script>
 <script defer src="js/GirlsFrontlineCoreAPI.js"></script>
-<script defer src="js/Network_State.min.js"></script>
-<script defer src="js/MaterialDateTimePicker_SKWAS.min.js"></script>
+<script defer src="js/MaterialDateTimePicker_SKWAS.js"></script>
 </body>
 </html>
 

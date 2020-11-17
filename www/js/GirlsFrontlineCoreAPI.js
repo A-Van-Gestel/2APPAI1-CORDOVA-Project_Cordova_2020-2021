@@ -1,6 +1,17 @@
 let GirlsFrontlineCoreAPI = function () {
     // ---------- Global Variables & Stuff ----------
     const doll_types = ['hg', 'smg', 'rf', 'ar', 'mg', 'sg']
+    const doll_stat_types = {
+        ['armor'] : 'ARMOR',
+        ['armorPiercing'] : 'AP',
+        ['criticalPercent'] : 'CRIT',
+        ['dodge'] : 'EVA',
+        ['hit'] : 'ACC',
+        ['hp'] : 'HP',
+        ['pow'] : 'DMG',
+        ['rate'] : 'ROF',
+        ['speed'] : 'MOBILITY'
+    }
 
     // Local Storage: Favorite dolls list
     let favorite_doll_ids = [];
@@ -52,6 +63,7 @@ let GirlsFrontlineCoreAPI = function () {
         get_dolls_by_type(doll_type.toLowerCase());
         reset_html_doll_data();
     })
+
 
     // Get selected T-Doll data from dropdown and add to Favorites
     $btnFloat_favorite.on('click', function() {
@@ -274,6 +286,25 @@ let GirlsFrontlineCoreAPI = function () {
             stats_armor = 0;
         }
 
+        // Parse tiles
+        let tiles_table = ["", "", "", "", "", "", "", "", ""];
+        let tile_doll_center = doll.effect.effectCenter;
+        let tiles_doll_buffs = doll.effect.effectPos;
+
+        tiles_doll_buffs.forEach(function (tile) {
+            tiles_table[tile] = "buff"
+        })
+        tiles_table[tile_doll_center] = "standing"
+
+        // parse tile buffs
+        let tiles_effect_table = ''
+        let tiles_doll_effect = doll.effect.gridEffect;
+        for (let i in tiles_doll_effect) {
+            let key = i;
+            let value = tiles_doll_effect[i];
+            tiles_effect_table += `<p style="margin: 0"><b>${doll_stat_types[key]}: </b>+${value}%</p>`
+        }
+
         // Data to HTML
         let doll_data = `
             <b>Name: </b>${doll.codename}<br>
@@ -283,26 +314,55 @@ let GirlsFrontlineCoreAPI = function () {
             <b>BuildTime: </b>${BuildTimeString}<br>
             <b>Skins: </b>${doll.skins.length}<br>
             <b>Digimind: </b>${digimind_upgrade}
-            <br>
             
             <h5>Stats</h5>
              <table>
               <tr>
-                <td><b>HP: </b>${doll.stats.hp}</td>
-                <td><b>DMG: </b>${doll.stats.pow}</td>
-                <td><b>ACC: </b>${doll.stats.hit}</td>
+                <td><b>${doll_stat_types['hp']}: </b>${doll.stats.hp}</td>
+                <td><b>${doll_stat_types['pow']}: </b>${doll.stats.pow}</td>
+                <td><b>${doll_stat_types['hit']}: </b>${doll.stats.hit}</td>
               </tr>
               <tr>
-                <td><b>EVA: </b>${doll.stats.dodge}</td>
-                <td><b>MOBILITY: </b>${doll.stats.speed}</td>
-                <td><b>ROF: </b>${doll.stats.rate}</td>
+                <td><b>${doll_stat_types['dodge']}: </b>${doll.stats.dodge}</td>
+                <td><b>${doll_stat_types['speed']}: </b>${doll.stats.speed}</td>
+                <td><b>${doll_stat_types['rate']}: </b>${doll.stats.rate}</td>
               </tr>
               <tr>
-                <td><b>AP: </b>${doll.stats.armorPiercing}</td>
-                <td><b>CRIT: </b>${doll.stats.criticalPercent}</td>
-                <td><b>ARMOR: </b>${stats_armor}</td>
+                <td><b>${doll_stat_types['armorPiercing']}: </b>${doll.stats.armorPiercing}</td>
+                <td><b>${doll_stat_types['criticalPercent']}: </b>${doll.stats.criticalPercent}</td>
+                <td><b>${doll_stat_types['armor']}: </b>${stats_armor}</td>
               </tr>
             </table>
+            
+            <h5>Tiles</h5>
+            <div class="row">
+                <div class="col s6">
+                    <table class="tile_grid_table">
+                        <tbody>
+                            <tr>
+                                <td class="${tiles_table[7]}"></td>
+                                <td class="${tiles_table[8]}"></td>
+                                <td class="${tiles_table[9]}"></td>
+                            </tr>
+                            <tr>
+                                <td class="${tiles_table[4]}"></td>
+                                <td class="${tiles_table[5]}"></td>
+                                <td class="${tiles_table[6]}"></td>
+                            </tr>
+                            <tr>
+                                <td class="${tiles_table[1]}"></td>
+                                <td class="${tiles_table[2]}"></td>
+                                <td class="${tiles_table[3]}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col s6">
+                    <p style="margin: 0"><b>Buffs: </b>${doll.effect.effectType.toUpperCase()}</p>
+                    ${tiles_effect_table}
+                </div>
+            </div>
         `;
 
             if (favorite === true) {
@@ -320,33 +380,62 @@ let GirlsFrontlineCoreAPI = function () {
     let reset_html_doll_data = function (favorite = false, buildTime = false) {
         // Data to HTML
         let doll_data = `
-                <b>Name: </b>No Data<br>
-                <b>ID: </b>No Data<br>
-                <b>Type: </b>No Data<br>
-                <b>Rank: </b>No Data<br>
-                <b>BuildTime: </b>No Data<br>
-                <b>Skins: </b>No Data<br>
-                <b>Digimind: </b>No Data
-            <br>
+            <b>Name: </b>No Data<br>
+            <b>ID: </b>No Data<br>
+            <b>Type: </b>No Data<br>
+            <b>Rank: </b>No Data<br>
+            <b>BuildTime: </b>No Data<br>
+            <b>Skins: </b>No Data<br>
+            <b>Digimind: </b>No Data
             
             <h5>Stats</h5>
              <table style="width:100%">
               <tr>
-                <td><b>HP: </b>0</td>
-                <td><b>DMG: </b>0</td>
-                <td><b>ACC: </b>0</td>
+                <td><b>${doll_stat_types['hp']}: </b>0</td>
+                <td><b>${doll_stat_types['pow']}: </b>0</td>
+                <td><b>${doll_stat_types['hit']}: </b>0</td>
               </tr>
               <tr>
-                <td><b>EVA: </b>0</td>
-                <td><b>MOBILITY: </b>0</td>
-                <td><b>ROF: </b>0</td>
+                <td><b>${doll_stat_types['dodge']}: </b>0</td>
+                <td><b>${doll_stat_types['speed']}: </b>0</td>
+                <td><b>${doll_stat_types['rate']}: </b>0</td>
               </tr>
               <tr>
-                <td><b>AP: </b>0</td>
-                <td><b>CRIT: </b>0</td>
-                <td><b>ARMOR: </b>0</td>
+                <td><b>${doll_stat_types['armorPiercing']}: </b>0</td>
+                <td><b>${doll_stat_types['criticalPercent']}: </b>0</td>
+                <td><b>${doll_stat_types['armor']}: </b>0</td>
               </tr>
             </table>
+            
+            <h5>Tiles</h5>
+            <div class="row">
+                <div class="col s6">
+                    <table class="tile_grid_table">
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col s6">
+                    <p style="margin: 0"><b>Buffs: </b>No Data</p>
+                    <p style="margin: 0"><b>Effect: </b>No Data</p>
+                </div>
+            </div>
         `;
 
         if (favorite === true) {
@@ -372,7 +461,7 @@ let GirlsFrontlineCoreAPI = function () {
         // g36.favor = 50;
         console.log("Doll G36: ", g36);
         // console.log("Doll G36 Stats: ", g36.stats);
-        console.log("Doll G36 Tiles: ", g36.effect);
+        // console.log("Doll G36 Tiles: ", g36.effect);
 
         // var skins = g36.skins;
         // skins.forEach(function (skin) {

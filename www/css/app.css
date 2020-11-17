@@ -1,5 +1,6 @@
 /* ------ Variables: colors,... ------ */
 :root {
+    --button_padding: 0px;
     --orange_gfl-color: #ffb600;
     --white_glf-color: #f7f7f7;
     --light_grey_gfl-color: #cecfd6;
@@ -23,6 +24,10 @@ p {
 .user-view p {
     margin-bottom: 0;
     margin-top: 0;
+}
+
+#tabTDollData, #tabBuildTime, #tabFavorite {
+    padding-bottom: var(--button_padding);
 }
 
 
@@ -82,23 +87,22 @@ td, th {
 
 
 
-/* Needs editing, copied from wiki */
-.tilegridtable {
-    background: rgb(62,62,62);
-    padding: 10px;
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
+/* T-Doll tile buff Table */
+.tile_grid_table {
+    background: var(--grey_gfl-color);
+    padding: 5px;
     border-collapse: separate;
     border-spacing: 2px;
 }
-.tilegridtable td {
-    background: rgba(0,0,0,0.5);
+.tile_grid_table td {
+    background: #6b696b;
     width: 30%;
     padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
+    border-radius: 0;
 }
-.tilegridtable td.buff {
-    background: rgba(0,255,222,1);
+.tile_grid_table td.buff {
+    background: #00ffde;
 }
-.tilegridtable td.standing {
-    background: rgba(255,255,255,1);
+.tile_grid_table td.standing {
+    background: #ffffff;
 }
