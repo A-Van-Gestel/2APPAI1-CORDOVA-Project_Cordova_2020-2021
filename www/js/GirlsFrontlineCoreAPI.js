@@ -307,9 +307,10 @@ let GirlsFrontlineCoreAPI = function () {
         let tiles_doll_buffs = doll.effect.effectPos;
 
         tiles_doll_buffs.forEach(function (tile) {
-            tiles_table[tile] = "buff"
+            tiles_table[tile -1] = "buff"
         })
-        tiles_table[tile_doll_center] = "standing"
+        tiles_table[tile_doll_center -1] = "standing"
+        console.log("tiles_table", tiles_table);
 
         // parse tile buffs
         let tiles_effect_table = ''
@@ -355,19 +356,19 @@ let GirlsFrontlineCoreAPI = function () {
                     <table class="tile_grid_table">
                         <tbody>
                             <tr>
-                                <td class="${tiles_table[7]}"></td>
-                                <td class="${tiles_table[8]}"></td>
-                                <td class="${tiles_table[9]}"></td>
+                                <td class="${tiles_table[7 -1]}"></td>
+                                <td class="${tiles_table[8 -1]}"></td>
+                                <td class="${tiles_table[9 -1]}"></td>
                             </tr>
                             <tr>
-                                <td class="${tiles_table[4]}"></td>
-                                <td class="${tiles_table[5]}"></td>
-                                <td class="${tiles_table[6]}"></td>
+                                <td class="${tiles_table[4 -1]}"></td>
+                                <td class="${tiles_table[5 -1]}"></td>
+                                <td class="${tiles_table[6 -1]}"></td>
                             </tr>
                             <tr>
-                                <td class="${tiles_table[1]}"></td>
-                                <td class="${tiles_table[2]}"></td>
-                                <td class="${tiles_table[3]}"></td>
+                                <td class="${tiles_table[1 -1]}"></td>
+                                <td class="${tiles_table[2 -1]}"></td>
+                                <td class="${tiles_table[3 -1]}"></td>
                             </tr>
                         </tbody>
                     </table>
