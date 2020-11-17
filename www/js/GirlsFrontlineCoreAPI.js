@@ -32,6 +32,7 @@ let GirlsFrontlineCoreAPI = function () {
     let $btnFloat_Unfavorite = $tabFavorite.find('#btnFloat_Unfavorite');
     let $tdoll_BuildTime = $tabBuildTime.find('#tdoll_BuildTime');
     let $tdoll_selection_BuildTime = $tabBuildTime.find('#tdoll_selection_BuildTime');
+    let $btnFloat_favorite_buildTime = $tabBuildTime.find('#btnFloat_favorite_buildTime');
     let $Doll_Data = $tabTDollData.find('#Doll_Data');
     let $Doll_Data_favorite = $tabFavorite.find('#Doll_Data_favorite');
     let $Doll_Data_BuildTime = $tabBuildTime.find('#Doll_Data_BuildTime');
@@ -68,6 +69,20 @@ let GirlsFrontlineCoreAPI = function () {
     // Get selected T-Doll data from dropdown and add to Favorites
     $btnFloat_favorite.on('click', function() {
         let id = $tdoll_selection.val();
+        // console.log("Favorite Button: adding ID = ", id)
+        if (id !== null) {
+            _addFavoriteDoll(parseInt(id));
+        }
+        else {
+            console.error("Favorite Button: " + id + " is NaN!");
+            M.toast({html: 'No T-Doll selected to Favorite!', displayLength: 2000, classes: 'red accent-4'})
+        }
+    })
+
+
+    // Get selected T-Doll data from dropdown and add to Favorites
+    $btnFloat_favorite_buildTime.on('click', function() {
+        let id = $tdoll_selection_BuildTime.val();
         // console.log("Favorite Button: adding ID = ", id)
         if (id !== null) {
             _addFavoriteDoll(parseInt(id));
@@ -334,7 +349,7 @@ let GirlsFrontlineCoreAPI = function () {
               </tr>
             </table>
             
-            <h5>Tiles</h5>
+            <h5>Formation Buff</h5>
             <div class="row">
                 <div class="col s6">
                     <table class="tile_grid_table">
@@ -407,7 +422,7 @@ let GirlsFrontlineCoreAPI = function () {
               </tr>
             </table>
             
-            <h5>Tiles</h5>
+            <h5>Formation Buff</h5>
             <div class="row">
                 <div class="col s6">
                     <table class="tile_grid_table">
