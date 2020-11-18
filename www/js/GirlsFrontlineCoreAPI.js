@@ -228,7 +228,7 @@ let GirlsFrontlineCoreAPI = function () {
         }
     }
 
-
+    // TODO: favorite & buildTime booleans to Selector
     // Sets the T-Doll Dropdown content
     let _set_doll_selection_dropdown = function (input_doll_list, favorite = false, buildTime = false) {
         let selector = undefined;
@@ -252,86 +252,105 @@ let GirlsFrontlineCoreAPI = function () {
         $('select').formSelect();
     }
 
-
-    // TODO: Split up in separate functions
-    // Sets the T-Doll HTML Data on screen
-    let _render_html_doll_data = function (input_id, favorite = false, buildTime = false) {
-        // console.log("Input_ID = ", input_id)
-        let doll = gfcore.dolls.find(({id}) => id === input_id);
-        // console.log(doll.codename + "_Data = ", doll);
-
-        // Rank conversion
-        let Rank = doll.rank;
-        let Rank_str;
-        if (Rank === 7) {
-            Rank_str = "&#10029;"    // Special
+    // Rank conversion (nr --> stars)
+    let _parse_rank = function (rank) {
+        if (rank === 7) {
+            return "&#10029;"    // Special
         } else {
-            Rank_str = "&#9733;".repeat(Rank);
+            return "&#9733;".repeat(rank);
         }
+    }
 
-        // Check if Mindupdate is 'undefined', if so set to No
-        let digimind_upgrade = doll.mindupdate
-        if (digimind_upgrade === undefined) {
-            digimind_upgrade = "No";
+
+    // Digimind conversion to table
+    let _parse_digimind = function (mindupdate) {
+        // Check if mindupdate is 'undefined', if so set to No
+        if (mindupdate === undefined) {
+            return "No";
         } else {
             // console.log("Digimind = ", digimind_upgrade)
-            digimind_upgrade = `
+            return `
              <table>
               <tr>
                 <td><b>Mod 1: </b>
-                    <br>Cores: ${doll.mindupdate[0].core}
-                    <br>Fragments: ${doll.mindupdate[0].mempiece}</td>
+                    <br>Cores: ${mindupdate[0].core}
+                    <br>Fragments: ${mindupdate[0].mempiece}</td>
                 <td><b>Mod 2: </b>
-                    <br>Cores: ${doll.mindupdate[1].core}
-                    <br>Fragments: ${doll.mindupdate[1].mempiece}</td>
+                    <br>Cores: ${mindupdate[1].core}
+                    <br>Fragments: ${mindupdate[1].mempiece}</td>
                 <td><b>Mod 3: </b>
-                    <br>Cores: ${doll.mindupdate[2].core}
-                    <br>Fragments: ${doll.mindupdate[2].mempiece}</td>
+                    <br>Cores: ${mindupdate[2].core}
+                    <br>Fragments: ${mindupdate[2].mempiece}</td>
               </tr>
             </table>
         `;
         }
+    }
 
-        // Convert seconds to Time
-        let BuildTimeOBJ = new Date((doll.buildTime - 3600) * 1000);        // -3600 seconds (1 hour) to count for timezone differences in calculations
-        let BuildTimeString = MaterialDateTimePicker.dateTimetoString(BuildTimeOBJ);
 
+    // Convert buildTime (seconds) to String (HH:MM:SS)
+    let _parse_buildtime = function (buildTime) {
+        // Convert seconds to Date
+        let BuildTimeOBJ = new Date((buildTime - 3600) * 1000);        // -3600 seconds (1 hour) to count for timezone differences in calculations
+        return MaterialDateTimePicker.dateTimetoString(BuildTimeOBJ);
+    }
+
+
+    let _parse_armor = function (armor) {
         // Check if Armor is 'undefined', if so set to 0
-        let stats_armor = doll.stats.armor
-        if (stats_armor === undefined) {
-            stats_armor = 0;
+        if (armor === undefined) {
+            return 0;
+        } else {
+            return armor;
         }
+    }
 
-        // Parse tiles
+
+    // Convert to an indexed array containing the correct tags for each tile
+    let _parse_formation_buff_tiles = function (effect) {
         let tiles_table = ["", "", "", "", "", "", "", "", ""];
-        let tile_doll_center = doll.effect.effectCenter;
-        let tiles_doll_buffs = doll.effect.effectPos;
+        let tile_doll_center = effect.effectCenter;
+        let tiles_doll_buffs = effect.effectPos;
 
         tiles_doll_buffs.forEach(function (tile) {
             tiles_table[tile - 1] = "buff"      // -1 so array starts at 0
         })
         tiles_table[tile_doll_center -1] = "standing"
-        console.log("tiles_table", tiles_table);
+        // console.log("tiles_table", tiles_table);
+        return tiles_table;
+    }
 
-        // parse tile buffs
+
+    // Convert Buffs to <p> tags
+    let _parse_formation_buffs = function (gridEffect) {
         let tiles_effect_table = ''
-        let tiles_doll_effect = doll.effect.gridEffect;
-        for (let i in tiles_doll_effect) {
-            let key = i;
-            let value = tiles_doll_effect[i];
-            tiles_effect_table += `<p style="margin: 0"><b>${doll_stat_types[key]}: </b>+${value}%</p>`
+        let tiles_doll_effect = gridEffect;
+        for (let key in tiles_doll_effect) {
+            tiles_effect_table += `<p style="margin: 0"><b>${doll_stat_types[key]}: </b>+${tiles_doll_effect[key]}%</p>`
         }
+        return tiles_effect_table;
+    }
+
+
+    // TODO: favorite & buildTime booleans to Selector
+    // Sets the T-Doll HTML Data on screen
+    let _render_html_doll_data = function (input_id, favorite = false, buildTime = false) {
+        let doll = gfcore.dolls.find(({id}) => id === input_id);
+        // console.log(doll.codename + "_Data = ", doll);
+
+        // Parse tiles for css classes
+        let tiles_table = _parse_formation_buff_tiles(doll.effect);
 
         // Data to HTML
         let doll_data = `
             <b>Name: </b>${doll.codename}<br>
             <b>ID: </b>${doll.id}<br>
             <b>Type: </b>${doll.type.toUpperCase()}<br>
-            <b>Rank: </b>${Rank_str}<br>
-            <b>BuildTime: </b>${BuildTimeString}<br>
+            <b>Rank: </b>${_parse_rank(doll.rank)}<br>
+            <b>BuildTime: </b>${_parse_buildtime(doll.buildTime)}<br>
             <b>Skins: </b>${doll.skins.length}<br>
-            <b>Digimind: </b>${digimind_upgrade}
-            
+            <b>Digimind: </b>${_parse_digimind(doll.mindupdate)}
+
             <h5>Stats</h5>
              <table>
               <tr>
@@ -347,10 +366,10 @@ let GirlsFrontlineCoreAPI = function () {
               <tr>
                 <td><b>${doll_stat_types['armorPiercing']}: </b>${doll.stats.armorPiercing}</td>
                 <td><b>${doll_stat_types['criticalPercent']}: </b>${doll.stats.criticalPercent}</td>
-                <td><b>${doll_stat_types['armor']}: </b>${stats_armor}</td>
+                <td><b>${doll_stat_types['armor']}: </b>${_parse_armor(doll.stats.armor)}</td>
               </tr>
             </table>
-            
+
             <h5>Formation Buff</h5>
             <div class="row">
                 <div class="col s6">
@@ -377,7 +396,7 @@ let GirlsFrontlineCoreAPI = function () {
 
                 <div class="col s6">
                     <p style="margin: 0"><b>Buffs: </b>${doll.effect.effectType.toUpperCase()}</p>
-                    ${tiles_effect_table}
+                    ${_parse_formation_buffs(doll.effect.gridEffect)}
                 </div>
             </div>
         `;
@@ -394,6 +413,7 @@ let GirlsFrontlineCoreAPI = function () {
     }
 
 
+    // TODO: favorite & buildTime booleans to Selector
     let reset_html_doll_data = function (favorite = false, buildTime = false) {
         // Data to HTML
         let doll_data = `
