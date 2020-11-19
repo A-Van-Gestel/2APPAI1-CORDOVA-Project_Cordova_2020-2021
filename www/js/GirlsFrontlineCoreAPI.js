@@ -487,38 +487,6 @@ let GirlsFrontlineCoreAPI = function () {
     }
 
 
-    // TODO: Remove unneeded function (Example)
-    // Example Script
-    let example = function () {
-        console.log("gfcore", gfcore)
-
-        const g36 = gfcore.dolls.find(({codename}) => codename === 'G36');
-        // g36.level = 70;
-        // g36.dummyLink = 3;
-        // g36.favor = 50;
-        console.log("Doll G36: ", g36);
-        // console.log("Doll G36 Stats: ", g36.stats);
-        // console.log("Doll G36 Tiles: ", g36.effect);
-
-        // var skins = g36.skins;
-        // skins.forEach(function (skin) {
-        //     console.log(skin.name);
-        // });
-
-        // let obtain_methods = [];
-        // let id;
-        // gfcore.dolls.forEach(function (tdoll) {
-        //     tdoll.obtain.forEach(function (obtain_obj) {
-        //         id = obtain_obj.id;
-        //         if (!obtain_methods.includes(id)) {
-        //             obtain_methods.push(id);
-        //         }
-        //     })
-        // })
-        // console.log("Obtain methods = ", obtain_methods)
-
-
-    }
 
 
 
@@ -569,9 +537,5 @@ let GirlsFrontlineCoreAPI = function () {
         get_dolls_by_type: get_dolls_by_type,
         get_dolls_by_buildTime: get_dolls_by_buildTime,
         reset_html_doll_data: reset_html_doll_data,
-
-
-        // TODO: Remove unneeded function (Example)
-        example: example,
     };
 }();
