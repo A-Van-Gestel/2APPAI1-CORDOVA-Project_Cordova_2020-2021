@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/materialize.1.0.0.min.css">
-    <link rel="stylesheet" href="css/app.min.css">
+    <link rel="stylesheet" href="css/app.css">
     <title>Girls' Frontline Information Bank</title>
 </head>
 <body class="white_glf">
@@ -45,32 +45,7 @@
 
     <!-- Grid -->
     <div class="container">
-        <!-- Main Tab 1 - About -->
-        <div class="row spa" id="tabAPPInfo">
-            <div class="col s12">
-                <div class="center-align">
-                    <h4><i class="material-icons">perm_device_information</i>About</h4>
-                    <img class="responsive-img" src="img/icon.png" alt="APP Icon" style="max-width: 100px">
-                    <h6 style="margin-bottom: 0; margin-top: 3px">Girls' Frontline Information Bank</h6>
-                    <div id="APP_info_all">
-                        <p class="center-align" style="margin-top:0; margin-bottom: 0">Identifier Not Found</p>
-                        <p class="center-align" style="margin-top: 0">Ver. x.x.x (Build xxxx)</p>
-                    </div>
-                    <a href="https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/" target="_blank" class="waves-effect waves-light btn-small grey_gfl">Check for updates</a>
-
-                    <div style="margin-top: 25px">
-                        <h6 class="center-align" style="margin-bottom: 3px">Created by</h6>
-                        <p class="center-align" style="margin-bottom: 0; margin-top: 0">Axel Van Gestel</p>
-                        <p class="center-align" style="margin-bottom: 0; margin-top: 0">Mail: <a href="mailto:r0784084@student.thomasmore.be">r0784084@student.thomasmore.be</a></p>
-                        <p class="center-align" style="margin-bottom: 0; margin-top: 0">SMS: <a href="sms:+32483060747">+32483060747</a></p>
-                        <p class="center-align" style="margin-top: 0">TEL: <a href="tel:+32483060747">+32483060747</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Main Tab 2 - T-Doll Data -->
+        <!-- Main Tab 1 - T-Doll Data -->
         <div class="row spa" id="tabTDollData">
             <div class="col s12">
                 <h4><i class="material-icons">contact_page</i> T-Doll Data</h4>
@@ -103,7 +78,7 @@
         </div>
 
 
-        <!-- Main Tab 3 - Build Time -->
+        <!-- Main Tab 2 - Build Time -->
         <div class="row spa" id="tabBuildTime">
             <div class="col s12">
                 <h4><i class="material-icons">build</i> Build Time</h4>
@@ -132,7 +107,7 @@
             </div>
 
 
-        <!-- Main Tab 4 - Favorite -->
+        <!-- Main Tab 3 - Favorite -->
         <div class="row spa" id="tabFavorite">
             <div class="col s12">
                 <h4><i class="material-icons">bookmarks</i> Favorite</h4>
@@ -164,11 +139,35 @@
         </div>
 
 
+        <!-- Main Tab 4 - About -->
+        <div class="row spa" id="tabAPPInfo">
+            <div class="col s12">
+                <div class="center-align">
+                    <h4><i class="material-icons">perm_device_information</i>About</h4>
+                    <img class="responsive-img" src="img/icon.png" alt="APP Icon" style="max-width: 100px">
+                    <h6 style="margin-bottom: 0; margin-top: 3px">Girls' Frontline Information Bank</h6>
+                    <div id="APP_info_all">
+                        <p class="center-align" style="margin-top:0; margin-bottom: 0">Identifier Not Found</p>
+                        <p class="center-align" style="margin-top: 0">Ver. x.x.x (Build xxxx)</p>
+                    </div>
+                    <a href="https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/" target="_blank" class="waves-effect waves-light btn-small grey_gfl">Check for updates</a>
+
+                    <div style="margin-top: 25px">
+                        <h6 class="center-align" style="margin-bottom: 3px">Created by</h6>
+                        <p class="center-align" style="margin-bottom: 0; margin-top: 0">Axel Van Gestel</p>
+                        <p class="center-align" style="margin-bottom: 0; margin-top: 0">Mail: <a href="mailto:r0784084@student.thomasmore.be">r0784084@student.thomasmore.be</a></p>
+                        <p class="center-align" style="margin-bottom: 0; margin-top: 0">SMS: <a href="sms:+32483060747">+32483060747</a></p>
+                        <p class="center-align" style="margin-top: 0">TEL: <a href="tel:+32483060747">+32483060747</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
 
-        <!-- Network Modal -->
+
+    <!-- Network Modal -->
         <div id="NetworkModal" class="modal modal-fixed-footer">
             <div class="modal-content">
                 <h4>No network connection</h4>
@@ -185,22 +184,20 @@
 
 
 
-<!-- TODO: .js to .min.js -->
 <script src="js/jquery.3.5.1min.js"></script>
 <script src="js/materialize.1.0.0.min.js"></script>
 <script crossorigin src="https://unpkg.com/girlsfrontline-core/umd/gfcore.min.js"></script>         <!-- Needed for API to work -->
 <script src="cordova.js"></script>
 <script defer src="js/app.js"></script>
 <!-- --- Custom Scripts --- -->
-<script defer src="js/app_info.min.js"></script>
-<script defer src="js/Network_State.min.js"></script>
-<script defer src="js/GirlsFrontlineCoreAPI.min.js"></script>
-<script defer src="js/MaterialDateTimePicker_SKWAS.min.js"></script>
+<script defer src="js/app_info.js"></script>
+<script defer src="js/Network_State.js"></script>
+<script defer src="js/GirlsFrontlineCoreAPI.js"></script>
+<script defer src="js/MaterialDateTimePicker_SKWAS.js"></script>
 </body>
 </html>
 
 
 <!-- TODO: (optional) Add Welcome page -->
 <!-- TODO: (optional) Add option to purge favorites -->
-<!-- TODO: (optional) Add T-Doll Tile Buffs display -->
 <!-- TODO: (optional) Add T-Doll Skill display -->

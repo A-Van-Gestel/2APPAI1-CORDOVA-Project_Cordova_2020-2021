@@ -26,6 +26,11 @@ p {
     margin-top: 0;
 }
 
+.user-view img {
+    max-width: 64px;
+    max-height: 64px;
+}
+
 #tabTDollData, #tabBuildTime, #tabFavorite {
     padding-bottom: var(--button_padding);
 }
