@@ -195,6 +195,7 @@ let GirlsFrontlineCoreAPI = function () {
                 });
 
                 // console.log("T-Doll of type = " + input_type, dolls_by_type);
+                dolls_by_type.sort(Sorting_methods.array_index_1)
                 _set_doll_selection_dropdown(dolls_by_type, favorite);
             }
         }
@@ -221,6 +222,7 @@ let GirlsFrontlineCoreAPI = function () {
             if (dolls_by_buildTime.length === 0) {
                 M.toast({html: 'No T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'grey_gfl'});
             }
+            dolls_by_buildTime.sort(Sorting_methods.array_index_1)
             _set_doll_selection_dropdown(dolls_by_buildTime, undefined, true);
         }
         catch (err) {
