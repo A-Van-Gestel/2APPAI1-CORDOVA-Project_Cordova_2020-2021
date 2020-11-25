@@ -270,20 +270,24 @@ let GirlsFrontlineCoreAPI = function () {
         } else {
             // console.log("Digimind = ", digimind_upgrade)
             return `
-             <table>
-              <tr>
-                <td><b>Mod 1: </b>
-                    <br>Cores: ${mindupdate[0].core}
-                    <br>Fragments: ${mindupdate[0].mempiece}</td>
-                <td><b>Mod 2: </b>
-                    <br>Cores: ${mindupdate[1].core}
-                    <br>Fragments: ${mindupdate[1].mempiece}</td>
-                <td><b>Mod 3: </b>
-                    <br>Cores: ${mindupdate[2].core}
-                    <br>Fragments: ${mindupdate[2].mempiece}</td>
-              </tr>
-            </table>
-        `;
+                 <table>
+                      <tr>
+                        <td><b>Mod 1:</b></td>
+                        <td><b>Mod 2:</b></td>
+                        <td><b>Mod 3:</b></td>
+                      </tr>
+                      <tr>
+                        <td>Cores: ${mindupdate[0].core}</td>
+                        <td>Cores: ${mindupdate[1].core}</td>
+                        <td>Cores: ${mindupdate[2].core}</td>
+                      </tr>
+                      <tr>
+                        <td>Fragments: ${mindupdate[0].mempiece}</td>
+                        <td>Fragments: ${mindupdate[1].mempiece}</td>
+                        <td>Fragments: ${mindupdate[2].mempiece}</td>
+                      </tr>
+                </table>
+            `;
         }
     }
 
