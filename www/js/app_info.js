@@ -1,8 +1,8 @@
 let AppInfo = function () {
     // ---------- Global Variables & Stuff ----------
     // Cache DOM for performance
-    let $tabAPPInfo = $('#tabAPPInfo');
-    let $APP_info_all = $tabAPPInfo.find('#APP_info_all');
+    let $tabAbout = $('#tabAbout');
+    let $APP_info_all = $tabAbout.find('#APP_info_all');
     let $APP_info_identifier = $('#APP_info_identifier');
     let $APP_info_version = $('#APP_info_version');
     let $APP_info_build = $('#APP_info_build');

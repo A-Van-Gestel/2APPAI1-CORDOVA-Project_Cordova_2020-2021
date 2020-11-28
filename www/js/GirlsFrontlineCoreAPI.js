@@ -2,23 +2,26 @@ let GirlsFrontlineCoreAPI = function () {
     // ---------- Global Variables & Stuff ----------
     const doll_types = ['hg', 'smg', 'rf', 'ar', 'mg', 'sg']
     const doll_stat_types = {
-        ['armor'] : 'ARMOR',
-        ['armorPiercing'] : 'AP',
-        ['criticalPercent'] : 'CRIT',
-        ['dodge'] : 'EVA',
-        ['hit'] : 'ACC',
-        ['hp'] : 'HP',
-        ['pow'] : 'DMG',
-        ['rate'] : 'ROF',
-        ['speed'] : 'MOBILITY'
+        armor : 'ARMOR',
+        armorPiercing : 'AP',
+        criticalPercent : 'CRIT',
+        dodge : 'EVA',
+        hit : 'ACC',
+        hp : 'HP',
+        pow : 'DMG',
+        rate : 'ROF',
+        speed : 'MOBILITY'
     }
+
+    // Settings
+    let setting_sorting_method;
 
     // Local Storage: Favorite dolls list
     let favorite_doll_ids = [];
 
     // Cache last selected Type
-    let selected_type = "";
-    let selected_type_favorited = "";
+    let selected_type = undefined;
+    let selected_type_favorited = undefined;
 
     // Cache DOM for performance
     let $tabTDollData = $('#tabTDollData');
@@ -195,7 +198,7 @@ let GirlsFrontlineCoreAPI = function () {
                 });
 
                 // console.log("T-Doll of type = " + input_type, dolls_by_type);
-                dolls_by_type.sort(Sorting_methods.array_index_1)
+                dolls_by_type.sort(setting_sorting_method);
                 _set_doll_selection_dropdown(dolls_by_type, favorite);
             }
         }
@@ -206,7 +209,7 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     // Get a List of all T-Dolls with a certain Build Time
-    let get_dolls_by_buildTime = function (input_buildTime) {
+    let get_dolls_by_buildTime = function (input_buildTime = 1200) {
         // console.log("Build Time = " + input_buildTime);
         try {
             let dolls_by_buildTime = []
@@ -222,7 +225,7 @@ let GirlsFrontlineCoreAPI = function () {
             if (dolls_by_buildTime.length === 0) {
                 M.toast({html: 'No T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'grey_gfl'});
             }
-            dolls_by_buildTime.sort(Sorting_methods.array_index_1)
+            dolls_by_buildTime.sort(setting_sorting_method);
             _set_doll_selection_dropdown(dolls_by_buildTime, undefined, true);
         }
         catch (err) {
@@ -230,8 +233,10 @@ let GirlsFrontlineCoreAPI = function () {
         }
     }
 
+
     // TODO: favorite & buildTime booleans to Selector
     // Sets the T-Doll Dropdown content
+
     let _set_doll_selection_dropdown = function (input_doll_list, favorite = false, buildTime = false) {
         let selector = undefined;
 
@@ -253,7 +258,6 @@ let GirlsFrontlineCoreAPI = function () {
         // Form Selection ReInitialization
         $('select').formSelect();
     }
-
     // Rank conversion (nr --> stars)
     let _parse_rank = function (rank) {
         if (rank === 7) {
@@ -262,7 +266,6 @@ let GirlsFrontlineCoreAPI = function () {
             return "&#9733;".repeat(rank);
         }
     }
-
 
     // Digimind conversion to table
     let _parse_digimind = function (mindupdate) {
@@ -340,6 +343,8 @@ let GirlsFrontlineCoreAPI = function () {
 
     // TODO: favorite & buildTime booleans to Selector
     // Sets the T-Doll HTML Data on screen
+
+
     let _render_html_doll_data = function (input_id, favorite = false, buildTime = false) {
         let doll = gfcore.dolls.find(({id}) => id === input_id);
         // console.log(doll.codename + "_Data = ", doll);
@@ -417,8 +422,6 @@ let GirlsFrontlineCoreAPI = function () {
                 $Doll_Data.html(doll_data);
             }
     }
-
-
     // TODO: favorite & buildTime booleans to Selector
     let reset_html_doll_data = function (favorite = false, buildTime = false) {
         // Data to HTML
@@ -537,11 +540,35 @@ let GirlsFrontlineCoreAPI = function () {
 
 
 
+
+
+    // ---------- Settings stuff ----------
+    let set_settings = function () {
+        let sorting_mode = function (sorting_mode) {
+            setting_sorting_method = sorting_mode;
+            // console.log("GFCoreAPI: set_settings: setting_sorting_method = ", setting_sorting_method);
+            // Form Selection ReInitialization
+            get_dolls_by_type(selected_type);
+            get_dolls_by_type(selected_type_favorited, true);
+            get_dolls_by_buildTime();
+        }
+
+
+
+        // ---------- Global Function returns (outside name : inside name) ----------
+        return {
+            sorting_mode: sorting_mode,
+        };
+    }()
+
+
+
     // ---------- Global Function returns (outside name : inside name) ----------
     return {
         init: init,
         get_dolls_by_type: get_dolls_by_type,
         get_dolls_by_buildTime: get_dolls_by_buildTime,
         reset_html_doll_data: reset_html_doll_data,
+        set_settings: set_settings,
     };
 }();

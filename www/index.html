@@ -39,7 +39,9 @@
         <li><a href="#!" data-show="tabFavorite" class="waves-effect"><i class="material-icons">bookmarks</i>Favorite</a></li>
         <li><div class="divider"></div></li>
         <!-- sideNav Tab 4 -->
-        <li><a href="#!" data-show="tabAPPInfo" class="waves-effect"><i class="material-icons">perm_device_information</i>About</a></li>
+        <li><a href="#!" data-show="tabSettings" class="waves-effect"><i class="material-icons">settings</i>Settings</a></li>
+        <!-- sideNav Tab 5 -->
+        <li><a href="#!" data-show="tabAbout" class="waves-effect"><i class="material-icons">perm_device_information</i>About</a></li>
     </ul>
 
 
@@ -136,11 +138,26 @@
                 </a>
             </div>
         </div>
+
+
+        <!-- Main Tab 4 - Settings -->
+        <div class="row spa" id="tabSettings">
+            <div class="col s12">
+                <h4><i class="material-icons">settings</i> Settings</h4>
+                <div class="input-field">
+                    <select id="settings_sorting_method">
+                        <option value="" disabled>Choose a Sorting Method</option>
+                        <option value="id">By ID</option>
+                        <option value="name" selected>By name</option>
+                    </select>
+                    <label for="settings_sorting_method">Sorting Method</label>
+                </div>
+            </div>
         </div>
 
 
-        <!-- Main Tab 4 - About -->
-        <div class="row spa" id="tabAPPInfo">
+        <!-- Main Tab 5 - About -->
+        <div class="row spa" id="tabAbout">
             <div class="col s12">
                 <div class="center-align">
                     <h4><i class="material-icons">perm_device_information</i>About</h4>
@@ -162,7 +179,7 @@
                 </div>
             </div>
         </div>
-
+    </div>
 
 
 
@@ -195,6 +212,7 @@
 <script defer src="js/Network_State.js"></script>
 <script defer src="js/GirlsFrontlineCoreAPI.js"></script>
 <script defer src="js/MaterialDateTimePicker_SKWAS.js"></script>
+<script defer src="js/Settings.js"></script>
 </body>
 </html>
 

@@ -21,6 +21,7 @@ $(function () {
 // ---------- Function Stuff ----------
 function onDeviceReady() {
     console.log('Device is ready');
+    Settings.init();                                  // Set Settings for the APP
     AppInfo.init();                                  // Get & Set the APP Info
     NetworkState.init();                            // Get the Network State on Launch
     GirlsFrontlineCoreAPI.init();

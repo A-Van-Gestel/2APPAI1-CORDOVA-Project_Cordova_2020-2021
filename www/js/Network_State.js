@@ -1,6 +1,15 @@
 let NetworkState = function () {
     // ---------- Global Variables & Stuff ----------
-    let states = {};
+    let states = {
+        '2g' : 'Cell 2G connection',
+        '3g' : 'Cell 3G connection',
+        '4g' : 'Cell 4G connection',
+        'cellular' : 'Cell generic connection',
+        'ethernet' : 'Ethernet connection',
+        'none' : 'No network connection',
+        'unknown' : 'Unknown connection',
+        'wifi' : 'WiFi connection'
+    };
 
 
     // Cache DOM for performance
@@ -28,16 +37,6 @@ let NetworkState = function () {
     // ---------- Function Stuff ----------
     // Initialise the Network State Check
     let init = function(){
-        states[Connection.UNKNOWN]  = 'Unknown connection';
-        states[Connection.ETHERNET] = 'Ethernet connection';
-        states[Connection.WIFI]     = 'WiFi connection';
-        states[Connection.CELL_2G]  = 'Cell 2G connection';
-        states[Connection.CELL_3G]  = 'Cell 3G connection';
-        states[Connection.CELL_4G]  = 'Cell 4G connection';
-        states[Connection.CELL]     = 'Cell generic connection';
-        states[Connection.NONE]     = 'No network connection';
-        // console.log('states', states);
-
         // Get current Network State
         let networkState = _getState()
 
