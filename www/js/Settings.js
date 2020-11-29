@@ -1,6 +1,8 @@
 let Settings = function () {
+    // TODO: Setting for default tab
+    // TODO: Option to clear Favorites
+    // TODO: Add Sorting Method: By build time
     // ---------- Global Variables & Stuff ----------
-    // TODO: Dynamically populate dropdowns
     // key : [function, "Sorting Name"]
     const sorting_methods = {
         id : [Sorting_methods.array_index_0_number, "By ID"],

@@ -1,5 +1,6 @@
 let GirlsFrontlineCoreAPI = function () {
     // ---------- Global Variables & Stuff ----------
+    // TODO: dynamically populate type buttons
     const doll_types = ['hg', 'smg', 'rf', 'ar', 'mg', 'sg']
     const doll_stat_types = {
         armor : 'ARMOR',
