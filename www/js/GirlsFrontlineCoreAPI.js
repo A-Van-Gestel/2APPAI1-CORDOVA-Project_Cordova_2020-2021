@@ -41,6 +41,20 @@ let GirlsFrontlineCoreAPI = function () {
     let $Doll_Data_BuildTime = $tabBuildTime.find('#Doll_Data_BuildTime');
 
 
+    // Setup i18next
+    i18next.use(i18nextXHRBackend).init({
+        fallbackLng: 'ko-KR',
+        lng: 'en-US',
+        load: 'currentOnly',
+        ns: ['gfcore'],
+        whitelist: ['ko-KR', 'ja-JP', 'en-US', 'zh-CN'],
+        backend: {
+            loadPath: 'https://unpkg.com/girlsfrontline-core@2.1.5-beta9/build/i18n/{{lng}}/{{ns}}.json',
+            crossDomain: true,
+        },
+    });
+
+
 
 
 
