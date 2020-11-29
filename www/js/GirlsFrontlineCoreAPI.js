@@ -10,7 +10,8 @@ let GirlsFrontlineCoreAPI = function () {
         hp : 'HP',
         pow : 'DMG',
         rate : 'ROF',
-        speed : 'MOBILITY'
+        speed : 'MOBILITY',
+        cooldown : 'COOLDOWN',
     }
 
     // Settings
@@ -348,6 +349,24 @@ let GirlsFrontlineCoreAPI = function () {
         }
 
 
+        // Convert Buffs Type to <p> tags
+        let parse_formation_buffs_type = function (effectType) {
+            let tiles_effect_type = ''
+            let tiles_doll_effect_type = effectType;
+
+            if (typeof tiles_doll_effect_type === "string") {
+                tiles_effect_type += `<p style="margin: 0"><b>Buffs: </b>${tiles_doll_effect_type.toUpperCase()}</p>`
+            }
+            else {
+                tiles_doll_effect_type.forEach(function (type) {
+                    tiles_effect_type += `<p style="margin: 0"><b>Buffs: </b>${type.toUpperCase()}</p>`
+                })
+            }
+
+            return tiles_effect_type;
+        }
+
+
         // Convert Buffs to <p> tags
         let parse_formation_buffs = function (gridEffect) {
             let tiles_effect_table = ''
@@ -366,6 +385,7 @@ let GirlsFrontlineCoreAPI = function () {
             parse_buildtime: parse_buildtime,
             parse_armor: parse_armor,
             parse_formation_buff_tiles: parse_formation_buff_tiles,
+            parse_formation_buffs_type: parse_formation_buffs_type,
             parse_formation_buffs: parse_formation_buffs,
         };
     }();
@@ -433,7 +453,7 @@ let GirlsFrontlineCoreAPI = function () {
                 </div>
 
                 <div class="col s6">
-                    <p style="margin: 0"><b>Buffs: </b>${doll.effect.effectType.toUpperCase()}</p>
+                    ${_parsers.parse_formation_buffs_type(doll.effect.effectType)}
                     ${_parsers.parse_formation_buffs(doll.effect.gridEffect)}
                 </div>
             </div>
