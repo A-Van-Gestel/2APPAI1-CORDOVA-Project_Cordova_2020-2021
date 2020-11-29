@@ -36,6 +36,6 @@ Gebruikt voor de pop-in te verbergen, terwijl de app alles aan het inladen is bi
 - [x] Mintens 1 Cordova Plug-in
 - [x] Data uitwisseling met JSON (AJAX) - API (girlsfrontline-core API)
 - [x] Local storage (Laatste selectie, favoriete,...)
-- [ ] Applicatie publiceren ([Sinners - Cordova Project (WIP)](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/))
+- [x] Applicatie publiceren ([Sinners - Cordova Project (WIP)](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/))
 - [ ] ...
 
