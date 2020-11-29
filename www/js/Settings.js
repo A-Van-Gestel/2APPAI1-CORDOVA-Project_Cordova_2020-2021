@@ -26,7 +26,7 @@ let Settings = function () {
         // console.log("Dropdown Sorting: Method = ", sorting_methods[mode]);
         if (mode !== "") {
             ls_sorting_method = sorting_methods[mode];
-            _setLocalStorage();
+            _setLocalStorage.sorting_method();
             GirlsFrontlineCoreAPI.set_settings.sorting_mode(ls_sorting_method);
         }
     });
@@ -54,17 +54,24 @@ let Settings = function () {
 
 
     // ---------- Local Storage stuff ----------
-    // TODO: Separate into sub Functions
-    // Write the Favorite T-Dolls Array to Local Storage
+    // Function to write the settings to Local Storage
     let _setLocalStorage = function() {
-        console.log("Saved settings to Local Storage");
-        for (let key in sorting_methods) {
-            let value = sorting_methods[key]
-            if (value === ls_sorting_method) {
-                localStorage.setItem('setting_sorting_method', key);  // localStorage.setItem('key', 'value')
+        let sorting_method = function () {
+            console.log("Saved Sorting Method settings to Local Storage");
+            for (let key in sorting_methods) {
+                let value = sorting_methods[key]
+                if (value === ls_sorting_method) {
+                    localStorage.setItem('setting_sorting_method', key);  // localStorage.setItem('key', 'value')
+                }
             }
-        }
-    };
+        };
+
+
+        // ---------- Global Function returns (outside name : inside name) ----------
+        return {
+            sorting_method: sorting_method,
+        };
+    }();
 
 
     // Read Settings from local storage
@@ -75,6 +82,8 @@ let Settings = function () {
             ls_sorting_method = sorting_methods[ls_sorting_method_key];
             $settings_sorting_method.val(ls_sorting_method_key);
             // console.log("Settings: Init: ls_sorting_method = ", ls_sorting_method);
+        } else {
+            _setLocalStorage.sorting_method();
         }
     }
 

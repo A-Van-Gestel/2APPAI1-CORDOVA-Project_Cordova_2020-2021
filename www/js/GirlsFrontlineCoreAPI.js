@@ -272,23 +272,27 @@ let GirlsFrontlineCoreAPI = function () {
         // Form Selection ReInitialization
         $('select').formSelect();
     }
-    // Rank conversion (nr --> stars)
-    let _parse_rank = function (rank) {
-        if (rank === 7) {
-            return "&#10029;"    // Special
-        } else {
-            return "&#9733;".repeat(rank);
-        }
-    }
 
-    // Digimind conversion to table
-    let _parse_digimind = function (mindupdate) {
-        // Check if mindupdate is 'undefined', if so set to No
-        if (mindupdate === undefined) {
-            return "No";
-        } else {
-            // console.log("Digimind = ", digimind_upgrade)
-            return `
+
+    // Function to hold all the parsing functions
+    let _parsers = function () {
+        // Rank conversion (nr --> stars)
+        let parse_rank = function (rank) {
+            if (rank === 7) {
+                return "&#10029;"    // Special
+            } else {
+                return "&#9733;".repeat(rank);
+            }
+        }
+
+        // Digimind conversion to table
+        let parse_digimind = function (mindupdate) {
+            // Check if mindupdate is 'undefined', if so set to No
+            if (mindupdate === undefined) {
+                return "No";
+            } else {
+                // console.log("Digimind = ", digimind_upgrade)
+                return `
                  <table>
                       <tr>
                         <td><b>Mod 1:</b></td>
@@ -307,74 +311,83 @@ let GirlsFrontlineCoreAPI = function () {
                       </tr>
                 </table>
             `;
+            }
         }
-    }
 
 
-    // Convert buildTime (seconds) to String (HH:MM:SS)
-    let _parse_buildtime = function (buildTime) {
-        // Convert seconds to Date
-        let BuildTimeOBJ = new Date((buildTime - 3600) * 1000);        // -3600 seconds (1 hour) to count for timezone differences in calculations
-        return MaterialDateTimePicker.dateTimetoString(BuildTimeOBJ);
-    }
-
-
-    let _parse_armor = function (armor) {
-        // Check if Armor is 'undefined', if so set to 0
-        if (armor === undefined) {
-            return 0;
-        } else {
-            return armor;
+        // Convert buildTime (seconds) to String (HH:MM:SS)
+        let parse_buildtime = function (buildTime) {
+            // Convert seconds to Date
+            let BuildTimeOBJ = new Date((buildTime - 3600) * 1000);        // -3600 seconds (1 hour) to count for timezone differences in calculations
+            return MaterialDateTimePicker.dateTimetoString(BuildTimeOBJ);
         }
-    }
 
 
-    // Convert to an indexed array containing the correct tags for each tile
-    let _parse_formation_buff_tiles = function (effect) {
-        let tiles_table = ["", "", "", "", "", "", "", "", ""];
-        let tile_doll_center = effect.effectCenter;
-        let tiles_doll_buffs = effect.effectPos;
-
-        tiles_doll_buffs.forEach(function (tile) {
-            tiles_table[tile - 1] = "buff"      // -1 so array starts at 0
-        })
-        tiles_table[tile_doll_center -1] = "standing"
-        // console.log("tiles_table", tiles_table);
-        return tiles_table;
-    }
-
-
-    // Convert Buffs to <p> tags
-    let _parse_formation_buffs = function (gridEffect) {
-        let tiles_effect_table = ''
-        let tiles_doll_effect = gridEffect;
-        for (let key in tiles_doll_effect) {
-            tiles_effect_table += `<p style="margin: 0"><b>${doll_stat_types[key]}: </b>+${tiles_doll_effect[key]}%</p>`
+        let parse_armor = function (armor) {
+            // Check if Armor is 'undefined', if so set to 0
+            if (armor === undefined) {
+                return 0;
+            } else {
+                return armor;
+            }
         }
-        return tiles_effect_table;
-    }
 
 
-    // TODO: favorite & buildTime booleans to Selector
+        // Convert to an indexed array containing the correct tags for each tile
+        let parse_formation_buff_tiles = function (effect) {
+            let tiles_table = ["", "", "", "", "", "", "", "", ""];
+            let tile_doll_center = effect.effectCenter;
+            let tiles_doll_buffs = effect.effectPos;
+
+            tiles_doll_buffs.forEach(function (tile) {
+                tiles_table[tile - 1] = "buff"      // -1 so array starts at 0
+            })
+            tiles_table[tile_doll_center -1] = "standing"
+            // console.log("tiles_table", tiles_table);
+            return tiles_table;
+        }
+
+
+        // Convert Buffs to <p> tags
+        let parse_formation_buffs = function (gridEffect) {
+            let tiles_effect_table = ''
+            let tiles_doll_effect = gridEffect;
+            for (let key in tiles_doll_effect) {
+                tiles_effect_table += `<p style="margin: 0"><b>${doll_stat_types[key]}: </b>+${tiles_doll_effect[key]}%</p>`
+            }
+            return tiles_effect_table;
+        }
+
+
+        // ---------- Global Function returns (outside name : inside name) ----------
+        return {
+            parse_rank: parse_rank,
+            parse_digimind: parse_digimind,
+            parse_buildtime: parse_buildtime,
+            parse_armor: parse_armor,
+            parse_formation_buff_tiles: parse_formation_buff_tiles,
+            parse_formation_buffs: parse_formation_buffs,
+        };
+    }();
+
+
     // Sets the T-Doll HTML Data on screen
-
-
     let _render_html_doll_data = function (input_id, favorite = false, buildTime = false) {
         let doll = gfcore.dolls.find(({id}) => id === input_id);
         // console.log(doll.codename + "_Data = ", doll);
 
         // Parse tiles for css classes
-        let tiles_table = _parse_formation_buff_tiles(doll.effect);
+        let tiles_table = _parsers.parse_formation_buff_tiles(doll.effect);
 
         // Data to HTML
         let doll_data = `
             <b>Name: </b>${doll.codename}<br>
             <b>ID: </b>${doll.id}<br>
             <b>Type: </b>${doll.type.toUpperCase()}<br>
-            <b>Rank: </b>${_parse_rank(doll.rank)}<br>
-            <b>BuildTime: </b>${_parse_buildtime(doll.buildTime)}<br>
+            <b>Rank: </b>${_parsers.parse_rank(doll.rank)}<br>
+            <b>BuildTime: </b>${_parsers.parse_buildtime(doll.buildTime)}<br>
             <b>Skins: </b>${doll.skins.length}<br>
-            <b>Digimind: </b>${_parse_digimind(doll.mindupdate)}
+            <b>Digimind: </b>${_parsers.parse_digimind(doll.mindupdate)}
 
             <h5>Stats</h5>
              <table>
@@ -391,7 +404,7 @@ let GirlsFrontlineCoreAPI = function () {
               <tr>
                 <td><b>${doll_stat_types['armorPiercing']}: </b>${doll.stats.armorPiercing}</td>
                 <td><b>${doll_stat_types['criticalPercent']}: </b>${doll.stats.criticalPercent}</td>
-                <td><b>${doll_stat_types['armor']}: </b>${_parse_armor(doll.stats.armor)}</td>
+                <td><b>${doll_stat_types['armor']}: </b>${_parsers.parse_armor(doll.stats.armor)}</td>
               </tr>
             </table>
 
@@ -421,7 +434,7 @@ let GirlsFrontlineCoreAPI = function () {
 
                 <div class="col s6">
                     <p style="margin: 0"><b>Buffs: </b>${doll.effect.effectType.toUpperCase()}</p>
-                    ${_parse_formation_buffs(doll.effect.gridEffect)}
+                    ${_parsers.parse_formation_buffs(doll.effect.gridEffect)}
                 </div>
             </div>
         `;
@@ -516,17 +529,25 @@ let GirlsFrontlineCoreAPI = function () {
     // ---------- Local Storage stuff ----------
     // Write the Favorite T-Dolls Array to Local Storage
     let _setLocalStorage = function() {
-        console.log("Save Favorited T-Dolls to Local Storage");
-        // console.log('favorite_doll_ids[]', favorite_doll_ids);
-        localStorage.setItem('favorite_doll_ids', JSON.stringify(favorite_doll_ids));  // localStorage.setItem('key', 'value')
-    };
+        let favorited_dolls = function () {
+            console.log("Save Favorited T-Dolls to Local Storage");
+            // console.log('favorite_doll_ids[]', favorite_doll_ids);
+            localStorage.setItem('favorite_doll_ids', JSON.stringify(favorite_doll_ids));  // localStorage.setItem('key', 'value')
+        }
+
+
+        // ---------- Global Function returns (outside name : inside name) ----------
+        return {
+            favorited_dolls: favorited_dolls,
+        };
+    }();
 
 
     let _addFavoriteDoll = function(id){
         // console.log('Added favorite T-Doll with ID = ' + id);
         if (!favorite_doll_ids.includes(id)) {
             favorite_doll_ids.push(id);  // Add the ID to the end of Array
-            _setLocalStorage();
+            _setLocalStorage.favorited_dolls();
             get_dolls_by_type(selected_type_favorited, true)
             M.toast({html: 'T-Doll Favorited', displayLength: 2000, classes: 'grey_gfl'})
         }
@@ -545,7 +566,7 @@ let GirlsFrontlineCoreAPI = function () {
                     favorite_doll_ids.splice(i, 1);    // Delete the element with Index 'I" from the Array
                 }
             }
-            _setLocalStorage();
+            _setLocalStorage.favorited_dolls();
             get_dolls_by_type(selected_type_favorited, true)
             reset_html_doll_data(true)
             M.toast({html: 'T-Doll removed from Favorites', displayLength: 2000, classes: 'grey_gfl'})
@@ -566,7 +587,6 @@ let GirlsFrontlineCoreAPI = function () {
             get_dolls_by_type(selected_type_favorited, true);
             get_dolls_by_buildTime();
         }
-
 
 
         // ---------- Global Function returns (outside name : inside name) ----------
