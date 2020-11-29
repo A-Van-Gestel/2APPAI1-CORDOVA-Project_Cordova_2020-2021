@@ -199,14 +199,14 @@ let GirlsFrontlineCoreAPI = function () {
                             selected_type_favorited = input_type;
                             if (tdoll.type === input_type && favorite_doll_ids.includes(tdoll.id)) {
                                 // console.log(tdoll.type + " - " + tdoll.codename, tdoll)
-                                dolls_by_type.push([tdoll.id, tdoll.codename]);
+                                dolls_by_type.push([tdoll.id, tdoll.codename, tdoll.rank]);
                             }
                             break;
                         default:
                             selected_type = input_type;
                             if (tdoll.type === input_type) {
                                 // console.log(tdoll.type + " - " + tdoll.codename, tdoll)
-                                dolls_by_type.push([tdoll.id, tdoll.codename]);
+                                dolls_by_type.push([tdoll.id, tdoll.codename, tdoll.rank]);
                             }
                     }
                 });
@@ -230,7 +230,7 @@ let GirlsFrontlineCoreAPI = function () {
             gfcore.dolls.forEach(function (tdoll) {
                     if (tdoll.buildTime === input_buildTime && tdoll.id < 20000 && tdoll.rank !== 7) {
                         // console.log(tdoll.buildTime + " - " + tdoll.codename)
-                        dolls_by_buildTime.push([tdoll.id, tdoll.codename]);
+                        dolls_by_buildTime.push([tdoll.id, tdoll.codename, tdoll.rank]);
                     }
                 }
             );
