@@ -21,6 +21,16 @@ let Sorting_methods = function () {
             return b[2] - a[2];
         }
 
+        // By buildTime (low -> high)
+        let array_index_3_number = function(a, b) {
+            return a[3] - b[3];
+        }
+
+        // By buildTime (high -> low)
+        let array_index_3_number_reversed = function(a, b) {
+            return b[3] - a[3];
+        }
+
 
 
     // ---------- Global Function returns (outside name : inside name) ----------
@@ -29,5 +39,7 @@ let Sorting_methods = function () {
         array_index_1_string: array_index_1_string,
         array_index_2_number: array_index_2_number,
         array_index_2_number_reversed: array_index_2_number_reversed,
+        array_index_3_number: array_index_3_number,
+        array_index_3_number_reversed: array_index_3_number_reversed,
     };
 }();

@@ -1,7 +1,6 @@
 let Settings = function () {
     // TODO: Setting for default tab
     // TODO: Option to clear Favorites
-    // TODO: Add Sorting Method: By build time
     // ---------- Global Variables & Stuff ----------
     // key : [function, "Sorting Name"]
     const sorting_methods = {
@@ -9,6 +8,8 @@ let Settings = function () {
         name : [Sorting_methods.array_index_1_string, "By name"],
         rank : [Sorting_methods.array_index_2_number, "By rank (low -> high)"],
         rank_reversed : [Sorting_methods.array_index_2_number_reversed, "By rank (high -> low)"],
+        buildTime : [Sorting_methods.array_index_3_number, "By build time (low -> high)"],
+        buildTime_reversed : [Sorting_methods.array_index_3_number_reversed, "By build time (high -> low)"],
     }
 
     // Local Storage: Sorting Method
