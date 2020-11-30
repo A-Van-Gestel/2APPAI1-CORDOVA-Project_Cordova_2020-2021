@@ -1,4 +1,5 @@
 $(function () {
+    // TODO: Add browser check (needs device-info plugin)
     document.addEventListener("deviceready", onDeviceReady, false);
 
 
