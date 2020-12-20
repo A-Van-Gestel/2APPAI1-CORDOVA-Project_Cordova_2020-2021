@@ -2,9 +2,9 @@
 
 - **Naam**: Van Gestel Axel
 - **Klas**: 2 APPAI A
-- **Email**: <a href="mailto:r0784084@student.thomasmore.be">r0784084@student.thomasmore.be</a>
 - **Studentnr**: r0784084
-- **Download APK URL**: [download (WIP)](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/resources/app-debug.apk)  
+- **Download Page**: [link](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/#download)  
+- **Direct APK Download**: [download](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/resources/app-debug.apk)  
 
 ![Hier een link naar uw foto](resources/A_Van_Gestel_FACE_400px.JPG)
 
@@ -36,6 +36,6 @@ Gebruikt voor de pop-in te verbergen, terwijl de app alles aan het inladen is bi
 - [x] Mintens 1 Cordova Plug-in
 - [x] Data uitwisseling met JSON (AJAX) - API (girlsfrontline-core API)
 - [x] Local storage (Laatste selectie, favoriete,...)
-- [x] Applicatie publiceren ([Sinners - Cordova Project (WIP)](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/))
+- [x] Applicatie publiceren ([Sinners - Cordova Project](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/))
 - [ ] ...
 
