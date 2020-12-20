@@ -6,7 +6,7 @@
 - **Download Page**: [link](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/#download)  
 - **Direct APK Download**: [download](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/resources/app-debug.apk)  
 
-![Hier een link naar uw foto](resources/A_Van_Gestel_FACE_400px.JPG)
+<img src="resources/icon.png" width="150" height="150">
 
 ## Korte omschrijving van de app
 
