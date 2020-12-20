@@ -17,6 +17,7 @@ let GirlsFrontlineCoreAPI = function () {
 
     // Settings
     let setting_sorting_method;
+    let setting_tdoll_naming_method;
 
     // Local Storage: Favorite dolls list
     let favorite_doll_ids = [];
@@ -201,14 +202,14 @@ let GirlsFrontlineCoreAPI = function () {
                             selected_type_favorited = input_type;
                             if (tdoll.type === input_type && favorite_doll_ids.includes(tdoll.id)) {
                                 // console.log(tdoll.type + " - " + tdoll.codename)
-                                dolls_by_type.push([tdoll.id, tdoll.codename, tdoll.rank, tdoll.buildTime]);
+                                dolls_by_type.push([tdoll.id, _i18next(tdoll.name, tdoll.codename, setting_tdoll_naming_method), tdoll.rank, tdoll.buildTime]);
                             }
                             break;
                         default:
                             selected_type = input_type;
                             if (tdoll.type === input_type) {
                                 // console.log(tdoll.type + " - " + tdoll.codename, tdoll)
-                                dolls_by_type.push([tdoll.id, tdoll.codename, tdoll.rank, tdoll.buildTime]);
+                                dolls_by_type.push([tdoll.id, _i18next(tdoll.name, tdoll.codename, setting_tdoll_naming_method), tdoll.rank, tdoll.buildTime]);
                             }
                     }
                 });
@@ -232,7 +233,7 @@ let GirlsFrontlineCoreAPI = function () {
             gfcore.dolls.forEach(function (tdoll) {
                     if (tdoll.buildTime === input_buildTime && tdoll.id < 20000 && tdoll.rank !== 7) {
                         // console.log(tdoll.buildTime + " - " + tdoll.codename)
-                        dolls_by_buildTime.push([tdoll.id, tdoll.codename, tdoll.rank, tdoll.buildTime]);
+                        dolls_by_buildTime.push([tdoll.id, _i18next(tdoll.name, tdoll.codename, setting_tdoll_naming_method), tdoll.rank, tdoll.buildTime]);
                     }
                 }
             );
@@ -402,7 +403,7 @@ let GirlsFrontlineCoreAPI = function () {
 
         // Data to HTML
         let doll_data = `
-            <b>Name: </b>${doll.codename}<br>
+            <b>Name: </b>${_i18next(doll.name, doll.codename, setting_tdoll_naming_method)}<br>
             <b>ID: </b>${doll.id}<br>
             <b>Type: </b>${doll.type.toUpperCase()}<br>
             <b>Rank: </b>${_parsers.parse_rank(doll.rank)}<br>
@@ -544,6 +545,30 @@ let GirlsFrontlineCoreAPI = function () {
     }
 
 
+    let _i18next = function (input, fallback, use) {
+        if (use) {
+            let next = i18next.t('gfcore:' + input.toString())
+            // console.log("next = " + next, "| input = " + input, "| fallback = " + fallback)
+            if (next.toString() !== input.toString()) {
+                return next;
+            }
+            else {
+                return fallback;
+            }
+        }
+        else {
+            return fallback;
+        }
+    }
+
+    // Reset T-Doll dropdowns
+    let _reset_dropdowns = function () {
+        get_dolls_by_type(selected_type);
+        get_dolls_by_type(selected_type_favorited, true);
+        get_dolls_by_buildTime();
+    }
+
+
 
 
 
@@ -604,15 +629,22 @@ let GirlsFrontlineCoreAPI = function () {
             setting_sorting_method = sorting_mode;
             // console.log("GFCoreAPI: set_settings: setting_sorting_method = ", setting_sorting_method);
             // Form Selection ReInitialization
-            get_dolls_by_type(selected_type);
-            get_dolls_by_type(selected_type_favorited, true);
-            get_dolls_by_buildTime();
+            _reset_dropdowns();
+        }
+
+
+        let tdoll_naming_method = function (tdoll_naming_method) {
+            setting_tdoll_naming_method = tdoll_naming_method;
+            // console.log("GFCoreAPI: set_settings: setting_tdoll_naming_method = ", setting_tdoll_naming_method);
+            // Form Selection ReInitialization
+            _reset_dropdowns();
         }
 
 
         // ---------- Global Function returns (outside name : inside name) ----------
         return {
             sorting_mode: sorting_mode,
+            tdoll_naming_method: tdoll_naming_method,
         };
     }()
 
