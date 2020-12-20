@@ -17,9 +17,11 @@ let Settings = function () {
         i18next_name : [true, "By name (may contain Chinese)"]
     }
 
-    // Local Storage: Sorting Method
-    let ls_sorting_method = sorting_methods['name'][0];
-    let ls_tdoll_naming_method = tdoll_naming_methods['codename'][0];
+    // Local Storage: Default setting
+    let ls_methods = {
+        ls_sorting_method: sorting_methods['name'][0],
+        ls_tdoll_naming_method: tdoll_naming_methods['codename'][0]
+    }
 
 
     // Cache DOM for performance
@@ -39,9 +41,9 @@ let Settings = function () {
         // console.log("Dropdown Sorting: Value = ", this.value);
         // console.log("Dropdown Sorting: Method = ", sorting_methods[mode][0]);
         if (mode !== "") {
-            ls_sorting_method = sorting_methods[mode][0];
+            ls_methods['ls_sorting_method'] = sorting_methods[mode][0];
             _setLocalStorage.sorting_method();
-            GirlsFrontlineCoreAPI.set_settings.sorting_mode(ls_sorting_method);
+            GirlsFrontlineCoreAPI.set_settings.sorting_mode(ls_methods['ls_sorting_method']);
         }
     });
 
@@ -50,9 +52,9 @@ let Settings = function () {
         // console.log("Dropdown Naming: Value = ", this.value);
         // console.log("Dropdown naming: Method = ", tdoll_naming_methods[mode][0]);
         if (mode !== "") {
-            ls_tdoll_naming_method = tdoll_naming_methods[mode][0];
+            ls_methods['ls_tdoll_naming_method'] = tdoll_naming_methods[mode][0];
             _setLocalStorage.tdoll_naming_method();
-            GirlsFrontlineCoreAPI.set_settings.tdoll_naming_method(ls_tdoll_naming_method);
+            GirlsFrontlineCoreAPI.set_settings.tdoll_naming_method(ls_methods['ls_tdoll_naming_method']);
         }
     });
 
@@ -84,7 +86,7 @@ let Settings = function () {
             }
 
 
-        // --- Dropdown Name Dropdown ---
+        // --- T-Doll Naming Method Dropdown ---
         $settings_tdoll_naming_method.empty()            // Empty current dropdown list
             .append("<option value='' disabled selected>Choose Dropdown Naming Method</option>");
 
@@ -101,8 +103,8 @@ let Settings = function () {
     // Set settings in other scripts
     let _set_settings = function () {
         console.log("Settings: Settings Set");
-        GirlsFrontlineCoreAPI.set_settings.sorting_mode(ls_sorting_method);
-        GirlsFrontlineCoreAPI.set_settings.tdoll_naming_method(ls_tdoll_naming_method);
+        GirlsFrontlineCoreAPI.set_settings.sorting_mode(ls_methods['ls_sorting_method']);
+        GirlsFrontlineCoreAPI.set_settings.tdoll_naming_method(ls_methods['ls_tdoll_naming_method']);
     };
 
 
@@ -110,24 +112,24 @@ let Settings = function () {
     // ---------- Local Storage stuff ----------
     // Function to write the settings to Local Storage
     let _setLocalStorage = function() {
-        let sorting_method = function () {
-            console.log("Saved Sorting Method settings to Local Storage");
-            for (let key in sorting_methods) {
-                let value = sorting_methods[key][0]
-                if (value === ls_sorting_method) {
-                    localStorage.setItem('setting_sorting_method', key);  // localStorage.setItem('key', 'value')
+        // Default Function
+        let _setLocalStorageFunction = function (object_Methods, ls_method, setting_method) {
+            for (let key in object_Methods) {
+                let value = object_Methods[key][0]
+                if (value === ls_methods[ls_method]) {
+                    localStorage.setItem(setting_method, key);  // localStorage.setItem('key', 'value')
                 }
             }
+        }
+
+        let sorting_method = function () {
+            console.log("Saved Sorting Method settings to Local Storage");
+            _setLocalStorageFunction(sorting_methods, 'ls_sorting_method', 'setting_sorting_method')
         };
 
         let tdoll_naming_method = function () {
             console.log("Saved Dropdown Name Type settings to Local Storage");
-            for (let key in tdoll_naming_methods) {
-                let value = tdoll_naming_methods[key][0]
-                if (value === ls_tdoll_naming_method) {
-                    localStorage.setItem('setting_tdoll_naming_method', key);  // localStorage.setItem('key', 'value')
-                }
-            }
+            _setLocalStorageFunction(tdoll_naming_methods, 'ls_tdoll_naming_method', 'setting_tdoll_naming_method')
         };
 
 
@@ -141,27 +143,24 @@ let Settings = function () {
 
     // Read Settings from local storage
     let _getLocalStorage = function () {
-        // --- Sorting Method ---
-        let ls_sorting_method_key = localStorage.getItem('setting_sorting_method');
-        if (ls_sorting_method_key !== null) {
-            ls_sorting_method = sorting_methods[ls_sorting_method_key][0];
-            $settings_sorting_method.val(ls_sorting_method_key);
-            // console.log("Settings: Init: ls_sorting_method = ", ls_sorting_method);
-        } else {
-            _setLocalStorage.sorting_method();
-            $settings_sorting_method.val(localStorage.getItem('setting_sorting_method'));
+        let _getLocalStorageFunction = function (object_Methods, ls_method, setting_method, setLocalStorageFunction, $selector) {
+            let ls_method_key = localStorage.getItem(setting_method);
+            // console.log(ls_method + "_key = ", ls_method_key)
+            if (ls_method_key !== null) {
+                ls_methods[ls_method] = object_Methods[ls_method_key][0];
+                $selector.val(ls_method_key);
+                // console.log("Settings: Init: " + ls_method + " = ", ls_methods[ls_method]);
+            } else {
+                setLocalStorageFunction();
+                $selector.val(localStorage.getItem(setting_method));
+            }
         }
 
         // --- Sorting Method ---
-        let ls_tdoll_naming_method_key = localStorage.getItem('setting_tdoll_naming_method');
-        if (ls_tdoll_naming_method_key !== null) {
-            ls_tdoll_naming_method = tdoll_naming_methods[ls_tdoll_naming_method_key][0];
-            $settings_tdoll_naming_method.val(ls_tdoll_naming_method_key);
-            // console.log("Settings: Init: ls_tdoll_naming_method = ", ls_tdoll_naming_method);
-        } else {
-            _setLocalStorage.tdoll_naming_method();
-            $settings_tdoll_naming_method.val(localStorage.getItem('setting_tdoll_naming_method'));
-        }
+         _getLocalStorageFunction(sorting_methods, 'ls_sorting_method', 'setting_sorting_method', _setLocalStorage.sorting_method, $settings_sorting_method)
+
+        // --- Tdoll Naming Method ---
+        _getLocalStorageFunction(tdoll_naming_methods, 'ls_tdoll_naming_method', 'setting_tdoll_naming_method', _setLocalStorage.tdoll_naming_method, $settings_tdoll_naming_method)
     }
 
 
