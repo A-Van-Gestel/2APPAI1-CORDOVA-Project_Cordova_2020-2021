@@ -76,24 +76,22 @@ let Settings = function () {
 
 
     let _set_dropdowns = function () {
-        // --- Sorting Method Dropdown ---
-        $settings_sorting_method.empty()            // Empty current dropdown list
-            .append("<option value='' disabled selected>Choose a Sorting Method</option>");
+        let _set_dropdownsFunction = function (object_Methods, $selector, message) {
+            // --- Setting Methods Dropdown ---
+            $selector.empty()            // Empty current dropdown list
+                .append(`<option value='' disabled selected>${message}</option>`);
 
-        for (let key in sorting_methods) {          // Dynamically add Sorting Methods to the list
-            let name = sorting_methods[key][1];
-            $settings_sorting_method.append("<option value='" + key + "'>" + name + "</option>");
+            for (let key in object_Methods) {          // Dynamically add Methods to the list
+                let name = object_Methods[key][1];
+                $selector.append("<option value='" + key + "'>" + name + "</option>");
             }
+        }
 
+        // --- Sorting Method Dropdown ---
+        _set_dropdownsFunction(sorting_methods, $settings_sorting_method, 'Choose a Sorting Method')
 
         // --- T-Doll Naming Method Dropdown ---
-        $settings_tdoll_naming_method.empty()            // Empty current dropdown list
-            .append("<option value='' disabled selected>Choose Dropdown Naming Method</option>");
-
-        for (let key in tdoll_naming_methods) {          // Dynamically add Naming methods to the list
-            let name = tdoll_naming_methods[key][1];
-            $settings_tdoll_naming_method.append("<option value='" + key + "'>" + name + "</option>");
-        }
+        _set_dropdownsFunction(tdoll_naming_methods, $settings_tdoll_naming_method, 'Choose Dropdown Naming Method')
 
         // Form Selection ReInitialization
         $('select').formSelect();
