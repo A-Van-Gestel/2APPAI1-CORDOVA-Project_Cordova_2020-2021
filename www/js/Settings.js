@@ -34,51 +34,33 @@ let Settings = function () {
 
 
     // ---------- UI Stuff ----------
-
-    // // Dynamic function ---BROKEN---
-    // let _get_dropdown_valueFunction = function (object_Methods, ls_method, setLocalStorageFunction, set_settingsFunction) {
-    //     console.log('this = ', this)
-    //     let mode = this.value;
-    //     console.log("Dropdown: Value = ", this.value);
-    //     console.log("Dropdown: Method = ", object_Methods[mode][0]);
-    //     if (mode !== "") {
-    //         ls_methods[ls_method] = sorting_methods[mode][0];
-    //         setLocalStorageFunction();
-    //         set_settingsFunction(ls_methods[ls_method]);
-    //     }
-    // }
-    //
-    // // Get selected T-Doll data from dropdown
-    // $settings_sorting_method.on('change', _get_dropdown_valueFunction(sorting_methods, 'ls_sorting_method', _setLocalStorage.sorting_method, GirlsFrontlineCoreAPI.set_settings.sorting_mode));
-    //
-    // $settings_tdoll_naming_method.on('change', _get_dropdown_valueFunction(tdoll_naming_methods, 'ls_tdoll_naming_method', _setLocalStorage.tdoll_naming_method, GirlsFrontlineCoreAPI.set_settings.tdoll_naming_method));
-
-
-
-    // ---Hardcoded---
-    // Get selected Setting from dropdown
-    $settings_sorting_method.on('change', function() {
-        let mode = this.value;
-        // console.log("Dropdown Sorting: Value = ", this.value);
-        // console.log("Dropdown Sorting: Method = ", sorting_methods[mode][0]);
-        if (mode !== "") {
-            ls_methods['ls_sorting_method'] = sorting_methods[mode][0];
-            _setLocalStorage.sorting_method();
-            GirlsFrontlineCoreAPI.set_settings.sorting_mode(ls_methods['ls_sorting_method']);
-        }
+    // Get selected T-Doll data from dropdown
+    $settings_sorting_method.on('change', function () {
+        return _get_dropdown_valueFunction(sorting_methods, 'ls_sorting_method', _setLocalStorage.sorting_method, GirlsFrontlineCoreAPI.set_settings.sorting_mode, $settings_sorting_method);
     });
 
-    // Get selected Setting from dropdown
-    $settings_tdoll_naming_method.on('change', function() {
-        let mode = this.value;
-        // console.log("Dropdown Naming: Value = ", this.value);
-        // console.log("Dropdown naming: Method = ", tdoll_naming_methods[mode][0]);
-        if (mode !== "") {
-            ls_methods['ls_tdoll_naming_method'] = tdoll_naming_methods[mode][0];
-            _setLocalStorage.tdoll_naming_method();
-            GirlsFrontlineCoreAPI.set_settings.tdoll_naming_method(ls_methods['ls_tdoll_naming_method']);
-        }
+    $settings_tdoll_naming_method.on('change', function () {
+        return _get_dropdown_valueFunction(tdoll_naming_methods, 'ls_tdoll_naming_method', _setLocalStorage.tdoll_naming_method, GirlsFrontlineCoreAPI.set_settings.tdoll_naming_method, $settings_tdoll_naming_method);
     });
+
+
+    // --- UI helper functions ---
+    // Dynamic function to get selected value from dropdown
+    let _get_dropdown_valueFunction = function (object_Methods, ls_method, setLocalStorageFunction, set_settingsFunction, $selector) {
+        try {
+            let mode = $selector.children("option:selected").val();
+            // console.log("Dropdown: Value = ", $selector.children("option:selected").val());
+            // console.log("Dropdown: Method = ", object_Methods[mode][0]);
+            if (mode !== "") {
+                ls_methods[ls_method] = object_Methods[mode][0];
+                setLocalStorageFunction();
+                set_settingsFunction(ls_methods[ls_method]);
+            }
+        }
+        catch (error) {
+            console.error(error)
+        }
+    }
 
 
 
