@@ -65,9 +65,9 @@ let GirlsFrontlineCoreAPI = function () {
     // --- T-Doll Data tab ---
     // Get selected T-Doll data from dropdown
     $tdoll_selection.on('change', function() {
-        let id = this.value;
-        // console.log("Dropdown: Value = ", this.value);
-        if (id !== "") {
+        let id = $(this).val();
+        // console.log("Dropdown: Value = ", $(this).val());
+        if (id !== null) {
             _render_html_doll_data(parseInt(id))
         }
     })
@@ -117,9 +117,9 @@ let GirlsFrontlineCoreAPI = function () {
     // --- Favorite Tab ---
     // Get selected T-Doll data from favorites dropdown
     $tdoll_selection_favorite.on('change', function() {
-        let id = this.value;
-        // console.log("Dropdown: Value = ", this.value);
-        if (id !== "") {
+        let id = $(this).val();
+        // console.log("Dropdown: Value = ", $(this).val());
+        if (id !== null) {
             _render_html_doll_data(parseInt(id),true)
         }
     })
@@ -161,9 +161,9 @@ let GirlsFrontlineCoreAPI = function () {
 
     // Get selected T-Doll data from dropdown
     $tdoll_selection_BuildTime.on('change', function() {
-        let id = this.value;
-        // console.log("Dropdown: Value = ", this.value);
-        if (id !== "") {
+        let id = $(this).val();
+        // console.log("Dropdown: Value = ", $(this).val());
+        if (id !== null) {
             _render_html_doll_data(parseInt(id), undefined, true)
         }
     })
