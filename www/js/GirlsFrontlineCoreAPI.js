@@ -1,4 +1,22 @@
 let GirlsFrontlineCoreAPI = function () {
+    // TODO: Equipment
+    // TODO: Fairies
+    // TODO: Heavy Ordnance Corps (HOC)
+
+    // TODO: Information: Skills
+    // TODO: Information: Equipment
+    // TODO: Information: Obtain Method
+    // TODO: Information: Extra: Consumption
+    // TODO: Information: Extra: Best Recipe
+
+    // TODO: Timer Equipment
+    // TODO: Timer Fairies
+
+    // TODO: Artwork
+
+    // TODO: Extra: Needed Combat Report Generator
+
+
     // ---------- Global Variables & Stuff ----------
     // TODO: dynamically populate type buttons
     const doll_types = ['hg', 'smg', 'rf', 'ar', 'mg', 'sg']
