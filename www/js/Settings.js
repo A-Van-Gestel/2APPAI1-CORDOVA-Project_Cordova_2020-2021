@@ -1,4 +1,5 @@
 let Settings = function () {
+    // TODO: Add Debug Mode
     // TODO: Setting for default tab
     // TODO: Option to clear Favorites
     // TODO: Add sorting method to Dropdown name (example: *** - UZI; 1:00h - UZI)
