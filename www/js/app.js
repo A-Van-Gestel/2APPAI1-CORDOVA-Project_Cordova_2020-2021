@@ -1,4 +1,5 @@
 $(function () {
+    // TODO: Integrate with GitHub Actions
     // TODO: Add Debug Mode
     // TODO: Add State system (save app state)
     // TODO: Make web compatible
