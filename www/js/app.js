@@ -1,5 +1,6 @@
 $(function () {
     // TODO: Add Debug Mode
+    // TODO: Add State system (save app state)
     // TODO: Make web compatible
     // TODO: Add browser check (needs device-info plugin)
     document.addEventListener("deviceready", onDeviceReady, false);
