@@ -111,3 +111,16 @@ td, th {
 .tile_grid_table td.standing {
     background: #ffffff;
 }
+
+
+
+/* Fixed Sidenav for Large Screens */
+header, main, footer {
+    padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}

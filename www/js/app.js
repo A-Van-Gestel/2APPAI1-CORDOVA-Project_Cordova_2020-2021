@@ -12,9 +12,11 @@ $(function () {
     $('.sidenav').sidenav();	/* https://materializecss.com/sidenav.html */
 
     $('.sidenav a').click(function () {
-        $('.spa').hide();                           // Alles met de tag "spa" wordt gehide
-        $('#' + $(this).data('show')).show();       // De huidige link dat je klikt wordt geshowed
-        $('.sidenav').sidenav('close');             // De navbar sluit zichzelf
+        $('.spa').hide();                           // Hide everything with the '.spa'-tag
+        $('#' + $(this).data('show')).show();       // Show the pressed link
+        if ($(window).width() <= 992) {
+            $('.sidenav').sidenav('close');             // Close the sidenav on Smaller Screens (< 992px)
+        }
     });
 
 
