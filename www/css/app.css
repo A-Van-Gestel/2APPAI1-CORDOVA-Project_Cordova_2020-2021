@@ -1,6 +1,8 @@
 /* ------ Variables: colors,... ------ */
 :root {
     --button_padding: 0px;
+    --data_min_heigt: 450px;
+    --table_grid_size: 200px;
     --orange_gfl-color: #ffb600;
     --white_glf-color: #f7f7f7;
     --light_grey_gfl-color: #cecfd6;
@@ -32,6 +34,7 @@ p {
 }
 
 #tabTDollData, #tabBuildTime, #tabFavorite {
+    min-height: var(--button_padding);
     padding-bottom: var(--button_padding);
 }
 
@@ -90,10 +93,13 @@ td, th {
     padding: 0;
 }
 
-
+.input-field {
+    min-height: 43px;
+}
 
 /* T-Doll tile buff Table */
 .tile_grid_table {
+    max-width: var(--table_grid_size);
     background: var(--grey_gfl-color);
     padding: 5px;
     border-collapse: separate;
@@ -115,8 +121,25 @@ td, th {
 
 
 /* Fixed Sidenav for Large Screens */
-header, main, footer {
-    padding-left: 300px;
+@media only screen and (min-width: 993px) {
+    header, main, footer {
+        padding-left: 300px;
+    }
+
+    .nav-wrapper {
+        margin-left: 8.3333333333%!important;
+        margin-right: 0!important;
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav-wrapper a:first-child {
+
+        /* Disable current CSS */
+        left: unset!important;
+        -webkit-transform: unset!important;
+        transform: unset!important;
+    }
 }
 
 @media only screen and (max-width : 992px) {

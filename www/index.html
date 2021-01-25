@@ -1,12 +1,23 @@
 <!doctype html>
-<html lang="nl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!-- START: Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- END: Favicons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="css/materialize.1.0.0.min.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/loader.css">
     <title>Girls' Frontline Information Bank</title>
 </head>
 <body class="white_glf">
@@ -67,7 +78,9 @@
                     <label for="tdoll_selection">T-Doll Selection</label>
                 </div>
                 <h5>Doll Data</h5>
-                <div id="Doll_Data"></div>
+                <div id="Doll_Data">
+                    <div class="loader center-block"></div>
+                </div>
             </div>
 
 
@@ -96,7 +109,9 @@
                     <label for="tdoll_selection_BuildTime">T-Doll Selection</label>
                 </div>
                 <h5>Doll Data</h5>
-                <div id="Doll_Data_BuildTime"></div>
+                <div id="Doll_Data_BuildTime">
+                    <div class="loader center-block"></div>
+                </div>
             </div>
 
 
@@ -129,7 +144,9 @@
                     <label for="tdoll_selection_favorite">T-Doll Selection</label>
                 </div>
                 <h5>Doll Data</h5>
-                <div id="Doll_Data_favorite"></div>
+                <div id="Doll_Data_favorite">
+                    <div class="loader center-block"></div>
+                </div>
             </div>
             <!-- Floating Favorite Button -->
             <div id="btnFloat_Unfavorite" class="fixed-action-btn">
@@ -206,7 +223,7 @@
 
 
 <script src="js/jquery.3.5.1min.js"></script>
-<script src="js/materialize.1.0.0.min.js"></script>
+<script src="js/materialize.min.js"></script>
 <script crossorigin src="https://unpkg.com/girlsfrontline-core/umd/gfcore.min.js"></script>         <!-- Needed for API to work -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/19.8.4/i18next.min.js" crossorigin="anonymous"></script>         <!-- Needed for API to work -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-xhr-backend/3.2.2/i18nextXHRBackend.min.js" crossorigin="anonymous"></script>         <!-- Needed for API to work -->

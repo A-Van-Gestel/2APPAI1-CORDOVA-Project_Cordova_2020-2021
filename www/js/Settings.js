@@ -2,6 +2,7 @@ let Settings = function () {
     // TODO: Setting for default tab
     // TODO: Option to clear Favorites
     // TODO: Add sorting method to Dropdown name (example: *** - UZI; 1:00h - UZI)
+    // TODO: Add localstorage export & import method
     // ---------- Global Variables & Stuff ----------
     // key : [function, "Sorting Name"]
     const sorting_methods = {

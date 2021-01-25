@@ -18,7 +18,8 @@
   "devDependencies": {
     "cordova-android": "^9.0.0",
     "cordova-browser": "^6.0.0",
-    "cordova-plugin-appinfo": "^2.1.2",
+    "cordova-plugin-buildinfo": "^4.0.0",
+    "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-materialdatetime": "git+https://github.com/moda20/cordova-plugin-MaterialDateTimePicker.git",
     "cordova-plugin-network-information": "^2.0.2",
     "cordova-plugin-splashscreen": "^6.0.0",
@@ -28,10 +29,11 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
-      "cordova-plugin-appinfo": {},
       "cordova-plugin-network-information": {},
       "skwas-cordova-plugin-datetimepicker": {},
-      "cordova-plugin-splashscreen": {}
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-buildinfo": {},
+      "cordova-plugin-device": {}
     },
     "platforms": [
       "browser",

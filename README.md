@@ -16,8 +16,10 @@ De gebruiker kan dan bepaalde T-doll’s opslaan in een lokale lijst, zodat hij 
 
 ## Plug-ins in mijn app
 
-- [cordova-plugin-appinfo](https://www.npmjs.com/package/cordova-plugin-appinfo)  
+- [cordova-plugin-buildinfo](https://www.npmjs.com/package/cordova-plugin-buildinfo)  
 Gebruikt voor de identifier, versie & build nummer van de applicatie op te halen, op deze manier gebeurt dit automatisch en hoef je geen html code te wijzigen bij een update of versie verandering.
+- [cordova-plugin-device](https://www.npmjs.com/package/cordova-plugin-device)  
+Used to differentiate between the browser & Android version in code.
 - [cordova-plugin-network-information](https://www.npmjs.com/package/@osvlabs/cordova-plugin-network-information)  
 Gebruikt voor het controleren of de app online kan tijdens het opstarten, zo niet dan krijgt de gebruiker een melding dat deze app internet toegang nodig heeft om correct te werken.
 - [skwas-cordova-plugin-datetimepicker](https://www.npmjs.com/package/skwas-cordova-plugin-datetimepicker)  

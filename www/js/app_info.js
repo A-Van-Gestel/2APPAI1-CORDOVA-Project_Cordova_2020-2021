@@ -15,15 +15,16 @@ let AppInfo = function () {
     let init = function () {
         // Get APP data
         let data = `
-            <p class="center-align" style="margin-top:0; margin-bottom: 0">${navigator.appInfo.identifier}</p>
-            <p class="center-align" style="margin-top: 0">Ver. ${navigator.appInfo.version} (Build ${navigator.appInfo.build})</p>
+            <p class="center-align" style="margin-top:0; margin-bottom: 0">${BuildInfo.packageName}</p>
+            <p class="center-align" style="margin-top: 0; margin-bottom: 0">Ver. ${BuildInfo.version} (Build ${BuildInfo.versionCode})</p>
+            <p class="center-align" style="margin-top: 0">${device.platform}</p>
         `;
 
         // Set APP data as HTML
         $APP_info_all.html(data);
-        $APP_info_identifier.text(navigator.appInfo.identifier);
-        $APP_info_version.text(navigator.appInfo.version);
-        $APP_info_build.text(navigator.appInfo.build);
+        $APP_info_identifier.text(BuildInfo.packageName);
+        $APP_info_version.text(BuildInfo.version);
+        $APP_info_build.text(BuildInfo.versionCode);
     };
 
 
