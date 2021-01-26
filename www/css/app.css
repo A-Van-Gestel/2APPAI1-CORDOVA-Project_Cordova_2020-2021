@@ -96,6 +96,22 @@ td, th {
 .input-field {
     min-height: 43px;
 }
+/* TimePicker */
+.timepicker-digital-display {
+    background-color: var(--grey_gfl-color);
+}
+.timepicker-analog-display {
+    background-color: var(--white_glf-color);
+}
+.timepicker-canvas-bearing, .timepicker-canvas-bg {
+    fill: var(--orange_gfl-color);
+}
+.timepicker-canvas line {
+    stroke: var(--orange_gfl-color);
+}
+.timepicker-footer .confirmation-btns .timepicker-close {
+    color: var(--grey_gfl-color);
+}
 
 /* T-Doll tile buff Table */
 .tile_grid_table {

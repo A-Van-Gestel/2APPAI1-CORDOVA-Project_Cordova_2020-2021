@@ -13,6 +13,7 @@ let AppInfo = function () {
 
     // ---------- Function Stuff ----------
     let init = function () {
+        console.log("Platform: ", device.platform)
         // Get APP data
         let data = `
             <p class="center-align" style="margin-top:0; margin-bottom: 0">${BuildInfo.packageName}</p>

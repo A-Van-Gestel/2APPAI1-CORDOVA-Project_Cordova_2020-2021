@@ -15,8 +15,17 @@ let MaterialDateTimePicker = function () {
         // console.log("baseline Date = ", _dateTimetoSeconds(myDate))
         // console.log("baseline Date: HH:MM:SS", dateTimetoString(myDate))
 
-        _getInputDate()
+        getInputDate()
         GirlsFrontlineCoreAPI.get_dolls_by_buildTime(_dateTimetoSeconds(myDate));
+        if (device.platform === "browser") {
+            $tdoll_BuildTime.addClass("timepicker");
+            $('.timepicker').timepicker({
+                defaultTime: '00:20',
+                twelveHour: false,
+                onOpenStart: null,
+                onCloseStart: null
+            });
+        }
     }
 
 
@@ -35,7 +44,7 @@ let MaterialDateTimePicker = function () {
     }
 
 
-    let _getInputDate = function () {
+    let getInputDate = function () {
         let buildTime_input = $tdoll_BuildTime.val()
         // console.log("buildTime_input", buildTime_input)
         let [hours, minutes, seconds] = buildTime_input.split(':');
@@ -47,7 +56,7 @@ let MaterialDateTimePicker = function () {
     }
 
 
-    let _setInputDate = function (date_input) {
+    let _setInputDate = function (date_input = myDate) {
         myDate = date_input
         $tdoll_BuildTime.val(dateTimetoString(myDate))
     }
@@ -62,6 +71,14 @@ let MaterialDateTimePicker = function () {
         return (date_input.getTime() - 2674800000) / 1000;
     }
 
+    let materializecss_TimePicker = function () {
+        let time = $tdoll_BuildTime.val();
+        $tdoll_BuildTime.val(time + ":00")
+        getInputDate()
+        GirlsFrontlineCoreAPI.get_dolls_by_buildTime(_dateTimetoSeconds(myDate));
+        GirlsFrontlineCoreAPI.reset_html_doll_data(undefined,true);
+    }
+
 
 
 
@@ -69,7 +86,9 @@ let MaterialDateTimePicker = function () {
     // ---------- Global Function returns (outside name : inside name) ----------
     return {
         init: init,
+        getInputDate: getInputDate,
         showTimePicker: showTimePicker,
         dateTimetoString: dateTimetoString,
+        materializecss_TimePicker: materializecss_TimePicker,
     };
 }()

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="be.axelvangestel.project" version="0.8.6.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="be.axelvangestel.project" version="0.8.6.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Girls' Frontline Information Bank</name>
     <description>
         A wiki like APP to get quickly get information about T-Dolls.
@@ -38,6 +38,8 @@
         <preference name="ShowSplashScreen" value="false" /> <!-- defaults to "true" -->
         <preference name="AutoHideSplashScreen" value="false" /> <!-- defaults to "true" -->
         <preference name="SplashScreenDelay" value="3000" /> <!-- defaults to "3000" -->
+        <preference name="SplashMaintainAspectRatio" value="true" />
+        <preference name="SplashScreenBackgroundColor" value="#f7f7f7" /> <!-- defaults to "#464646" -->
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -45,8 +47,8 @@
     </platform>
     <platform name="browser">
         <preference name="ShowSplashScreen" value="false" /> <!-- defaults to "true" -->
-        <preference name="SplashScreen" value="/img/splashscreen.png" /> <!-- defaults to "/img/logo.png" -->
-        <preference name="AutoHideSplashScreen" value="false" /> <!-- defaults to "true" -->
+        <preference name="SplashScreen" value="img/splashscreen.png" /> <!-- defaults to "/img/logo.png" -->
+        <preference name="AutoHideSplashScreen" value="true" /> <!-- defaults to "true" -->
         <preference name="SplashScreenDelay" value="3000" /> <!-- defaults to "3000" -->
         <preference name="SplashScreenBackgroundColor" value="#464646" /> <!-- defaults to "#464646" -->
         <preference name="SplashScreenWidth" value="300" /> <!-- defaults to "170" -->

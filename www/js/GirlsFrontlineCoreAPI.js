@@ -173,7 +173,14 @@ let GirlsFrontlineCoreAPI = function () {
     // --- Build Time tab ---
     // Open TimePicker on clicking the Build Time text field
     $tdoll_BuildTime.on('click', function() {
-        MaterialDateTimePicker.showTimePicker()
+        if (device.platform !== "browser") {
+            MaterialDateTimePicker.showTimePicker()
+        }
+    })
+    $tdoll_BuildTime.on('change', function() {
+        if (device.platform === "browser") {
+            MaterialDateTimePicker.materializecss_TimePicker()
+        }
     })
 
 
@@ -259,6 +266,10 @@ let GirlsFrontlineCoreAPI = function () {
             // console.log("dolls_by_buildTime = ", dolls_by_buildTime)
             if (dolls_by_buildTime.length === 0) {
                 M.toast({html: 'No T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'grey_gfl'});
+            }
+            else {
+                // TODO: Fix startup toast spam
+                // M.toast({html: dolls_by_buildTime.length + ' T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'grey_gfl'});
             }
             dolls_by_buildTime.sort(setting_sorting_method);
             _set_doll_selection_dropdown(dolls_by_buildTime, undefined, true);
