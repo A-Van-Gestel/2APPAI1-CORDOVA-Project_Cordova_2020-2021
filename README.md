@@ -5,6 +5,7 @@
 - **Studentnr**: r0784084
 - **Download Page**: [link](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/#download)  
 - **Direct APK Download**: [download](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/resources/app-debug.apk)  
+- **Online version**: [link](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/online/)  
 
 <img src="resources/icon.png" width="150" height="150">
 
