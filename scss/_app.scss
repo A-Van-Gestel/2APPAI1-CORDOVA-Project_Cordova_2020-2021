@@ -1,0 +1,165 @@
+/* ------ Variables: colors,... ------ */
+:root {
+  --button_padding: 0px;
+  --data_min_heigt: 450px;
+  --table_grid_size: 200px;
+  --orange_gfl-color: #ffb600;
+  --white_glf-color: #f7f7f7;
+  --light_grey_gfl-color: #cecfd6;
+  --grey_gfl-color: #424942;
+}
+
+
+/* --- Navbar CCS --- */
+.spa { display: none; }
+#tabTDollData { display: block; }
+
+
+a.brand-logo {
+  font-size: 1.2rem;
+}
+
+p {
+  text-align: justify;
+}
+
+.user-view p {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.user-view img {
+  max-width: 64px;
+  max-height: 64px;
+}
+
+#tabTDollData, #tabBuildTime, #tabFavorite {
+  min-height: var(--button_padding);
+  padding-bottom: var(--button_padding);
+}
+
+
+/* --- Tab CSS --- */
+.btn-small {
+  border-radius: 0;
+}
+
+#tabTDollData .active, #tabFavorite .active {
+!important;background-color: var(--orange_gfl-color);
+}
+
+.btn-small:focus, .btn-small:hover, .btn-large:focus, .btn-large:hover {
+  background-color: var(--orange_gfl-color);
+}
+
+
+.orange_gfl {
+  background-color: var(--orange_gfl-color);
+}
+.orange_gfl-text {
+  color: var(--orange_gfl-color);
+}
+
+.white_glf {
+  background-color: var(--white_glf-color);
+}
+.white_glf-text {
+  color: var(--white_glf-color);
+}
+
+.light_grey_glf {
+  background-color: var(--light_grey_gfl-color);
+}
+.light_grey_glf-text {
+  color: var(--light_grey_gfl-color);
+}
+
+.grey_gfl {
+  background-color: var(--grey_gfl-color);
+}
+.grey_gfl-text {
+  color: var(--grey_gfl-color);
+}
+
+/* ----- Override Materialize CSS ----- */
+.toast {
+  justify-content: center;
+}
+
+table {
+  border-collapse: separate;
+}
+td, th {
+  padding: 0;
+}
+
+.input-field {
+  min-height: 43px;
+}
+/* TimePicker */
+.timepicker-digital-display {
+  background-color: var(--grey_gfl-color);
+}
+.timepicker-analog-display {
+  background-color: var(--white_glf-color);
+}
+.timepicker-canvas-bearing, .timepicker-canvas-bg {
+  fill: var(--orange_gfl-color);
+}
+.timepicker-canvas line {
+  stroke: var(--orange_gfl-color);
+}
+.timepicker-footer .confirmation-btns .timepicker-close {
+  color: var(--grey_gfl-color);
+}
+
+/* T-Doll tile buff Table */
+.tile_grid_table {
+  max-width: var(--table_grid_size);
+  background: var(--grey_gfl-color);
+  padding: 5px;
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+.tile_grid_table td {
+  background: #6b696b;
+  width: 30%;
+  padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
+  border-radius: 0;
+}
+.tile_grid_table td.buff {
+  background: #00ffde;
+}
+.tile_grid_table td.standing {
+  background: #ffffff;
+}
+
+
+
+/* Fixed Sidenav for Large Screens */
+@media only screen and (min-width: 993px) {
+  header, main, footer {
+    padding-left: 300px;
+  }
+
+  .nav-wrapper {
+    margin-left: 8.3333333333%!important;
+    margin-right: 0!important;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-wrapper a:first-child {
+
+    /* Disable current CSS */
+    left: unset!important;
+    -webkit-transform: unset!important;
+    transform: unset!important;
+  }
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
