@@ -1,18 +1,16 @@
 'use strict';
 
-var gulp = require('gulp');
-var run = require('gulp-run-command').default
-var plumber = require('gulp-plumber');
-var notify = require('gulp-notify');
-var newer = require('gulp-newer');
-var sass = require('gulp-dart-sass');
-var prefix = require('gulp-autoprefixer');
-var sourcemaps = require('gulp-sourcemaps');
-var cleanCSS = require('gulp-clean-css');
-var postcss = require('gulp-postcss');
-var mqpacker = require('@lipemat/css-mqpacker');
-
-
+const gulp = require('gulp');
+const run = require('gulp-run-command').default;
+const plumber = require('gulp-plumber');
+const notify = require('gulp-notify');
+const newer = require('gulp-newer');
+const sass = require('gulp-dart-sass');
+const prefix = require('gulp-autoprefixer');
+const sourcemaps = require('gulp-sourcemaps');
+const cleanCSS = require('gulp-clean-css');
+const postcss = require('gulp-postcss');
+const mqpacker = require('@lipemat/css-mqpacker');
 
 
 gulp.task('cordova-watch', function () {
@@ -38,7 +36,7 @@ gulp.task('js', function () {
 
 // Compile sass into CSS (/www/css/) & auto-inject into browser
 gulp.task('sass', function () {
-    var processors = [
+    const processors = [
         mqpacker({sort: true})
     ];
     return gulp.src('./scss/**/*.scss')
