@@ -18,7 +18,7 @@ var mqpacker = require('@lipemat/css-mqpacker');
 gulp.task('cordova-watch', function () {
     gulp.watch('./scss/**/*.scss', gulp.series('sass'));
     // gulp.watch('./**/*.{html,css,js,php}').on('change', browserSync.reload);
-    run('cordova serve --live-reload');
+    run('cordova run browser --live-reload')();
 });
 
 // Optimize CSS just before publishing

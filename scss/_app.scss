@@ -23,14 +23,16 @@ p {
   text-align: justify;
 }
 
-.user-view p {
-  margin-bottom: 0;
-  margin-top: 0;
-}
+.user-view {
+  p {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
 
-.user-view img {
-  max-width: 64px;
-  max-height: 64px;
+  img {
+    max-width: 64px;
+    max-height: 64px;
+  }
 }
 
 #tabTDollData, #tabBuildTime, #tabFavorite {
@@ -44,12 +46,16 @@ p {
   border-radius: 0;
 }
 
-#tabTDollData .active, #tabFavorite .active {
-!important;background-color: var(--orange_gfl-color);
+#tabTDollData, #tabFavorite {
+  .active {
+    background-color: var(--orange_gfl-color)!important;
+  }
 }
 
-.btn-small:focus, .btn-small:hover, .btn-large:focus, .btn-large:hover {
-  background-color: var(--orange_gfl-color);
+.btn-small, .btn-large {
+  &:focus, &:hover {
+    background-color: var(--orange_gfl-color);
+  }
 }
 
 
@@ -120,18 +126,19 @@ td, th {
   padding: 5px;
   border-collapse: separate;
   border-spacing: 2px;
-}
-.tile_grid_table td {
-  background: #6b696b;
-  width: 30%;
-  padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
-  border-radius: 0;
-}
-.tile_grid_table td.buff {
-  background: #00ffde;
-}
-.tile_grid_table td.standing {
-  background: #ffffff;
+
+  td {
+    background: #6b696b;
+    width: 30%;
+    padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
+    border-radius: 0;
+  }
+  .buff {
+    background: #00ffde;
+  }
+  .standing {
+    background: #ffffff;
+  }
 }
 
 
@@ -143,22 +150,21 @@ td, th {
   }
 
   .nav-wrapper {
-    margin-left: 8.3333333333%!important;
-    margin-right: 0!important;
+    margin-left: 8.3333333333% !important;
+    margin-right: 0 !important;
     display: flex;
     justify-content: center;
-  }
 
-  .nav-wrapper a:first-child {
-
-    /* Disable current CSS */
-    left: unset!important;
-    -webkit-transform: unset!important;
-    transform: unset!important;
+    a:first-child {
+      /* Disable current CSS */
+      left: unset !important;
+      -webkit-transform: unset !important;
+      transform: unset !important;
+    }
   }
 }
 
-@media only screen and (max-width : 992px) {
+@media only screen and (max-width: 992px) {
   header, main, footer {
     padding-left: 0;
   }
