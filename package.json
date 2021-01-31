@@ -5,10 +5,12 @@
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
   "main": "index.js",
   "scripts": {
+    "watch": "gulp default",
     "browser": "phonegap serve",
     "android": "cordova run android",
     "icon": "cordova-res android --type icon",
-    "splash": "cordova-res android --type splash"
+    "splash": "cordova-res android --type splash",
+    "publish": "gulp publish"
   },
   "keywords": [
     "ecosystem:cordova"
