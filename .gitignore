@@ -9,5 +9,9 @@ node_modules/
 /platforms/
 
 # Generated outputs
-/www/css/
-/www/js/
+/www/css/*
+/www/js/*
+
+# Exclude the folders
+!/www/css/.gitkeep
+!/www/js/.gitkeep
