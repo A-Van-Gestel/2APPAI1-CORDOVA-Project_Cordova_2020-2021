@@ -38,6 +38,7 @@
     "gulp-postcss": "^9.0.0",
     "gulp-run-command": "0.0.10",
     "gulp-sourcemaps": "^3.0.0",
+    "gulp-terser": "^2.0.1",
     "jquery": "^3.5.1",
     "skwas-cordova-plugin-datetimepicker": "^2.1.2"
   },

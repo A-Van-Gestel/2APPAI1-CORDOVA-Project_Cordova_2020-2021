@@ -11,19 +11,13 @@ const sourcemaps = require('gulp-sourcemaps');
 const cleanCSS = require('gulp-clean-css');
 const postcss = require('gulp-postcss');
 const mqpacker = require('@lipemat/css-mqpacker');
+const terser = require('gulp-terser');
 
 
 gulp.task('cordova-watch', function () {
-    gulp.watch('./scss/**/*.scss', gulp.series('sass'));
-    // gulp.watch('./**/*.{html,css,js,php}').on('change', browserSync.reload);
+    gulp.watch('./src/scss/**/*.scss', gulp.series('sass'));
+    gulp.watch('./src/js/**/*.js').on('change', gulp.series('copy-js'));
     run('cordova run browser --live-reload')();
-});
-
-// Optimize CSS just before publishing
-gulp.task('minify-css', function () {
-    return gulp.src('./www/**/*.css')
-        .pipe(cleanCSS())
-        .pipe(gulp.dest('./www'));
 });
 
 // Copy MaterializeCSS + jQuery JS-files
@@ -34,12 +28,19 @@ gulp.task('js', function () {
         .pipe(gulp.dest('./www/js'));
 });
 
+// Copy src-files
+gulp.task('copy-js', function () {
+    return gulp.src('./src/js/**/*.js')
+        //.pipe(newer('./www/js'))
+        .pipe(gulp.dest('./www/js/'));
+});
+
 // Compile sass into CSS (/www/css/) & auto-inject into browser
 gulp.task('sass', function () {
     const processors = [
         mqpacker({sort: true})
     ];
-    return gulp.src('./scss/**/*.scss')
+    return gulp.src('./src/scss/**/*.scss')
         .pipe(plumber({
             errorHandler: notify.onError({
                 title: 'SASS compile error!',
@@ -55,5 +56,23 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./www/css'));
 });
 
-gulp.task('default', gulp.series('js', 'sass', 'cordova-watch'));
-gulp.task('minify', gulp.series('minify-css'));
+// Optimize CSS just before publishing
+gulp.task('minify-css', function () {
+    return gulp.src('./www/**/*.css')
+        .pipe(cleanCSS())
+        .pipe(gulp.dest('./www'));
+});
+
+// Optimize JS just before publishing
+gulp.task('minify-js', function () {
+    return gulp.src('./src/js/**/*.js')
+        //.pipe(sourcemaps.init())
+        .pipe(terser())
+        //.pipe(sourcemaps.write())
+        .pipe(gulp.dest('./www/js/'));
+});
+
+
+gulp.task('default', gulp.series('js', 'copy-js', 'sass', 'cordova-watch'));
+gulp.task('minify', gulp.series('minify-css', 'minify-js'));
+gulp.task('publish', gulp.series('js', 'sass', 'minify-css', 'minify-js'));
