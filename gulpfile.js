@@ -30,7 +30,7 @@ gulp.task('js', function () {
 
 // Copy src-files
 gulp.task('copy-js', function () {
-    return gulp.src('./src/js/**/*.js')
+    return gulp.src('./src/js/**/*.js', {base: './src/js/'})
         //.pipe(newer('./www/js'))
         .pipe(gulp.dest('./www/js/'));
 });
@@ -65,7 +65,7 @@ gulp.task('minify-css', function () {
 
 // Optimize JS just before publishing
 gulp.task('minify-js', function () {
-    return gulp.src('./src/js/**/*.js')
+    return gulp.src('./src/js/**/*.js', {base: './src/js/'})
         //.pipe(sourcemaps.init())
         .pipe(terser())
         //.pipe(sourcemaps.write())
