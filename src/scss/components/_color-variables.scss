@@ -1,0 +1,89 @@
+// Google Color Palette defined: http://www.google.com/design/spec/style/color.html
+// --- Colors ---
+$gfl-orange-color: #ffb600;
+$gfl-white-color: #f7f7f7;
+$gfl-light-gray-color: #f7f7f7;
+$gfl-grey-color: #424942;
+
+// --- Color maps ---
+$gfl-orange: (
+        "base":       $gfl-orange-color,
+        "lighten-5":  lighten($gfl-orange-color, 50),
+        "lighten-4":  lighten($gfl-orange-color, 40),
+        "lighten-3":  lighten($gfl-orange-color, 30),
+        "lighten-2":  lighten($gfl-orange-color, 20),
+        "lighten-1":  lighten($gfl-orange-color, 10),
+        "darken-1":   darken($gfl-orange-color, 10),
+        "darken-2":   darken($gfl-orange-color, 20),
+        "darken-3":   darken($gfl-orange-color, 30),
+        "darken-4":   darken($gfl-orange-color, 40),
+);
+
+$gfl-white: (
+        "base":       $gfl-white-color,
+        "lighten-5":  lighten($gfl-white-color, 50),
+        "lighten-4":  lighten($gfl-white-color, 40),
+        "lighten-3":  lighten($gfl-white-color, 30),
+        "lighten-2":  lighten($gfl-white-color, 20),
+        "lighten-1":  lighten($gfl-white-color, 10),
+        "darken-1":   darken($gfl-white-color, 10),
+        "darken-2":   darken($gfl-white-color, 20),
+        "darken-3":   darken($gfl-white-color, 30),
+        "darken-4":   darken($gfl-white-color, 40),
+);
+
+$gfl-light-gray: (
+        "base":       $gfl-light-gray-color,
+        "lighten-5":  lighten($gfl-light-gray-color, 50),
+        "lighten-4":  lighten($gfl-light-gray-color, 40),
+        "lighten-3":  lighten($gfl-light-gray-color, 30),
+        "lighten-2":  lighten($gfl-light-gray-color, 20),
+        "lighten-1":  lighten($gfl-light-gray-color, 10),
+        "darken-1":   darken($gfl-light-gray-color, 10),
+        "darken-2":   darken($gfl-light-gray-color, 20),
+        "darken-3":   darken($gfl-light-gray-color, 30),
+        "darken-4":   darken($gfl-light-gray-color, 40),
+);
+
+$gfl-grey: (
+        "base":       $gfl-grey-color,
+        "lighten-5":  lighten($gfl-grey-color, 50),
+        "lighten-4":  lighten($gfl-grey-color, 40),
+        "lighten-3":  lighten($gfl-grey-color, 30),
+        "lighten-2":  lighten($gfl-grey-color, 20),
+        "lighten-1":  lighten($gfl-grey-color, 10),
+        "darken-1":   darken($gfl-grey-color, 10),
+        "darken-2":   darken($gfl-grey-color, 20),
+        "darken-3":   darken($gfl-grey-color, 30),
+        "darken-4":   darken($gfl-grey-color, 40),
+);
+
+$colors : (
+        // MaterializeCSS
+        "materialize-red": $materialize-red,
+        "red": $red,
+        "pink": $pink,
+        "purple": $purple,
+        "deep-purple": $deep-purple,
+        "indigo": $indigo,
+        "blue": $blue,
+        "light-blue": $light-blue,
+        "cyan": $cyan,
+        "teal": $teal,
+        "green": $green,
+        "light-green": $light-green,
+        "lime": $lime,
+        "yellow": $yellow,
+        "amber": $amber,
+        "orange": $orange,
+        "deep-orange": $deep-orange,
+        "brown": $brown,
+        "blue-grey": $blue-grey,
+        "grey": $grey,
+        "shades": $shades,
+        // Custom
+        "gfl-orange": $gfl-orange,
+        "gfl-white": $gfl-white,
+        "gfl-light-gray": $gfl-light-gray,
+        "gfl-grey": $gfl-grey,
+);

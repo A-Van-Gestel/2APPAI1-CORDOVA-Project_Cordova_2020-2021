@@ -1,0 +1,23 @@
+/* T-Doll tile buff Table */
+.formation-grid-table {
+  max-width: $formation-grid-size;
+  background: $gfl-grey-color;
+  padding: $formation-grid-padding!important;
+  border-collapse: separate!important;
+  border-spacing: $formation-grid-spacing!important;
+
+  td {
+    background: $formation-grid-background-color;
+    width: percentage(1/3)!important;
+    padding: 0 0 percentage(1/3) !important;     /* = width for a 1:1 aspect ratio */
+    border-radius: 0!important;
+  }
+  .buff {
+    background: $formation-grid-buff-color;
+  }
+  .standing {
+    background: $formation-grid-standing-color;
+  }
+}
+
+

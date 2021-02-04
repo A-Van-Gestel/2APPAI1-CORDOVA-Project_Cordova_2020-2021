@@ -1,0 +1,27 @@
+// Hide all Tabs
+.spa { display: none; }
+
+.user-view {
+  p {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  img {
+    max-width: 64px;
+    max-height: 64px;
+  }
+}
+
+// Fixed Sidenav for Large Screens
+@media #{$large-and-up} {
+  header, main, footer {
+    padding-left: 300px;
+  }
+}
+
+@media #{$medium-and-down} {
+  header, main, footer {
+    padding-left: 0;
+  }
+}

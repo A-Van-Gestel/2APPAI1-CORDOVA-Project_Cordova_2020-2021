@@ -1,0 +1,20 @@
+a.brand-logo {
+  font-size: 1.2rem;
+}
+
+// Fixed Sidenav for Large Screens
+@media #{$large-and-up} {
+  .nav-wrapper {
+    margin-left: 8.3333333333% !important;
+    margin-right: 0 !important;
+    display: flex;
+    justify-content: center;
+
+    a:first-child {
+      /* Disable current CSS */
+      left: unset !important;
+      -webkit-transform: unset !important;
+      transform: unset !important;
+    }
+  }
+}

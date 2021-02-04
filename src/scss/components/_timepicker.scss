@@ -1,0 +1,16 @@
+//TODO: Change MaterializeCSS Variables to override colors
+.timepicker-digital-display {
+  background-color: $gfl-grey-color;
+}
+.timepicker-analog-display {
+  background-color: $gfl-white-color;
+}
+.timepicker-canvas-bearing, .timepicker-canvas-bg {
+  fill: $gfl-orange-color;
+}
+.timepicker-canvas line {
+  stroke: $gfl-orange-color;
+}
+.timepicker-footer .confirmation-btns .timepicker-close {
+  color: $gfl-grey-color;
+}
