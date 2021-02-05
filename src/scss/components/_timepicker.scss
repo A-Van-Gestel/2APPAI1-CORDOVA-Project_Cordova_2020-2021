@@ -1,16 +1,58 @@
-//TODO: Change MaterializeCSS Variables to override colors
-.timepicker-digital-display {
-  background-color: $gfl-grey-color;
-}
-.timepicker-analog-display {
-  background-color: $gfl-white-color;
-}
-.timepicker-canvas-bearing, .timepicker-canvas-bg {
-  fill: $gfl-orange-color;
-}
-.timepicker-canvas line {
-  stroke: $gfl-orange-color;
-}
-.timepicker-footer .confirmation-btns .timepicker-close {
-  color: $gfl-grey-color;
+.timepicker-color-gfl {
+  // --- Digital clock ---
+  // Digital clock: Background
+  .timepicker-digital-display {
+    background-color: $gfl-grey-color;
+  }
+
+  // Digital clock: Selected time
+  .text-primary {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  // Digital clock: Unselected time
+  .timepicker-text-container {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+
+  // --- Analogue clock ---
+  // Analogue clock: Background
+  .timepicker-plate {
+    background-color: $gfl-white-color;
+  }
+
+  // Analogue clock: Time text
+  .timepicker-tick {
+    color: $gfl-grey-color;
+  }
+
+  // Analogue clock: Hovering over
+  .timepicker-tick.active,
+  .timepicker-tick:hover {
+    background-color: transparentize($gfl-orange-color, .65);
+  }
+
+  // Analogue clock: line
+  .timepicker-canvas line {
+    stroke: $gfl-orange-color;
+  }
+
+  // Analogue clock: Selected time + center bearing
+  .timepicker-canvas-bearing,
+  .timepicker-canvas-bg {
+    fill: $gfl-orange-color;
+  }
+
+
+  // --- Footer ---
+  // Footer: CLEAR button
+  .timepicker-clear {
+    color: $error-color;
+  }
+
+  // Footer: CANCEL & OK buttons
+  .timepicker-close {
+    color: $gfl-grey-color;
+  }
 }

@@ -325,7 +325,7 @@ let GirlsFrontlineCoreAPI = function () {
             } else {
                 // console.log("Digimind = ", digimind_upgrade)
                 return `
-                 <table>
+                 <table class="stats-table">
                       <tr>
                         <td><b>Mod 1:</b></td>
                         <td><b>Mod 2:</b></td>
@@ -386,11 +386,11 @@ let GirlsFrontlineCoreAPI = function () {
             let tiles_doll_effect_type = effectType;
 
             if (typeof tiles_doll_effect_type === "string") {
-                tiles_effect_type += `<p style="margin: 0"><b>Buffs: </b>${tiles_doll_effect_type.toUpperCase()}</p>`
+                tiles_effect_type += `<p class="m-0"><b>Buffs: </b>${tiles_doll_effect_type.toUpperCase()}</p>`
             }
             else {
                 tiles_doll_effect_type.forEach(function (type) {
-                    tiles_effect_type += `<p style="margin: 0"><b>Buffs: </b>${type.toUpperCase()}</p>`
+                    tiles_effect_type += `<p class="m-0"><b>Buffs: </b>${type.toUpperCase()}</p>`
                 })
             }
 
@@ -403,7 +403,7 @@ let GirlsFrontlineCoreAPI = function () {
             let tiles_effect_table = ''
             let tiles_doll_effect = gridEffect;
             for (let key in tiles_doll_effect) {
-                tiles_effect_table += `<p style="margin: 0"><b>${doll_stat_types[key]}: </b>+${tiles_doll_effect[key]}%</p>`
+                tiles_effect_table += `<p class="m-0"><b>${doll_stat_types[key]}: </b>+${tiles_doll_effect[key]}%</p>`
             }
             return tiles_effect_table;
         }
@@ -556,8 +556,8 @@ let GirlsFrontlineCoreAPI = function () {
                 </div>
 
                 <div class="col s6">
-                    <p style="margin: 0"><b>Buffs: </b>No Data</p>
-                    <p style="margin: 0"><b>Effect: </b>No Data</p>
+                    <p class="m-0"><b>Buffs: </b>No Data</p>
+                    <p class="m-0"><b>Effect: </b>No Data</p>
                 </div>
             </div>
         `;

@@ -18,7 +18,8 @@ let MaterialDateTimePicker = function () {
         getInputDate()
         GirlsFrontlineCoreAPI.get_dolls_by_buildTime(_dateTimetoSeconds(myDate));
         if (device.platform === "browser") {
-            $tdoll_BuildTime.addClass("timepicker");
+            $tdoll_BuildTime.addClass("timepicker")
+                .parent().addClass("timepicker-color-gfl");
             $('.timepicker').timepicker({
                 defaultTime: '00:20',
                 twelveHour: false,

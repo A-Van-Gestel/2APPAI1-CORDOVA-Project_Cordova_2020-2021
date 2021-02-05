@@ -1,6 +1,9 @@
 // Import Material Icons
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+// Sidenav
+$sidenav-img-size: 64px;
+
 // Active Tab
 #tabTDollData { display: block; }
 
@@ -15,3 +18,10 @@ $formation-grid-spacing: 2px;
 $formation-grid-buff-color: #00ffde;
 $formation-grid-standing-color: #ffffff;
 $formation-grid-background-color: #6b696b;
+
+// Dropdown
+$dropdown-item-height-compact: 35px;
+
+// --- Helpers ---
+// Spacing
+$num-spacing-helpers: 5;

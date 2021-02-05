@@ -1,22 +1,21 @@
-// Hide all Tabs
-.spa { display: none; }
-
-.user-view {
-  p {
-    margin-bottom: 0;
-    margin-top: 0;
+.sidenav {
+  .user-view {
+    img {
+      max-width: $sidenav-img-size;
+      max-height: $sidenav-img-size;
+    }
   }
 
-  img {
-    max-width: 64px;
-    max-height: 64px;
+  .divider {
+    margin: ($sidenav-padding / 4) 0 ($sidenav-padding / 4) 0;
   }
 }
+
 
 // Fixed Sidenav for Large Screens
 @media #{$large-and-up} {
   header, main, footer {
-    padding-left: 300px;
+    padding-left: $sidenav-width;
   }
 }
 
