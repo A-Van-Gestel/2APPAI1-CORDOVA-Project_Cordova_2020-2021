@@ -75,4 +75,4 @@ gulp.task('minify-js', function () {
 
 gulp.task('default', gulp.series('js', 'copy-js', 'sass', 'cordova-watch'));
 gulp.task('minify', gulp.series('minify-css', 'minify-js'));
-gulp.task('publish', gulp.series('js', 'sass', 'minify-css', 'minify-js'));
+gulp.task('publish', gulp.series('js', 'sass', 'minify-css', 'minify-js', function () {run('cordova run browser')()}));
