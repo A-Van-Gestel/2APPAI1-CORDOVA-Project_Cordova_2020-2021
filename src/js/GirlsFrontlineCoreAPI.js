@@ -265,11 +265,11 @@ let GirlsFrontlineCoreAPI = function () {
 
             // console.log("dolls_by_buildTime = ", dolls_by_buildTime)
             if (dolls_by_buildTime.length === 0) {
-                M.toast({html: 'No T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'grey_gfl'});
+                M.toast({html: 'No T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'gfl-grey'});
             }
             else {
                 // TODO: Fix startup toast spam
-                // M.toast({html: dolls_by_buildTime.length + ' T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'grey_gfl'});
+                // M.toast({html: dolls_by_buildTime.length + ' T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'gfl-grey'});
             }
             dolls_by_buildTime.sort(setting_sorting_method);
             _set_doll_selection_dropdown(dolls_by_buildTime, undefined, true);
@@ -325,7 +325,7 @@ let GirlsFrontlineCoreAPI = function () {
             } else {
                 // console.log("Digimind = ", digimind_upgrade)
                 return `
-                 <table>
+                 <table class="stats-table">
                       <tr>
                         <td><b>Mod 1:</b></td>
                         <td><b>Mod 2:</b></td>
@@ -386,11 +386,11 @@ let GirlsFrontlineCoreAPI = function () {
             let tiles_doll_effect_type = effectType;
 
             if (typeof tiles_doll_effect_type === "string") {
-                tiles_effect_type += `<p style="margin: 0"><b>Buffs: </b>${tiles_doll_effect_type.toUpperCase()}</p>`
+                tiles_effect_type += `<p class="m-0"><b>Buffs: </b>${tiles_doll_effect_type.toUpperCase()}</p>`
             }
             else {
                 tiles_doll_effect_type.forEach(function (type) {
-                    tiles_effect_type += `<p style="margin: 0"><b>Buffs: </b>${type.toUpperCase()}</p>`
+                    tiles_effect_type += `<p class="m-0"><b>Buffs: </b>${type.toUpperCase()}</p>`
                 })
             }
 
@@ -403,7 +403,7 @@ let GirlsFrontlineCoreAPI = function () {
             let tiles_effect_table = ''
             let tiles_doll_effect = gridEffect;
             for (let key in tiles_doll_effect) {
-                tiles_effect_table += `<p style="margin: 0"><b>${doll_stat_types[key]}: </b>+${tiles_doll_effect[key]}%</p>`
+                tiles_effect_table += `<p class="m-0"><b>${doll_stat_types[key]}: </b>+${tiles_doll_effect[key]}%</p>`
             }
             return tiles_effect_table;
         }
@@ -441,7 +441,7 @@ let GirlsFrontlineCoreAPI = function () {
             <b>Digimind: </b>${_parsers.parse_digimind(doll.mindupdate)}
 
             <h5>Stats</h5>
-             <table>
+             <table class="stats-table">
               <tr>
                 <td><b>${doll_stat_types['hp']}: </b>${doll.stats.hp}</td>
                 <td><b>${doll_stat_types['pow']}: </b>${doll.stats.pow}</td>
@@ -462,7 +462,7 @@ let GirlsFrontlineCoreAPI = function () {
             <h5>Formation Buff</h5>
             <div class="row">
                 <div class="col s6">
-                    <table class="tile_grid_table">
+                    <table class="formation-grid-table">
                         <tbody>
                             <tr>
                                 <td class="${tiles_table[6]}"></td> <!-- Tile 7 -->
@@ -513,7 +513,7 @@ let GirlsFrontlineCoreAPI = function () {
             <b>Digimind: </b>No Data
             
             <h5>Stats</h5>
-             <table style="width:100%">
+             <table class="stats-table">
               <tr>
                 <td><b>${doll_stat_types['hp']}: </b>0</td>
                 <td><b>${doll_stat_types['pow']}: </b>0</td>
@@ -534,7 +534,7 @@ let GirlsFrontlineCoreAPI = function () {
             <h5>Formation Buff</h5>
             <div class="row">
                 <div class="col s6">
-                    <table class="tile_grid_table">
+                    <table class="formation-grid-table">
                         <tbody>
                         <tr>
                             <td></td>
@@ -556,8 +556,8 @@ let GirlsFrontlineCoreAPI = function () {
                 </div>
 
                 <div class="col s6">
-                    <p style="margin: 0"><b>Buffs: </b>No Data</p>
-                    <p style="margin: 0"><b>Effect: </b>No Data</p>
+                    <p class="m-0"><b>Buffs: </b>No Data</p>
+                    <p class="m-0"><b>Effect: </b>No Data</p>
                 </div>
             </div>
         `;
@@ -624,11 +624,11 @@ let GirlsFrontlineCoreAPI = function () {
             favorite_doll_ids.push(id);  // Add the ID to the end of Array
             _setLocalStorage.favorited_dolls();
             get_dolls_by_type(selected_type_favorited, true)
-            M.toast({html: 'T-Doll Favorited', displayLength: 2000, classes: 'grey_gfl'})
+            M.toast({html: 'T-Doll Favorited', displayLength: 2000, classes: 'gfl-grey'})
         }
         else {
             // console.error("Not Added favorite T-Doll with ID = " + id + " because of duplicate.")
-            M.toast({html: 'T-Doll already Favorited', displayLength: 2000, classes: 'grey_gfl'})
+            M.toast({html: 'T-Doll already Favorited', displayLength: 2000, classes: 'gfl-grey'})
         }
     };
 
@@ -644,7 +644,7 @@ let GirlsFrontlineCoreAPI = function () {
             _setLocalStorage.favorited_dolls();
             get_dolls_by_type(selected_type_favorited, true)
             reset_html_doll_data(true)
-            M.toast({html: 'T-Doll removed from Favorites', displayLength: 2000, classes: 'grey_gfl'})
+            M.toast({html: 'T-Doll removed from Favorites', displayLength: 2000, classes: 'gfl-grey'})
         }
     };
 

@@ -1,0 +1,26 @@
+.sidenav {
+  .user-view {
+    img {
+      max-width: $sidenav-img-size;
+      max-height: $sidenav-img-size;
+    }
+  }
+
+  .divider {
+    margin: ($sidenav-padding / 4) 0 ($sidenav-padding / 4) 0;
+  }
+}
+
+
+// Fixed Sidenav for Large Screens
+@media #{$large-and-up} {
+  header, main, footer {
+    padding-left: $sidenav-width;
+  }
+}
+
+@media #{$medium-and-down} {
+  header, main, footer {
+    padding-left: 0;
+  }
+}

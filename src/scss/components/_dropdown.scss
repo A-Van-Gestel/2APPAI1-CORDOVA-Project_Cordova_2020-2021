@@ -1,0 +1,45 @@
+//TODO: Change dropdown colors using MaterializeCSS Variables
+
+// Keep page from jumping when not loaded
+.input-field {
+  min-height: 43px;
+}
+
+.dropdown-compact {
+  li {
+    min-height: $dropdown-item-height-compact;
+
+    & > a, & > span {
+      padding: (($dropdown-item-height-compact - 22) / 2) 16px;
+    }
+  }
+}
+
+// Dropdown colors
+.dropdown-color-gfl {
+  .dropdown-content {
+    // Dropdown background
+    background-color: $gfl-white-color;
+
+    li {
+      // Dropdown hover & active
+      &:hover, &.active {
+        background-color: $dropdown-hover-bg-color;
+      }
+
+      // Dropdown text
+      & > a, & > span {
+        color: lighten($gfl-grey-color, 5);
+      }
+
+      // Dropdown selected background
+      &.selected {
+        //background-color: darken($gfl-light-gray-color, 5)!important;
+      }
+      // Dropdown disabled text
+      &.disabled > span {
+        color: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+}

@@ -5,10 +5,12 @@
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
   "main": "index.js",
   "scripts": {
+    "watch": "gulp default",
     "browser": "phonegap serve",
     "android": "cordova run android",
     "icon": "cordova-res android --type icon",
-    "splash": "cordova-res android --type splash"
+    "splash": "cordova-res android --type splash",
+    "publish": "gulp publish"
   },
   "keywords": [
     "ecosystem:cordova"
@@ -16,14 +18,30 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@lipemat/css-mqpacker": "^8.0.1",
+    "@materializecss/materialize": "^1.0.0",
+    "browser-sync": "^2.26.14",
     "cordova-android": "^9.0.0",
     "cordova-browser": "^6.0.0",
+    "cordova-plugin-browsersync-gen2": "^1.1.7",
     "cordova-plugin-buildinfo": "^4.0.0",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-materialdatetime": "git+https://github.com/moda20/cordova-plugin-MaterialDateTimePicker.git",
     "cordova-plugin-network-information": "^2.0.2",
     "cordova-plugin-splashscreen": "^6.0.0",
     "cordova-plugin-whitelist": "^1.3.4",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-dart-sass": "^1.0.2",
+    "gulp-newer": "^1.4.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.0",
+    "gulp-run-command": "0.0.10",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-terser": "^2.0.1",
+    "jquery": "^3.5.1",
     "skwas-cordova-plugin-datetimepicker": "^2.1.2"
   },
   "cordova": {
@@ -33,12 +51,12 @@
       "skwas-cordova-plugin-datetimepicker": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-buildinfo": {},
-      "cordova-plugin-device": {}
+      "cordova-plugin-device": {},
+      "cordova-plugin-browsersync-gen2": {}
     },
     "platforms": [
       "browser",
       "android"
     ]
-  },
-  "dependencies": {}
+  }
 }

@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+// --- Override MaterializeCSS variables and custom mixins ---
+// Color
+@import "../../node_modules/@materializecss/materialize/sass/components/color-variables";
+@import "components/color-variables";
+
+// Variables
+@import "components/variables";
+@import "components/mixins";
+
+// Link to MaterializeCSS
+@import "../../node_modules/@materializecss/materialize/sass/materialize";
+
+// Reset
+@import "components/reset";
+
+// Components
+@import "components/type";
+@import "components/sidenav";
+@import "components/navbar";
+@import "components/dropdown";
+@import "components/buttons";
+@import "components/tabs";
+@import "components/timepicker";
+
+// Custom components
+@import "components/formation-grid";
+@import "components/stats-table";
+@import "components/loader";
+
+// Helpers
+@import "helpers/spacing";

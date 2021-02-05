@@ -16,9 +16,9 @@ let AppInfo = function () {
         console.log("Platform: ", device.platform)
         // Get APP data
         let data = `
-            <p class="center-align" style="margin-top:0; margin-bottom: 0">${BuildInfo.packageName}</p>
-            <p class="center-align" style="margin-top: 0; margin-bottom: 0">Ver. ${BuildInfo.version} (Build ${BuildInfo.versionCode})</p>
-            <p class="center-align" style="margin-top: 0">${device.platform}</p>
+            <p class="center-align my-0">${BuildInfo.packageName}</p>
+            <p class="center-align my-0">Ver. ${BuildInfo.version} (Build ${BuildInfo.versionCode})</p>
+            <p class="center-align mt-0">${device.platform}</p>
         `;
 
         // Set APP data as HTML

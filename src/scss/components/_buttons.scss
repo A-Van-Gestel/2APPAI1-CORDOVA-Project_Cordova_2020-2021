@@ -1,0 +1,15 @@
+.btn-small {
+  border-radius: 0;
+  padding: 0 16px;
+}
+
+.btn-small, .btn-large {
+  &.active {
+    background-color: $gfl-orange-color!important;
+    color: $gfl-grey-color!important;
+  }
+
+  &:focus, &:hover {
+    background-color: lighten($gfl-orange-color, 5)!important;
+  }
+}
