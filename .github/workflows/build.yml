@@ -1,0 +1,68 @@
+name: App Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      # Get current time
+      - name: Get Time
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          timeZone: 1
+          format: 'YYYY-MM-DD HH:mm:ss'
+
+      # Install zip
+      - name: Install zip
+        uses: montudor/action-zip@v0.1.1
+
+      # Checkout repo
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Install all the project dependencies
+      - name: Install dependencies
+        run: sudo npm install
+
+      # Run GULP to generate css & js files
+      - name: GULP publish
+        uses: elstudio/actions-js-build/build@v2
+        with:
+          args: publish-github
+
+      # Setup the Cordova environment & build app
+      - name: Setup Cordova
+        uses: oxr463/setup-cordova@0.0.2
+        with:
+          exec: |
+            cordova platform add android browser &&/
+            cordova build browser --no-telemetry &&/
+            cordova build android --no-telemetry
+
+      - name: Zip Browser release
+        run: sudo zip -qq -r browser.zip www
+        working-directory: platforms/browser
+
+      # Create a Release
+      - name: Upload Automated Build
+        id: upload-release-asset
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: automated-build-${{ github.run_id }}
+          name: Automated Build [${{ steps.time.outputs.time }}]
+          allowUpdates: true
+          replacesArtifacts: true
+          draft: false
+          prerelease: true
+          artifacts: "platforms/android/app/build/outputs/apk/debug/app-debug.apk,platforms/browser/browser.zip"
+          body: |
+            Automated Build from latest commit using GitHub Actions!
+            May or may not work as expected.
+
+            **Build against:** ${{ github.sha }} on ${{ steps.time.outputs.time }}
+            Android: app-debug.apk
+            Browser: browser.zip
