@@ -26,14 +26,14 @@ jobs:
       with:
         args: publish-github
 
-      # Setup the Cordova environment & build app
-      - name: Setup Cordova
-        uses: oxr463/setup-cordova@0.0.2
-        with:
-          exec: |
-            cordova platform add android browser &&/
-            cordova build browser --no-telemetry &&/
-            cordova build android --no-telemetry
+    # Setup the Cordova environment & build app
+    - name: Setup Cordova
+      uses: oxr463/setup-cordova@0.0.2
+      with:
+        exec: |
+          cordova platform add android browser &&/
+          cordova build browser --no-telemetry &&/
+          cordova build android --no-telemetry
 
 #    # Build Browser Version
 #    - name: Build for Browser
