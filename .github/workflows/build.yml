@@ -19,7 +19,7 @@ jobs:
         uses: nanzm/get-time-action@v1.1
         with:
           timeZone: 1
-          format: 'YYYY-MM-DD-HH-mm-ss'
+          format: 'YYYY-MM-DD HH:mm:ss'
 
       # Install zip
       - name: Install zip
@@ -58,7 +58,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: automated-build-${{ steps.time.outputs.time }}
+          tag: automated-build-${{ github.run_id }}
           name: Automated Build [${{ steps.time.outputs.time }}]
           allowUpdates: true
           replacesArtifacts: true
