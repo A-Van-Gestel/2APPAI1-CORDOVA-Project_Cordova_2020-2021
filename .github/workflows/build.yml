@@ -1,0 +1,66 @@
+name: App Build
+
+#on:
+#  push:
+#    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Setup the Cordova environment
+    - name: Setup Cordova
+      uses: oxr463/setup-cordova@0.0.2
+      with:
+        exec: |
+          cordova platform add android browser
+
+    # Install all the project dependencies
+    - name: Install dependencies
+      run: npm install
+
+    # Run GULP generating publish files
+    - name: GULP publish
+      run: gulp publish
+
+    # Build Browser Version
+    - name: Build for Browser
+      run: cordova build browser --no-telemetry
+
+    - name: Zip Browser release
+      uses: montudor/action-zip@v0.1.1
+      with:
+        args: zip -qq -r browser.zip platforms/browser/www
+      
+    # Build Android Version
+    - name: Build for Android
+      run: cordova build android --no-telemetry
+      
+    # Create a Release
+    - name: Upload Automated Build
+      id: upload-release-asset
+      uses: ncipollo/release-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: automated-build-${{ github.run_id }}
+        name: Automated Build
+        allowUpdates: true
+        replacesArtifacts: true
+        draft: false
+        prerelease: true
+        artifacts: "platforms/android/app/build/outputs/apk/debug/app-debug.apk,platforms/browser/browser.zip"
+        body: |
+          Automated Build from latest commit using GitHub Actions!
+          May or may not work as expected.
+          
+          **Build against:** ${{ github.sha }}
+          Android: app-debug.apk
+          Browser: browser.zip
