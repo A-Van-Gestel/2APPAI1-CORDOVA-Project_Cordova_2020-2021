@@ -41,8 +41,6 @@ jobs:
             cordova build android --no-telemetry
 
       - name: Zip Browser release
-        with:
-          args: zip -qq -r browser.zip
         run: zip -qq -r browser.zip www
         working-directory: platforms/browser
 
