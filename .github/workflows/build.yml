@@ -25,11 +25,13 @@ jobs:
 
     # Install all the project dependencies
     - name: Install dependencies
-      run: sudo npm ci
+      run: sudo npm install
 
     # Run GULP generating publish files
     - name: GULP publish
-      run: gulp publish
+      uses: elstudio/actions-js-build/build@v2
+      with:
+        args: publish
 
     # Build Browser Version
     - name: Build for Browser
