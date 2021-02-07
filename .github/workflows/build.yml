@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: sudo npm install
 
-      # Install NPM dependencies && run GULP to generate css & js files
+      # run GULP to generate css & js files
       - name: GULP publish
         uses: elstudio/actions-js-build/build@v2
         with:
@@ -41,7 +41,7 @@ jobs:
             cordova build android --no-telemetry
 
       - name: Zip Browser release
-        run: zip -qq -r browser.zip www
+        run: sudo zip -qq -r browser.zip www
         working-directory: platforms/browser
 
       # Create a Release
