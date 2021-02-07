@@ -16,13 +16,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    # Setup the Cordova environment
-    - name: Setup Cordova
-      uses: oxr463/setup-cordova@0.0.2
-      with:
-        exec: |
-          cordova platform add android browser
-
     # Install all the project dependencies
     - name: Install dependencies
       run: sudo npm install
@@ -33,18 +26,27 @@ jobs:
       with:
         args: publish-github
 
-    # Build Browser Version
-    - name: Build for Browser
-      run: cordova build browser --no-telemetry
+      # Setup the Cordova environment & build app
+      - name: Setup Cordova
+        uses: oxr463/setup-cordova@0.0.2
+        with:
+          exec: |
+            cordova platform add android browser &&/
+            cordova build browser --no-telemetry &&/
+            cordova build android --no-telemetry
+
+#    # Build Browser Version
+#    - name: Build for Browser
+#      run: cordova build browser --no-telemetry
 
     - name: Zip Browser release
       uses: montudor/action-zip@v0.1.1
       with:
         args: zip -qq -r browser.zip platforms/browser/www
       
-    # Build Android Version
-    - name: Build for Android
-      run: cordova build android --no-telemetry
+#    # Build Android Version
+#    - name: Build for Android
+#      run: cordova build android --no-telemetry
       
     # Create a Release
     - name: Upload Automated Build
