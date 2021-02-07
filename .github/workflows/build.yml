@@ -31,7 +31,7 @@ jobs:
     - name: GULP publish
       uses: elstudio/actions-js-build/build@v2
       with:
-        args: publish
+        args: publish-github
 
     # Build Browser Version
     - name: Build for Browser
