@@ -13,6 +13,14 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
+      # Get current time
+      - name: Get Time
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          timeZone: 1
+          format: 'YYYY-MM-DD-HH-mm-ss'
+
       # Install zip
       - name: Install zip
         uses: montudor/action-zip@v0.1.1
@@ -25,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: sudo npm install
 
-      # run GULP to generate css & js files
+      # Run GULP to generate css & js files
       - name: GULP publish
         uses: elstudio/actions-js-build/build@v2
         with:
@@ -50,8 +58,8 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: automated-build-${{ github.run_id }}
-          name: Automated Build
+          tag: automated-build-${{ steps.time.outputs.time }}
+          name: Automated Build [${{ steps.time.outputs.time }}]
           allowUpdates: true
           replacesArtifacts: true
           draft: false
