@@ -69,6 +69,6 @@ jobs:
             Automated Build from latest commit using GitHub Actions!
             May or may not work as expected.
 
-            **Build against:** ${{ github.sha }}
+            **Build against:** ${{ github.sha }} on ${{ steps.time.outputs.time }}
             Android: app-debug.apk
             Browser: browser.zip
