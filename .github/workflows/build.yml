@@ -21,9 +21,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-#      # Install all the project dependencies
-#      - name: Install dependencies
-#        run: sudo npm install
+      # Install all the project dependencies
+      - name: Install dependencies
+        run: sudo npm install
 
       # Install NPM dependencies && run GULP to generate css & js files
       - name: GULP publish
