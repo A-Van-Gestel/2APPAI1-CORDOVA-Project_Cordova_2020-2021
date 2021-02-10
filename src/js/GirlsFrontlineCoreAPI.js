@@ -36,6 +36,7 @@ let GirlsFrontlineCoreAPI = function () {
     // Settings
     let setting_sorting_method;
     let setting_tdoll_naming_method;
+    let setting_tdoll_obtain_visibility;
 
     // Local Storage: Favorite dolls list
     let favorite_doll_ids = [];
@@ -409,12 +410,21 @@ let GirlsFrontlineCoreAPI = function () {
         }
 
 
-        let parse_obtain = function (obtain) {
+        let parse_obtain = function (obtain=false) {
             // console.log(obtain)
             let str_obtain = '';
-            obtain.forEach(function (obtain_method) {
-                str_obtain += `<p class="m-0"><b>Obtain: </b>${_i18next(obtain_method.description, 'No Data')}</p>`
-            })
+            if (setting_tdoll_obtain_visibility) {
+                // if T-Doll, Show Obtain Methods
+                if (obtain !== false) {
+                    obtain.forEach(function (obtain_method) {
+                        str_obtain += `<p class="m-0"><b>Obtain: </b>${_i18next(obtain_method.description, 'No Data')}</p>`
+                    })
+                }
+                // if dummy, Show "No Data"
+                else {
+                    str_obtain += `<p class="m-0"><b>Obtain: </b>No Data</p>`
+                }
+            }
 
             return str_obtain;
         }
@@ -538,7 +548,7 @@ let GirlsFrontlineCoreAPI = function () {
             <b>BuildTime: </b>No Data<br>
             <b>Skins: </b>No Data<br>
             <b>Digimind: </b>No Data<br>
-            <b>Obtain: </b>No Data
+            ${_parsers.parse_obtain()}
             
             <h5>Stats</h5>
              <table class="stats-table">
@@ -707,11 +717,24 @@ let GirlsFrontlineCoreAPI = function () {
             }
         }
 
+        let tdoll_obtain_visibility = function (tdoll_obtain_visibility, init=false) {
+            setting_tdoll_obtain_visibility = tdoll_obtain_visibility;
+            // console.log("GFCoreAPI: set_settings: setting_tdoll_obtain_visibility = ", setting_tdoll_obtain_visibility);
+            // Form Selection ReInitialization
+            if (!init) {
+                _reset_dropdowns();
+                reset_html_doll_data();
+                reset_html_doll_data(true,undefined);
+                reset_html_doll_data(undefined,true);
+            }
+        }
+
 
         // ---------- Global Function returns (outside name : inside name) ----------
         return {
             sorting_mode: sorting_mode,
             tdoll_naming_method: tdoll_naming_method,
+            tdoll_obtain_visibility: tdoll_obtain_visibility,
         };
     }()
 

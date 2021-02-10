@@ -19,10 +19,16 @@ let Settings = function () {
         i18next_name : [true, "By name (may contain Chinese)"]
     }
 
+    const tdoll_obtain_visibilities = {
+        hide : [false, "Hide obtain method"],
+        show : [true, "Show obtain method (incomplete & buggy)"]
+    }
+
     // Local Storage: Default setting
     let ls_methods = {
         ls_sorting_method: sorting_methods['name'][0],
-        ls_tdoll_naming_method: tdoll_naming_methods['codename'][0]
+        ls_tdoll_naming_method: tdoll_naming_methods['codename'][0],
+        ls_tdoll_obtain_visibility: tdoll_obtain_visibilities['hide'][0]
     }
 
 
@@ -30,6 +36,7 @@ let Settings = function () {
     let $tabSettings = $('#tabSettings');
     let $settings_sorting_method = $tabSettings.find('#settings_sorting_method');
     let $settings_tdoll_naming_method = $tabSettings.find('#settings_tdoll_naming_method');
+    let $settings_tdoll_obtain_visibility = $tabSettings.find('#settings_tdoll_obtain_visibility');
 
 
 
@@ -43,6 +50,10 @@ let Settings = function () {
 
     $settings_tdoll_naming_method.on('change', function () {
         return _get_dropdown_valueFunction(tdoll_naming_methods, 'ls_tdoll_naming_method', _setLocalStorage.tdoll_naming_method, GirlsFrontlineCoreAPI.set_settings.tdoll_naming_method, $settings_tdoll_naming_method);
+    });
+
+    $settings_tdoll_obtain_visibility.on('change', function () {
+        return _get_dropdown_valueFunction(tdoll_obtain_visibilities, 'ls_tdoll_obtain_visibility', _setLocalStorage.tdoll_obtain_visibility, GirlsFrontlineCoreAPI.set_settings.tdoll_obtain_visibility, $settings_tdoll_obtain_visibility);
     });
 
 
@@ -99,6 +110,9 @@ let Settings = function () {
         // --- T-Doll Naming Method Dropdown ---
         _set_dropdownsFunction(tdoll_naming_methods, $settings_tdoll_naming_method, 'Choose Dropdown Naming Method')
 
+        // --- T-Doll Obtain Visibility Dropdown ---
+        _set_dropdownsFunction(tdoll_obtain_visibilities, $settings_tdoll_obtain_visibility, 'Choose Obtain Visibility')
+
         // Form Selection ReInitialization
         $tabSettings.find('select').formSelect();
     }
@@ -137,11 +151,17 @@ let Settings = function () {
             _setLocalStorageFunction(tdoll_naming_methods, 'ls_tdoll_naming_method', 'setting_tdoll_naming_method')
         };
 
+        let tdoll_obtain_visibility = function () {
+            console.log("Saved T-Doll Obtain visibility settings to Local Storage");
+            _setLocalStorageFunction(tdoll_obtain_visibilities, 'ls_tdoll_obtain_visibility', 'setting_tdoll_obtain_visibility')
+        };
+
 
         // ---------- Global Function returns (outside name : inside name) ----------
         return {
             sorting_method: sorting_method,
             tdoll_naming_method: tdoll_naming_method,
+            tdoll_obtain_visibility: tdoll_obtain_visibility,
         };
     }();
 
@@ -166,6 +186,9 @@ let Settings = function () {
 
         // --- Tdoll Naming Method ---
         _getLocalStorageFunction(tdoll_naming_methods, 'ls_tdoll_naming_method', 'setting_tdoll_naming_method', _setLocalStorage.tdoll_naming_method, $settings_tdoll_naming_method)
+
+        // --- Tdoll Obtain Visibility ---
+        _getLocalStorageFunction(tdoll_obtain_visibilities, 'ls_tdoll_obtain_visibility', 'setting_tdoll_obtain_visibility', _setLocalStorage.tdoll_obtain_visibility, $settings_tdoll_obtain_visibility)
     }
 
 
