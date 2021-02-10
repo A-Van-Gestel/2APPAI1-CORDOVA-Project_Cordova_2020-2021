@@ -5,7 +5,7 @@ let GirlsFrontlineCoreAPI = function () {
 
     // TODO: Information: Skills
     // TODO: Information: Equipment
-    // TODO: Information: Obtain Method
+    // DONE: Information: Obtain Method
     // TODO: Information: Extra: Consumption
     // TODO: Information: Extra: Best Recipe
 
