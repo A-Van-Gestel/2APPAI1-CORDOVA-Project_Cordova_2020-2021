@@ -100,7 +100,7 @@ let Settings = function () {
         _set_dropdownsFunction(tdoll_naming_methods, $settings_tdoll_naming_method, 'Choose Dropdown Naming Method')
 
         // Form Selection ReInitialization
-        $('select').formSelect();
+        $tabSettings.find('select').formSelect();
     }
 
 

@@ -660,6 +660,9 @@ let GirlsFrontlineCoreAPI = function () {
             // Form Selection ReInitialization
             if (!init) {
                 _reset_dropdowns();
+                reset_html_doll_data();
+                reset_html_doll_data(true,undefined);
+                reset_html_doll_data(undefined,true);
             }
         }
 
@@ -670,6 +673,9 @@ let GirlsFrontlineCoreAPI = function () {
             // Form Selection ReInitialization
             if (!init) {
                 _reset_dropdowns();
+                reset_html_doll_data();
+                reset_html_doll_data(true,undefined);
+                reset_html_doll_data(undefined,true);
             }
         }
 
