@@ -256,12 +256,12 @@ let GirlsFrontlineCoreAPI = function () {
         try {
             let dolls_by_buildTime = []
             gfcore.dolls.forEach(function (tdoll) {
-                    if (tdoll.buildTime === input_buildTime && tdoll.id < 20000 && tdoll.rank !== 7) {
-                        // console.log(tdoll.buildTime + " - " + tdoll.codename)
-                        dolls_by_buildTime.push([tdoll.id, _i18next(tdoll.name, tdoll.codename, setting_tdoll_naming_method), tdoll.rank, tdoll.buildTime]);
-                    }
+                // Check if doll has correct BuildTime, is not a MOD, is not a Special, is craftable
+                if (tdoll.buildTime === input_buildTime && tdoll.id < 20000 && tdoll.rank !== 7 && _parsers.isCraftable(tdoll.obtain)) {
+                    // console.log(tdoll.buildTime + " - " + tdoll.codename)
+                    dolls_by_buildTime.push([tdoll.id, _i18next(tdoll.name, tdoll.codename, setting_tdoll_naming_method), tdoll.rank, tdoll.buildTime]);
                 }
-            );
+            });
 
             // console.log("dolls_by_buildTime = ", dolls_by_buildTime)
             if (dolls_by_buildTime.length === 0) {
@@ -409,6 +409,30 @@ let GirlsFrontlineCoreAPI = function () {
         }
 
 
+        let parse_obtain = function (obtain) {
+            // console.log(obtain)
+            let str_obtain = '';
+            obtain.forEach(function (obtain_method) {
+                str_obtain += `<p class="m-0"><b>Obtain: </b>${_i18next(obtain_method.description, 'No Data')}</p>`
+            })
+
+            return str_obtain;
+        }
+
+        let isCraftable = function (obtain) {
+            let craftable = false;
+            obtain.forEach(function (obtain_method) {
+                // Standard: gun_obtain-10000001
+                // Heavy: gun_obtain-10000002
+                if (Object.values(obtain_method).indexOf("gun_obtain-10000001") >= 0 || Object.values(obtain_method).indexOf("gun_obtain-10000002") >= 0) {
+                    // console.log('true')
+                    craftable = true;
+                }
+            })
+            return craftable;
+        }
+
+
         // ---------- Global Function returns (outside name : inside name) ----------
         return {
             parse_rank: parse_rank,
@@ -418,6 +442,8 @@ let GirlsFrontlineCoreAPI = function () {
             parse_formation_buff_tiles: parse_formation_buff_tiles,
             parse_formation_buffs_type: parse_formation_buffs_type,
             parse_formation_buffs: parse_formation_buffs,
+            parse_obtain: parse_obtain,
+            isCraftable: isCraftable,
         };
     }();
 
@@ -439,6 +465,7 @@ let GirlsFrontlineCoreAPI = function () {
             <b>BuildTime: </b>${_parsers.parse_buildtime(doll.buildTime)}<br>
             <b>Skins: </b>${doll.skins.length}<br>
             <b>Digimind: </b>${_parsers.parse_digimind(doll.mindupdate)}
+            ${_parsers.parse_obtain(doll.obtain)}
 
             <h5>Stats</h5>
              <table class="stats-table">
@@ -510,7 +537,8 @@ let GirlsFrontlineCoreAPI = function () {
             <b>Rank: </b>No Data<br>
             <b>BuildTime: </b>No Data<br>
             <b>Skins: </b>No Data<br>
-            <b>Digimind: </b>No Data
+            <b>Digimind: </b>No Data<br>
+            <b>Obtain: </b>No Data
             
             <h5>Stats</h5>
              <table class="stats-table">
@@ -574,7 +602,7 @@ let GirlsFrontlineCoreAPI = function () {
     }
 
 
-    let _i18next = function (input, fallback, use) {
+    let _i18next = function (input, fallback, use=true) {
         if (use) {
             let next = i18next.t('gfcore:' + input.toString())
             // console.log("next = " + next, "| input = " + input, "| fallback = " + fallback)
