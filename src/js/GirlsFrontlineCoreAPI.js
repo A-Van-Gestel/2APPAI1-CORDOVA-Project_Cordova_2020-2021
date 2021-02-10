@@ -63,7 +63,7 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     // Setup i18next
-    i18next.use(i18nextXHRBackend).init({
+    i18next.use(i18nextHttpBackend).init({
         fallbackLng: 'ko-KR',
         lng: 'en-US',
         load: 'currentOnly',
@@ -654,19 +654,23 @@ let GirlsFrontlineCoreAPI = function () {
 
     // ---------- Settings stuff ----------
     let set_settings = function () {
-        let sorting_mode = function (sorting_mode) {
+        let sorting_mode = function (sorting_mode, init=false) {
             setting_sorting_method = sorting_mode;
             // console.log("GFCoreAPI: set_settings: setting_sorting_method = ", setting_sorting_method);
             // Form Selection ReInitialization
-            _reset_dropdowns();
+            if (!init) {
+                _reset_dropdowns();
+            }
         }
 
 
-        let tdoll_naming_method = function (tdoll_naming_method) {
+        let tdoll_naming_method = function (tdoll_naming_method, init=false) {
             setting_tdoll_naming_method = tdoll_naming_method;
             // console.log("GFCoreAPI: set_settings: setting_tdoll_naming_method = ", setting_tdoll_naming_method);
             // Form Selection ReInitialization
-            _reset_dropdowns();
+            if (!init) {
+                _reset_dropdowns();
+            }
         }
 
 

@@ -1,6 +1,7 @@
 'use strict';
 
 const gulp = require('gulp');
+const del = require('del');
 const run = require('gulp-run-command').default;
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
@@ -16,20 +17,35 @@ const terser = require('gulp-terser');
 
 gulp.task('cordova-watch', function () {
     gulp.watch('./src/scss/**/*.scss', gulp.series('sass'));
-    gulp.watch('./src/js/**/*.js').on('change', gulp.series('copy-js'));
+    gulp.watch('./src/js/**/*.js').on('change', gulp.series('copy-src-js'));
     run('cordova run browser --live-reload')();
 });
 
 // Copy MaterializeCSS + jQuery JS-files
 gulp.task('js', function () {
-    return gulp.src(['node_modules/@materializecss/materialize/dist/js/materialize.min.js', 'node_modules/jquery/dist/jquery.min.js'])
-        .pipe(newer('./www/js'))
+    return gulp.src([
+        'node_modules/@materializecss/materialize/dist/js/materialize.min.js',
+        'node_modules/jquery/dist/jquery.min.js',
+        'node_modules/i18next/i18next.min.js',
+        'node_modules/i18next-http-backend/i18nextHttpBackend.min.js'
+        ])
+        .pipe(newer('./www/js/external'))
         .pipe(notify({message: 'Copy JS files'}))
-        .pipe(gulp.dest('./www/js'));
+        .pipe(gulp.dest('./www/js/external'));
 });
 
+
+gulp.task('clean', function(){
+    return del([
+        // here we use a globbing pattern to match everything inside the `js` folder
+        'www/js/**/*',
+        'www/css/**/*',
+    ]);
+});
+
+
 // Copy src-files
-gulp.task('copy-js', function () {
+gulp.task('copy-src-js', function () {
     return gulp.src('./src/js/**/*.js', {base: './src/js/'})
         //.pipe(newer('./www/js'))
         .pipe(gulp.dest('./www/js/'));
@@ -73,7 +89,7 @@ gulp.task('minify-js', function () {
 });
 
 
-gulp.task('default', gulp.series('js', 'copy-js', 'sass', 'cordova-watch'));
+gulp.task('default', gulp.series('clean', 'js', 'copy-src-js', 'sass', 'cordova-watch'));
 gulp.task('minify', gulp.series('minify-css', 'minify-js'));
 gulp.task('publish', gulp.series('js', 'sass', 'minify-css', 'minify-js', function () {run('cordova run browser')()}));
 gulp.task('publish-github', gulp.series('js', 'sass', 'minify-css', 'minify-js'));

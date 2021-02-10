@@ -107,8 +107,9 @@ let Settings = function () {
     // Set settings in other scripts
     let _set_settings = function () {
         console.log("Settings: Settings Loaded");
-        GirlsFrontlineCoreAPI.set_settings.sorting_mode(ls_methods['ls_sorting_method']);
-        GirlsFrontlineCoreAPI.set_settings.tdoll_naming_method(ls_methods['ls_tdoll_naming_method']);
+        GirlsFrontlineCoreAPI.set_settings.sorting_mode(ls_methods['ls_sorting_method'], true);
+        GirlsFrontlineCoreAPI.set_settings.tdoll_naming_method(ls_methods['ls_tdoll_naming_method'], true);
+        GirlsFrontlineCoreAPI.init();
     };
 
 
