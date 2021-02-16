@@ -1,10 +1,17 @@
+/**
+ * @namespace Settings
+ */
 let Settings = function () {
     // TODO: Setting for default tab
     // TODO: Option to clear Favorites
     // TODO: Add sorting method to Dropdown name (example: *** - UZI; 1:00h - UZI)
     // TODO: Add localstorage export & import method
     // ---------- Global Variables & Stuff ----------
-    // key : [function, "Sorting Name"]
+    /**
+     * Contains the sorting methods for the dropdowns.
+     * key : [function, "Sorting Name"]
+     * @type {Object}
+     */
     const sorting_methods = {
         id : [Sorting_methods.array_index_0_number, "By ID"],
         name : [Sorting_methods.array_index_1_string, "By name"],
@@ -14,17 +21,30 @@ let Settings = function () {
         buildTime_reversed : [Sorting_methods.array_index_3_number_reversed, "By build time (high -> low)"],
     }
 
+    /**
+     * Contains the naming convention for the T-Dolls.
+     * key : [boolean, "Sorting Name"]
+     * @type {Object}
+     */
     const tdoll_naming_methods = {
         codename : [false, "By codename"],
         i18next_name : [true, "By name (may contain Chinese)"]
     }
 
+    /**
+     * Contains the obtain visibilities for the T-Dolls.
+     * key : [boolean, "Sorting Name"]
+     * @type {Object}
+     */
     const tdoll_obtain_visibilities = {
         hide : [false, "Hide obtain method"],
         show : [true, "Show obtain method (incomplete & buggy)"]
     }
 
-    // Local Storage: Default setting
+    /**
+     * Local Storage: Default setting
+     * @type {Object}
+     */
     let ls_methods = {
         ls_sorting_method: sorting_methods['name'][0],
         ls_tdoll_naming_method: tdoll_naming_methods['codename'][0],
@@ -58,7 +78,15 @@ let Settings = function () {
 
 
     // --- UI helper functions ---
-    // Dynamic function to get selected value from dropdown
+    /**
+     * Dynamic function to get selected value from dropdown
+     * @param {Object} object_Methods - Contains all the Dropdown config stuff
+     * @param {string} ls_method - LocalStorage setting in ls_methods
+     * @param {Function} setLocalStorageFunction
+     * @param {Function} set_settingsFunction
+     * @param {jQuery} $selector
+     * @private
+     */
     let _get_dropdown_valueFunction = function (object_Methods, ls_method, setLocalStorageFunction, set_settingsFunction, $selector) {
         try {
             let mode = $selector.children("option:selected").val();
@@ -80,6 +108,9 @@ let Settings = function () {
 
 
     // ---------- Function Stuff ----------
+    /**
+     * Sets the settings dropdowns, reads the settings from LocalStorage & Sets the settings in other scripts.
+     */
     let init = function () {
         // Add all the options to there dropdowns
         _set_dropdowns();
@@ -92,7 +123,18 @@ let Settings = function () {
     };
 
 
+    /**
+     * Sets the Settings Dropdowns
+     * @private
+     */
     let _set_dropdowns = function () {
+        /**
+         * Dynamic function to set dropdowns
+         * @param {Object} object_Methods - Contains all the Dropdown config stuff
+         * @param {jQuery} $selector
+         * @param {string} message
+         * @private
+         */
         let _set_dropdownsFunction = function (object_Methods, $selector, message) {
             // --- Setting Methods Dropdown ---
             $selector.empty()            // Empty current dropdown list
@@ -118,7 +160,10 @@ let Settings = function () {
     }
 
 
-    // Set settings in other scripts
+    /**
+     * Set settings in other scripts
+     * @private
+     */
     let _set_settings = function () {
         console.log("Settings: Settings Loaded");
         GirlsFrontlineCoreAPI.set_settings.sorting_mode(ls_methods['ls_sorting_method'], true);
@@ -130,9 +175,18 @@ let Settings = function () {
 
 
     // ---------- Local Storage stuff ----------
-    // Function to write the settings to Local Storage
+    /**
+     * Function to write the settings to Local Storage
+     * @private
+     */
     let _setLocalStorage = function() {
-        // Default Function
+        /**
+         * Dynamic function to set LocalStorage items.
+         * @param {Object} object_Methods - Contains all the Dropdown config stuff
+         * @param {string} ls_method - LocalStorage setting in ls_methods
+         * @param {string} setting_method
+         * @private
+         */
         let _setLocalStorageFunction = function (object_Methods, ls_method, setting_method) {
             for (let key in object_Methods) {
                 let value = object_Methods[key][0]
@@ -167,8 +221,20 @@ let Settings = function () {
     }();
 
 
-    // Read Settings from local storage
+    /**
+     * Read Settings from local storage
+     * @private
+     */
     let _getLocalStorage = function () {
+        /**
+         * Dynamic function to get the items from LocalStorage.
+         * @param {Object} object_Methods - Contains all the Dropdown config stuff
+         * @param {string} ls_method - LocalStorage setting in ls_methods
+         * @param {string} setting_method
+         * @param {Function} setLocalStorageFunction
+         * @param {jQuery} $selector
+         * @private
+         */
         let _getLocalStorageFunction = function (object_Methods, ls_method, setting_method, setLocalStorageFunction, $selector) {
             let ls_method_key = localStorage.getItem(setting_method);
             // console.log(ls_method + "_key = ", ls_method_key)

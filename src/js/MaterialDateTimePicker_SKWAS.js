@@ -1,6 +1,13 @@
+/**
+ * @namespace MaterialDateTimePicker
+ */
 let MaterialDateTimePicker = function () {
     // ---------- Global Variables & Stuff ----------
-    let myDate = new Date(1970,1,1,0,0,0,0); // our baseline Date (00:00:00)
+    /**
+     * Our baseline Date (00:00:00).
+     * @type {Date}
+     */
+    let myDate = new Date(1970,1,1,0,0,0,0);
 
 
     // Cache DOM for performance
@@ -11,6 +18,10 @@ let MaterialDateTimePicker = function () {
 
 
     // ---------- Function Stuff ----------
+    /**
+     * Initialises the TimePicker.
+     * If browser sets up the MaterializeCSS TimePicker.
+     */
     let init = function () {
         // console.log("baseline Date = ", _dateTimetoSeconds(myDate))
         // console.log("baseline Date: HH:MM:SS", dateTimetoString(myDate))
@@ -30,6 +41,9 @@ let MaterialDateTimePicker = function () {
     }
 
 
+    /**
+     * Opens the SKWAS TimePicker.
+     */
     let showTimePicker = function () {
         cordova.plugins.DateTimePicker.show({
             mode: "time",
@@ -44,7 +58,9 @@ let MaterialDateTimePicker = function () {
         })
     }
 
-
+    /**
+     * Get the input date in the HTML5 text field.
+     */
     let getInputDate = function () {
         let buildTime_input = $tdoll_BuildTime.val()
         // console.log("buildTime_input", buildTime_input)
@@ -57,21 +73,40 @@ let MaterialDateTimePicker = function () {
     }
 
 
+    /**
+     * Set the input date in the HTML5 text field.
+     * @param {Date} [date_input=myDate]
+     * @private
+     */
     let _setInputDate = function (date_input = myDate) {
         myDate = date_input
         $tdoll_BuildTime.val(dateTimetoString(myDate))
     }
 
 
+    /**
+     * Converts a DateTime to a string with format "HH:MM:SS".
+     * @param {Date} date_input
+     * @returns {string}
+     */
     let dateTimetoString = function (date_input) {
         return date_input.getHours().toString().padStart(2, '0') + ":" + date_input.getMinutes().toString().padStart(2, '0') + ":" + date_input.getSeconds().toString().padStart(2, '0');
     }
 
 
+    /**
+     * Converts a DateTime to seconds.
+     * @param {Date} date_input
+     * @returns {number}
+     * @private
+     */
     let _dateTimetoSeconds = function (date_input) {
         return (date_input.getTime() - 2674800000) / 1000;
     }
 
+    /**
+     * Fix for the MaterializeCSS TimePicker to use the SKWAS Date based system.
+     */
     let materializecss_TimePicker = function () {
         let time = $tdoll_BuildTime.val();
         $tdoll_BuildTime.val(time + ":00")
