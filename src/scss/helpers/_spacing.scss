@@ -2,50 +2,96 @@
   // Margin
   .m-#{$i} {
     margin: #{$i}rem;
+    &-#{5} {
+      margin: #{$i + 0.5}rem;
+    }
   }
   .mx-#{$i} {
     margin-left: #{$i}rem;
     margin-right: #{$i}rem;
+    &-#{5} {
+      margin-left: #{$i + 0.5}rem;
+      margin-right: #{$i + 0.5}rem;
+    }
   }
   .my-#{$i} {
     margin-top: #{$i}rem;
     margin-bottom: #{$i}rem;
+    &-#{5} {
+      margin-top: #{$i + 0.5}rem;
+      margin-bottom: #{$i + 0.5}rem;
+    }
   }
   .mt-#{$i} {
     margin-top: #{$i}rem;
+    &-#{5} {
+      margin-top: #{$i + 0.5}rem;
+    }
   }
   .mb-#{$i} {
     margin-bottom: #{$i}rem;
+    &-#{5} {
+      margin-bottom: #{$i + 0.5}rem;
+    }
   }
   .ml-#{$i} {
     margin-left: #{$i}rem;
+    &-#{5} {
+      margin-left: #{$i + 0.5}rem;
+    }
   }
   .mr-#{$i} {
     margin-right: #{$i}rem;
+    &-#{5} {
+      margin-right: #{$i + 0.5}rem;
+    }
   }
 
   // Padding
   .p-#{$i} {
     padding: #{$i}rem;
+    &-#{5} {
+      padding: #{$i + 0.5}rem;
+    }
   }
   .px-#{$i} {
     padding-left: #{$i}rem;
     padding-right: #{$i}rem;
+    &-#{5} {
+      padding-left: #{$i + 0.5}rem;
+      padding-right: #{$i + 0.5}rem;
+    }
   }
   .py-#{$i} {
     padding-top: #{$i}rem;
     padding-bottom: #{$i}rem;
+    &-#{5} {
+      padding-top: #{$i + 0.5}rem;
+      padding-bottom: #{$i + 0.5}rem;
+    }
   }
   .pt-#{$i} {
     padding-top: #{$i}rem;
+    &-#{5} {
+      padding-top: #{$i + 0.5}rem;
+    }
   }
   .pb-#{$i} {
     padding-bottom: #{$i}rem;
+    &-#{5} {
+      padding-bottom: #{$i + 0.5}rem;
+    }
   }
   .pl-#{$i} {
     padding-left: #{$i}rem;
+    &-#{5} {
+      padding-left: #{$i + 0.5}rem;
+    }
   }
   .pr-#{$i} {
     padding-right: #{$i}rem;
+    &-#{5} {
+      padding-right: #{$i + 0.5}rem;
+    }
   }
 }

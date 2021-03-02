@@ -3,6 +3,13 @@
   // Digital clock: Background
   .timepicker-digital-display {
     background-color: $gfl-grey-color;
+
+    // Fix jumping timepicker text
+    .timepicker-text-container {
+      .timepicker-display-column {
+        min-width: 149.828px;
+      }
+    }
   }
 
   // Digital clock: Selected time
