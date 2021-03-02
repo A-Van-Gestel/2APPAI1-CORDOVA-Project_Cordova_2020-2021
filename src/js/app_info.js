@@ -1,3 +1,6 @@
+/**
+ * @namespace AppInfo
+ */
 let AppInfo = function () {
     // ---------- Global Variables & Stuff ----------
     // Cache DOM for performance
@@ -12,6 +15,9 @@ let AppInfo = function () {
 
 
     // ---------- Function Stuff ----------
+    /**
+     * Initialises the BuildInfo plugin & sets the info on the HTML5 page.
+     */
     let init = function () {
         console.log("Platform: ", device.platform)
         // Get APP data

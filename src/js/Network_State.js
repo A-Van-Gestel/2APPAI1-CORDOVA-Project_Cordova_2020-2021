@@ -1,9 +1,17 @@
+/**
+ * @namespace NetworkState
+ */
 let NetworkState = function () {
     // ---------- Global Variables & Stuff ----------
+    /**
+     * Contains all the Network States.
+     * @type {Object}
+     */
     let states = {
         '2g' : 'Cell 2G connection',
         '3g' : 'Cell 3G connection',
         '4g' : 'Cell 4G connection',
+        '5g' : 'Cell 5G connection',
         'cellular' : 'Cell generic connection',
         'ethernet' : 'Ethernet connection',
         'none' : 'No network connection',
@@ -35,7 +43,9 @@ let NetworkState = function () {
 
 
     // ---------- Function Stuff ----------
-    // Initialise the Network State Check
+    /**
+     * Initialise the Network State Check.
+     */
     let init = function(){
         // Get current Network State
         let networkState = _getState()
@@ -47,7 +57,11 @@ let NetworkState = function () {
     };
 
 
-    // Get current Network State
+    /**
+     * Get current Network State.
+     * @returns {string}
+     * @private
+     */
     let _getState = function(){
         let networkState = navigator.connection.type;
         console.log('Connection type: ', networkState);
@@ -56,13 +70,18 @@ let NetworkState = function () {
     };
 
 
-    // Show "No network connection" Modal
+    /**
+     * Show "No network connection" Modal.
+     * @private
+     */
     let _show_modal = function () {
         $NetworkModal.modal().modal('open');
     }
 
 
-    // Close "No network connection" Modal
+    /**
+     * Close "No network connection" Modal.
+     */
     let close_modal = function () {
         $NetworkModal.modal().modal('close');
     }

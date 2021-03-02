@@ -1,3 +1,6 @@
+/**
+ * @namespace GirlsFrontlineCoreAPI
+ */
 let GirlsFrontlineCoreAPI = function () {
     // TODO: Equipment
     // TODO: Fairies
@@ -19,7 +22,16 @@ let GirlsFrontlineCoreAPI = function () {
 
     // ---------- Global Variables & Stuff ----------
     // TODO: dynamically populate type buttons
+    /**
+     * Array containing all the T-Doll types.
+     * @type {string[]}
+     */
     const doll_types = ['hg', 'smg', 'rf', 'ar', 'mg', 'sg']
+
+    /**
+     * Object containing all the T-Doll stat types.
+     * @type {Object}
+     */
     const doll_stat_types = {
         armor : 'ARMOR',
         armorPiercing : 'AP',
@@ -197,7 +209,10 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     // ---------- Function Stuff ----------
-    // initialise the systems using the API
+    /**
+     * Initialise the systems using the API
+     * Sets the initial screen state
+     */
     let init = function () {
         // Read Favorite dolls from local storage
         let favorite_doll_ids_str = localStorage.getItem('favorite_doll_ids');
@@ -216,7 +231,11 @@ let GirlsFrontlineCoreAPI = function () {
     };
 
 
-    // Get a list of all T-Dolls of a certain Type
+    /**
+     * Get a list of all T-Dolls of a certain Type
+     * @param {string} input_type
+     * @param {boolean} favorite
+     */
     let get_dolls_by_type = function (input_type = 'hg', favorite = false) {
         // console.log("Input: Type = " + input_type + ",", "Favorite =  " + favorite);
         try {
@@ -251,7 +270,11 @@ let GirlsFrontlineCoreAPI = function () {
     }
 
 
-    // Get a List of all T-Dolls with a certain Build Time
+
+    /**
+     * Get a List of all T-Dolls with a certain Build Time
+     * @param {number} input_buildTime
+     */
     let get_dolls_by_buildTime = function (input_buildTime = 1200) {
         // console.log("Build Time = " + input_buildTime);
         try {
@@ -282,8 +305,13 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     // TODO: favorite & buildTime booleans to Selector
-    // Sets the T-Doll Dropdown content
-
+    /**
+     * Sets the T-Doll Dropdown content
+     * @param input_doll_list
+     * @param {boolean} favorite
+     * @param {boolean} buildTime
+     * @private
+     */
     let _set_doll_selection_dropdown = function (input_doll_list, favorite = false, buildTime = false) {
         let selector = undefined;
 
@@ -306,10 +334,16 @@ let GirlsFrontlineCoreAPI = function () {
         $('select').formSelect();
     }
 
-
-    // Function to hold all the parsing functions
+    /**
+     * Function to hold all the parsing functions
+     * @private
+     */
     let _parsers = function () {
-        // Rank conversion (nr --> stars)
+        /**
+         * Rank conversion (nr --> stars)
+         * @param {number} rank
+         * @returns {string} Returns a list of stars.
+         */
         let parse_rank = function (rank) {
             if (rank === 7) {
                 return "&#10029;"    // Special
@@ -318,7 +352,11 @@ let GirlsFrontlineCoreAPI = function () {
             }
         }
 
-        // Digimind conversion to table
+        /**
+         * Digimind conversion to table
+         * @param {undefined|array} mindupdate
+         * @returns {string}
+         */
         let parse_digimind = function (mindupdate) {
             // Check if mindupdate is 'undefined', if so set to No
             if (mindupdate === undefined) {
@@ -348,7 +386,11 @@ let GirlsFrontlineCoreAPI = function () {
         }
 
 
-        // Convert buildTime (seconds) to String (HH:MM:SS)
+        /**
+         * Convert buildTime (seconds) to String (HH:MM:SS)
+         * @param {number} buildTime
+         * @returns {string}
+         */
         let parse_buildtime = function (buildTime) {
             // Convert seconds to Date
             let BuildTimeOBJ = new Date((buildTime - 3600) * 1000);        // -3600 seconds (1 hour) to count for timezone differences in calculations
@@ -356,6 +398,11 @@ let GirlsFrontlineCoreAPI = function () {
         }
 
 
+        /**
+         *  Makes sure armor is always a number
+         * @param {undefined|number} armor
+         * @returns {number}
+         */
         let parse_armor = function (armor) {
             // Check if Armor is 'undefined', if so set to 0
             if (armor === undefined) {
@@ -366,7 +413,11 @@ let GirlsFrontlineCoreAPI = function () {
         }
 
 
-        // Convert to an indexed array containing the correct tags for each tile
+        /**
+         * Convert to an indexed array containing the correct tags for each tile
+         * @param {Object} effect
+         * @returns {string[]}
+         */
         let parse_formation_buff_tiles = function (effect) {
             let tiles_table = ["", "", "", "", "", "", "", "", ""];
             let tile_doll_center = effect.effectCenter;
@@ -381,7 +432,11 @@ let GirlsFrontlineCoreAPI = function () {
         }
 
 
-        // Convert Buffs Type to <p> tags
+        /**
+         * Convert Buffs Type to <p> tags
+         * @param {string|string[]} effectType
+         * @returns {string}
+         */
         let parse_formation_buffs_type = function (effectType) {
             let tiles_effect_type = ''
             let tiles_doll_effect_type = effectType;
@@ -399,7 +454,11 @@ let GirlsFrontlineCoreAPI = function () {
         }
 
 
-        // Convert Buffs to <p> tags
+        /**
+         * Convert Buffs to <p> tags
+         * @param {Object} gridEffect
+         * @returns {string}
+         */
         let parse_formation_buffs = function (gridEffect) {
             let tiles_effect_table = ''
             let tiles_doll_effect = gridEffect;
@@ -410,12 +469,17 @@ let GirlsFrontlineCoreAPI = function () {
         }
 
 
-        let parse_obtain = function (obtain=false) {
+        /**
+         * Convert obtain to <p> tags
+         * @param {Object|undefined} obtain
+         * @returns {string}
+         */
+        let parse_obtain = function (obtain=undefined) {
             // console.log(obtain)
             let str_obtain = '';
             if (setting_tdoll_obtain_visibility) {
                 // if T-Doll, Show Obtain Methods
-                if (obtain !== false) {
+                if (obtain !== undefined) {
                     obtain.forEach(function (obtain_method) {
                         str_obtain += `<p class="m-0"><b>Obtain: </b>${_i18next(obtain_method.description, 'No Data')}</p>`
                     })
@@ -428,7 +492,11 @@ let GirlsFrontlineCoreAPI = function () {
 
             return str_obtain;
         }
-
+        /**
+         * Checks if doll is craftable
+         * @param {Object} obtain - Usually doll.obtain
+         * @returns {boolean} - True if craftable
+         */
         let isCraftable = function (obtain) {
             let craftable = false;
             obtain.forEach(function (obtain_method) {
@@ -458,7 +526,13 @@ let GirlsFrontlineCoreAPI = function () {
     }();
 
 
-    // Sets the T-Doll HTML Data on screen
+    /**
+     * Sets the T-Doll HTML Data on screen
+     * @param {number} input_id
+     * @param {boolean} [favorite=false]
+     * @param {boolean} [buildTime=false]
+     * @private
+     */
     let _render_html_doll_data = function (input_id, favorite = false, buildTime = false) {
         let doll = gfcore.dolls.find(({id}) => id === input_id);
         // console.log(doll.codename + "_Data = ", doll);
@@ -538,6 +612,11 @@ let GirlsFrontlineCoreAPI = function () {
             }
     }
     // TODO: favorite & buildTime booleans to Selector
+    /**
+     * Resets the HTML5 View.
+     * @param {boolean} [favorite=false]
+     * @param {boolean}  [buildTime=false]
+     */
     let reset_html_doll_data = function (favorite = false, buildTime = false) {
         // Data to HTML
         let doll_data = `
@@ -612,6 +691,14 @@ let GirlsFrontlineCoreAPI = function () {
     }
 
 
+    /**
+     * Converts code to human readable text
+     * @param {string} input
+     * @param {*} fallback
+     * @param {boolean} [use=true]
+     * @returns {*}
+     * @private
+     */
     let _i18next = function (input, fallback, use=true) {
         if (use) {
             let next = i18next.t('gfcore:' + input.toString())
@@ -628,7 +715,10 @@ let GirlsFrontlineCoreAPI = function () {
         }
     }
 
-    // Reset T-Doll dropdowns
+    /**
+     * Reset T-Doll dropdowns
+     * @private
+     */
     let _reset_dropdowns = function () {
         get_dolls_by_type(selected_type);
         get_dolls_by_type(selected_type_favorited, true);
@@ -640,8 +730,14 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     // ---------- Local Storage stuff ----------
-    // Write the Favorite T-Dolls Array to Local Storage
+    /**
+     * Contains all Set LocalStorage functions
+     * @private
+     */
     let _setLocalStorage = function() {
+        /**
+         * Write the Favorite T-Dolls Array to Local Storage
+         */
         let favorited_dolls = function () {
             console.log("Save Favorited T-Dolls to Local Storage");
             // console.log('favorite_doll_ids[]', favorite_doll_ids);
@@ -656,6 +752,11 @@ let GirlsFrontlineCoreAPI = function () {
     }();
 
 
+    /**
+     * Adds Favorite doll id to local array && localstorage.
+     * @param {number} id
+     * @private
+     */
     let _addFavoriteDoll = function(id){
         // console.log('Added favorite T-Doll with ID = ' + id);
         if (!favorite_doll_ids.includes(id)) {
@@ -671,6 +772,11 @@ let GirlsFrontlineCoreAPI = function () {
     };
 
 
+    /**
+     * Deletes Favorite doll id from local array && localstorage.
+     * @param {number} id
+     * @private
+     */
     let _deleteFavoriteDoll = function(id){
         // console.log("Remove favorite T-Doll with ID = ", id);
         if(confirm('Remove this T-Doll?')) {
@@ -691,7 +797,15 @@ let GirlsFrontlineCoreAPI = function () {
 
 
     // ---------- Settings stuff ----------
+    /**
+     * Contains all the settings stuff.
+     */
     let set_settings = function () {
+        /**
+         * Sets the sorting mode used for the dropdowns.
+         * @param sorting_mode
+         * @param {boolean} [init=false] - True delays the dropdown initialisation
+         */
         let sorting_mode = function (sorting_mode, init=false) {
             setting_sorting_method = sorting_mode;
             // console.log("GFCoreAPI: set_settings: setting_sorting_method = ", setting_sorting_method);
@@ -705,6 +819,11 @@ let GirlsFrontlineCoreAPI = function () {
         }
 
 
+        /**
+         * Sets the T-Doll naming method used.
+         * @param tdoll_naming_method
+         * @param {boolean} [init=false] - True delays the dropdown initialisation
+         */
         let tdoll_naming_method = function (tdoll_naming_method, init=false) {
             setting_tdoll_naming_method = tdoll_naming_method;
             // console.log("GFCoreAPI: set_settings: setting_tdoll_naming_method = ", setting_tdoll_naming_method);
@@ -717,6 +836,11 @@ let GirlsFrontlineCoreAPI = function () {
             }
         }
 
+        /**
+         * Sets the T-Doll obtain visibility.
+         * @param {boolean} tdoll_obtain_visibility
+         * @param {boolean} [init=false] - True delays the dropdown initialisation
+         */
         let tdoll_obtain_visibility = function (tdoll_obtain_visibility, init=false) {
             setting_tdoll_obtain_visibility = tdoll_obtain_visibility;
             // console.log("GFCoreAPI: set_settings: setting_tdoll_obtain_visibility = ", setting_tdoll_obtain_visibility);
