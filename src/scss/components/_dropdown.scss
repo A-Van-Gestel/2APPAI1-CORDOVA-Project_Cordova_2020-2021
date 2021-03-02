@@ -1,5 +1,10 @@
 //TODO: Change dropdown colors using MaterializeCSS Variables
 
+// Fix dropdowns
+select {
+  display: none;
+}
+
 // Keep page from jumping when not loaded
 .input-field {
   min-height: 43px;
