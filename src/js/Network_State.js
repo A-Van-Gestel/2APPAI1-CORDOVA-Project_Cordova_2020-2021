@@ -75,7 +75,7 @@ let NetworkState = function () {
      * @private
      */
     let _show_modal = function () {
-        $NetworkModal.modal().modal('open');
+        $NetworkModal.modal({dismissible: false}).modal('open');
     }
 
 
