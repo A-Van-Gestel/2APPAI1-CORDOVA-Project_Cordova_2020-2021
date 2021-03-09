@@ -199,7 +199,7 @@
                         <p class="center-align my-0">Identifier Not Found</p>
                         <p class="center-align mt-0">Ver. x.x.x (Build xxxx)</p>
                     </div>
-                    <a href="https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/#download" target="_blank" class="waves-effect waves-light btn-small gfl-grey">Check for updates</a>
+                    <a id="updateCheckButton" class="waves-effect waves-light btn-small gfl-grey">Check for updates</a>
 
                     <div style="margin-top: 25px">
                         <h6 class="center-align" style="margin-bottom: 3px">Created by</h6>
@@ -226,6 +226,27 @@
                 <a id="NetworkModal_Retry" class="waves-effect waves-green btn-flat">Retry</a>
             </div>
         </div>
+
+
+
+    <!-- Update Modal -->
+    <div id="UpdateModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Updates</h4>
+            <p id="updateInstalledState" class="email mb-0-5"><b>Installed: </b>No Data</p>
+            <p id="updateOnlineState" class="email my-0-5"><b>Online: </b>No Data</p>
+            <p id="updateOnlineDate" class="email my-0-5"><b>Release date: </b>No Data</p>
+            <p class="mt-0-5 mb-0"><b>Online name:</b></p>
+            <p id="updateCommitMessage" class="mt-0 mb-0-5">No commit message.</p>
+            <p class="mt-0-5 mb-0"><b>Online message:</b></p>
+            <p id="updateCommitBody" class="mt-0" style="white-space:pre-wrap;">No commit body.</p>
+
+        </div>
+        <div class="modal-footer">
+            <a id="updateDownloadLink" target="_blank" class="waves-effect waves-light btn-small gfl-grey left">Download</a>
+            <a id="UpdateModal_Retry" class="waves-effect waves-green btn-flat">Refresh</a>
+        </div>
+    </div>
 </main>
 
 
@@ -248,6 +269,7 @@
 <script defer src="js/GirlsFrontlineCoreAPI.js"></script>
 <script defer src="js/MaterialDateTimePicker_SKWAS.js"></script>
 <script defer src="js/Settings.js"></script>
+<script defer src="js/update.js"></script>
 </body>
 </html>
 

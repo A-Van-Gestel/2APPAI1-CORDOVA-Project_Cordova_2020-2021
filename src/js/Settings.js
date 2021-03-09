@@ -6,6 +6,8 @@ let Settings = function () {
     // TODO: Option to clear Favorites
     // TODO: Add sorting method to Dropdown name (example: *** - UZI; 1:00h - UZI)
     // TODO: Add localstorage export & import method
+    // TODO: Add setting to check for Pre-Releases on Update Check
+    // TODO: Add setting to switch between always showing update modal or not
     // ---------- Global Variables & Stuff ----------
     /**
      * Contains the sorting methods for the dropdowns.

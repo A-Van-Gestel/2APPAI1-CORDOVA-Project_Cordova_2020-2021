@@ -95,6 +95,16 @@ let MaterialDateTimePicker = function () {
 
 
     /**
+     * Converts a Date to a string with format "YYYY-MM-DD HH:MM:SS".
+     * @param {Date} date_input
+     * @returns {string}
+     */
+    let datetoString = function (date_input) {
+        return date_input.getFullYear().toString() + "-" + date_input.getMonth().toString().padStart(2, '0') + "-" + date_input.getDay().toString().padStart(2, '0') + " " + date_input.getHours().toString().padStart(2, '0') + ":" + date_input.getMinutes().toString().padStart(2, '0') + ":" + date_input.getSeconds().toString().padStart(2, '0');
+    }
+
+
+    /**
      * Converts a DateTime to seconds.
      * @param {Date} date_input
      * @returns {number}
@@ -125,6 +135,7 @@ let MaterialDateTimePicker = function () {
         getInputDate: getInputDate,
         showTimePicker: showTimePicker,
         dateTimetoString: dateTimetoString,
+        datetoString: datetoString,
         materializecss_TimePicker: materializecss_TimePicker,
     };
 }()
