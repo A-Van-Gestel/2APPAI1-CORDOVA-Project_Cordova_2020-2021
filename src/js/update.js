@@ -39,7 +39,7 @@ let Update = function () {
 
     // Refresh GitHub data
     $UpdateModal_Retry.on('click', function() {
-        _getState();
+        _getState(undefined, true);
     })
 
 
@@ -57,17 +57,19 @@ let Update = function () {
     /**
      * Get current GitHub State.
      * @param {boolean} [dev=false] include pre-releases
+     * @param {boolean} [refresh=false]
      * @returns {JSON}
      * @private
      */
-    let _getState = function(dev=false){
+    let _getState = function(dev=false, refresh=false){
+        let GitStateJSON = JSON;
         if (dev) {
             // All releases: https://api.github.com/repos/A-Van-Gestel/2APPAI1-CORDOVA-Project_Cordova_2020-2021/releases
             $.getJSON("https://api.github.com/repos/A-Van-Gestel/2APPAI1-CORDOVA-Project_Cordova_2020-2021/releases").done(function (json) {
                 // console.log(json);
                 versionOnline = json[0].tag_name;
                 _render_html(json[0]);
-                return json;
+                GitStateJSON = json;
             });
         }
         else {
@@ -76,9 +78,13 @@ let Update = function () {
                 // console.log(json);
                 versionOnline = json.tag_name;
                 _render_html(json);
-                return json;
+                GitStateJSON = json;
             });
         }
+        if (refresh) {
+            M.toast({html: 'Refresh completed', displayLength: 2000, classes: 'gfl-grey'})
+        }
+        return GitStateJSON;
 
     };
 
