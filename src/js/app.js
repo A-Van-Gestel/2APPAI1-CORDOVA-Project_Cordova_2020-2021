@@ -30,6 +30,6 @@ function onDeviceReady() {
     NetworkState.init();                            // Get the Network State on Launch
     GirlsFrontlineCoreAPI.init();
     MaterialDateTimePicker.init();
-    Update.init();
+    // Update.init();       // Now initialized by Settings
     navigator.splashscreen.hide();      // Hide the splashscreen
 }
