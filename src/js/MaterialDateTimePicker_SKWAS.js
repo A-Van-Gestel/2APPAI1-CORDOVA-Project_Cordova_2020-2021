@@ -100,7 +100,15 @@ let MaterialDateTimePicker = function () {
      * @returns {string}
      */
     let datetoString = function (date_input) {
-        return date_input.getFullYear().toString() + "-" + date_input.getMonth().toString().padStart(2, '0') + "-" + date_input.getDay().toString().padStart(2, '0') + " " + date_input.getHours().toString().padStart(2, '0') + ":" + date_input.getMinutes().toString().padStart(2, '0') + ":" + date_input.getSeconds().toString().padStart(2, '0');
+        // console.log("date_input =", date_input)
+        // console.log("getUTCFullYear = ", date_input.getUTCFullYear().toString())
+        // console.log("getUTCMonth + 1 = ", (date_input.getUTCMonth() + 1).toString())
+        // console.log("getUTCDate = ", date_input.getUTCDate().toString())
+        // console.log("getUTCHours = ", date_input.getUTCHours().toString())
+        // console.log("getUTCMinutes = ", date_input.getUTCMinutes().toString())
+        // console.log("getUTCSeconds = ", date_input.getUTCSeconds().toString())
+
+        return date_input.getUTCFullYear().toString() + "-" + (date_input.getUTCMonth() + 1).toString().padStart(2, '0') + "-" + date_input.getUTCDate().toString().padStart(2, '0') + " " + date_input.getUTCHours().toString().padStart(2, '0') + ":" + date_input.getUTCMinutes().toString().padStart(2, '0') + ":" + date_input.getUTCSeconds().toString().padStart(2, '0');
     }
 
 

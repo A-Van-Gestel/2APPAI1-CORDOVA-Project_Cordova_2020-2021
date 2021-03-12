@@ -40,7 +40,13 @@ let Update = function () {
     $UpdateModal_Retry.on('click', function() {
         _getState(setting_dev_builds).then(function(json){
             _render_html(json);
-            M.toast({html: 'Refresh completed', displayLength: 2000, classes: 'gfl-grey'});
+            if (_check_update(true)) {
+                M.toast({html: 'Refresh completed, update found', displayLength: 2000, classes: 'gfl-grey'});
+            }
+            else {
+                M.toast({html: 'Refresh completed, no update found', displayLength: 2000, classes: 'gfl-grey'});
+            }
+
         });
     })
 
@@ -61,16 +67,27 @@ let Update = function () {
     };
 
 
-    let _check_update = function () {
+    /**
+     * Checks if installed version = online version
+     * @returns {boolean} True if update
+     * @param {boolean} [silent=false] - Only returns value
+     * @private
+     */
+    let _check_update = function (silent=false) {
+        let update = false;
         // console.log("Update: versionOnline = ", versionOnline)
         // console.log("Update: versionInstalled = ", BuildInfo.version)
         if (versionOnline !== BuildInfo.version) {
-            if (setting_show_on_startup === "modal") {
-                _show_modal();
-            } else if (setting_show_on_startup === "toast") {
-                M.toast({html: 'An update is available', displayLength: 5000, classes: 'gfl-orange gfl-grey-text'})
+            update = true;
+            if (!silent) {
+                if (setting_show_on_startup === "modal") {
+                    _show_modal();
+                } else if (setting_show_on_startup === "toast") {
+                    M.toast({html: 'An update is available', displayLength: 5000, classes: 'gfl-orange gfl-grey-text'})
+                }
             }
         }
+        return update;
     }
 
 
@@ -109,12 +126,12 @@ let Update = function () {
         let commitBody = GitHubState.body
         let releaseDate = new Date(GitHubState.published_at);
         let releaseDateString = MaterialDateTimePicker.datetoString(releaseDate);
-        let updateDownloadLinkBase = "https://github.com/A-Van-Gestel/2APPAI1-CORDOVA-Project_Cordova_2020-2021/releases/download/";
+        const updateDownloadLinkBase = "https://github.com/A-Van-Gestel/2APPAI1-CORDOVA-Project_Cordova_2020-2021/releases/download/";
 
 
-        $updateInstalledState.html(`<b>Installed: </b>${BuildInfo.version}`);
-        $updateOnlineState.html(`<b>Online: </b>${GitHubState.tag_name}`);
-        $updateOnlineDate.html(`<b>Release date: </b>${releaseDateString}`);
+        $updateInstalledState.html(`${BuildInfo.version}`);
+        $updateOnlineState.html(`${GitHubState.tag_name}`);
+        $updateOnlineDate.html(`${releaseDateString}`);
         $updateCommitMessage.html(`${GitHubState.name}`);
         $updateCommitBody.html(`${commitBody}`);
         if (device.platform === "Android") {

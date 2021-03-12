@@ -2,6 +2,8 @@
  * @namespace GirlsFrontlineCoreAPI
  */
 let GirlsFrontlineCoreAPI = function () {
+    // TODO: Update BuildTime to use UTC standard (Now possibly influenced by time zone)
+
     // TODO: Equipment
     // TODO: Fairies
     // TODO: Heavy Ordnance Corps (HOC)
