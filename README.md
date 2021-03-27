@@ -7,7 +7,7 @@
 - **Direct APK Download**: [download](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/resources/app-debug.apk)  
 - **Online version**: [link](https://vangestelaxel.sinners.be/2APPAI1/cordova/cordova_project/online/)  
 
-<img src="resources/icon.png" width="542" height="542" style="width: 150px; height: 150px" alt="App icon">
+<img src="resources/icon.png" width="150" height="150" alt="App icon">
 
 ## Short description of this app
 My plan is to develop an app that allows the user to quickly find information (name, stats, skills, skins,...) about a specific T-Doll (character) from the game “Girls' Frontline”. To make this work efficiently I can use the `girlsfrontline-core API` that manages this info and keeps it up-to-date.<br />
