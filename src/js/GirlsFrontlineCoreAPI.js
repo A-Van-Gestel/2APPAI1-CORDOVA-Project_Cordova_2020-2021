@@ -128,7 +128,7 @@ let GirlsFrontlineCoreAPI = function () {
         }
         else {
             console.error("Favorite Button: " + id + " is NaN!");
-            M.toast({html: 'No T-Doll selected to Favorite!', displayLength: 2000, classes: 'red accent-4'})
+            M.toast({text: 'No T-Doll selected to Favorite!', displayLength: 2000, classes: 'red accent-4'})
         }
     })
 
@@ -142,7 +142,7 @@ let GirlsFrontlineCoreAPI = function () {
         }
         else {
             console.error("Favorite Button: " + id + " is NaN!");
-            M.toast({html: 'No T-Doll selected to Favorite!', displayLength: 2000, classes: 'red accent-4'})
+            M.toast({text: 'No T-Doll selected to Favorite!', displayLength: 2000, classes: 'red accent-4'})
         }
     })
 
@@ -180,7 +180,7 @@ let GirlsFrontlineCoreAPI = function () {
         }
         else {
             console.error("UnFavorite Button: " + id + " is NaN!");
-            M.toast({html: 'No T-Doll selected to Unfavorite!', displayLength: 2000, classes: 'red accent-4'})
+            M.toast({text: 'No T-Doll selected to Unfavorite!', displayLength: 2000, classes: 'red accent-4'})
         }
     })
 
@@ -291,11 +291,11 @@ let GirlsFrontlineCoreAPI = function () {
 
             // console.log("dolls_by_buildTime = ", dolls_by_buildTime)
             if (dolls_by_buildTime.length === 0) {
-                M.toast({html: 'No T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'gfl-grey'});
+                M.toast({text: 'No T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'gfl-grey'});
             }
             else {
                 // TODO: Fix startup toast spam
-                // M.toast({html: dolls_by_buildTime.length + ' T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'gfl-grey'});
+                // M.toast({text: dolls_by_buildTime.length + ' T-Dolls found with selected Build Time.', displayLength: 2000, classes: 'gfl-grey'});
             }
             dolls_by_buildTime.sort(setting_sorting_method);
             _set_doll_selection_dropdown(dolls_by_buildTime, undefined, true);
@@ -765,11 +765,11 @@ let GirlsFrontlineCoreAPI = function () {
             favorite_doll_ids.push(id);  // Add the ID to the end of Array
             _setLocalStorage.favorited_dolls();
             get_dolls_by_type(selected_type_favorited, true)
-            M.toast({html: 'T-Doll Favorited', displayLength: 2000, classes: 'gfl-grey'})
+            M.toast({text: 'T-Doll Favorited', displayLength: 2000, classes: 'gfl-grey'})
         }
         else {
             // console.error("Not Added favorite T-Doll with ID = " + id + " because of duplicate.")
-            M.toast({html: 'T-Doll already Favorited', displayLength: 2000, classes: 'gfl-grey'})
+            M.toast({text: 'T-Doll already Favorited', displayLength: 2000, classes: 'gfl-grey'})
         }
     };
 
@@ -790,7 +790,7 @@ let GirlsFrontlineCoreAPI = function () {
             _setLocalStorage.favorited_dolls();
             get_dolls_by_type(selected_type_favorited, true)
             reset_html_doll_data(true)
-            M.toast({html: 'T-Doll removed from Favorites', displayLength: 2000, classes: 'gfl-grey'})
+            M.toast({text: 'T-Doll removed from Favorites', displayLength: 2000, classes: 'gfl-grey'})
         }
     };
 

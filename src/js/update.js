@@ -26,7 +26,7 @@ let Update = function () {
     $buttonUpdateCheck.on('click', function() {
         _getState(setting_dev_builds).then(function(json){
             if (!setting_show_modal_always && versionOnline === BuildInfo.version) {
-                M.toast({html: 'No updates found', displayLength: 2000, classes: 'gfl-grey'})
+                M.toast({text: 'No updates found', displayLength: 2000, classes: 'gfl-grey'})
             }
             else {
                 _render_html(json);
@@ -41,10 +41,10 @@ let Update = function () {
         _getState(setting_dev_builds).then(function(json){
             _render_html(json);
             if (_check_update(true)) {
-                M.toast({html: 'Refresh completed, update found', displayLength: 2000, classes: 'gfl-grey'});
+                M.toast({text: 'Refresh completed, update found', displayLength: 2000, classes: 'gfl-grey'});
             }
             else {
-                M.toast({html: 'Refresh completed, no update found', displayLength: 2000, classes: 'gfl-grey'});
+                M.toast({text: 'Refresh completed, no update found', displayLength: 2000, classes: 'gfl-grey'});
             }
 
         });
@@ -83,7 +83,7 @@ let Update = function () {
                 if (setting_show_on_startup === "modal") {
                     _show_modal();
                 } else if (setting_show_on_startup === "toast") {
-                    M.toast({html: 'An update is available', displayLength: 5000, classes: 'gfl-orange gfl-grey-text'})
+                    M.toast({text: 'An update is available', displayLength: 5000, classes: 'gfl-orange gfl-grey-text'})
                 }
             }
         }

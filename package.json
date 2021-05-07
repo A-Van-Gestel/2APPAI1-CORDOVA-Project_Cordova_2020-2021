@@ -22,9 +22,9 @@
     "@lipemat/css-mqpacker": "^8.0.1",
     "@materializecss/materialize": "github:materializecss/materialize#v1-dev",
     "browser-sync": "^2.26.14",
-    "cordova-android": "^9.0.0",
+    "cordova-android": "^9.1.0",
     "cordova-browser": "^6.0.0",
-    "cordova-plugin-browsersync-gen2": "^1.1.7",
+    "cordova-plugin-browsersync-gen2": "github:4sh/cordova-plugin-browsersync-gen2",
     "cordova-plugin-buildinfo": "^4.0.0",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-materialdatetime": "git+https://github.com/moda20/cordova-plugin-MaterialDateTimePicker.git",
@@ -37,13 +37,13 @@
     "gulp-clean-css": "^4.3.0",
     "gulp-dart-sass": "^1.0.2",
     "gulp-newer": "^1.4.0",
-    "gulp-notify": "^3.2.0",
+    "gulp-notify": "^4.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^9.0.0",
     "gulp-run-command": "0.0.10",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-terser": "^2.0.1",
-    "i18next-http-backend": "^1.1.1",
+    "i18next-http-backend": "^1.2.2",
     "jquery": "^3.6.0",
     "skwas-cordova-plugin-datetimepicker": "^2.1.2"
   },
@@ -63,6 +63,6 @@
     ]
   },
   "dependencies": {
-    "i18next": "^19.9.1"
+    "i18next": "^20.2.2"
   }
 }
