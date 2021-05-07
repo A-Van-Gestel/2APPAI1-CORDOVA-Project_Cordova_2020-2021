@@ -20,19 +20,25 @@ jobs:
 
       # Install zip
       - name: Install zip
-        uses: montudor/action-zip@v0.1.1
+        uses: montudor/action-zip@v1
 
       # Checkout repo
       - name: Checkout
         uses: actions/checkout@v2
 
+      # Setup Node
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12
+
       # Install all the project dependencies
       - name: Install dependencies
-        run: sudo npm install
+        run: sudo npm install --legacy-peer-deps
 
       # Run GULP to generate css & js files
       - name: GULP publish
-        uses: elstudio/actions-js-build/build@v2
+        uses: elstudio/actions-js-build/build@v4
         with:
           args: publish-github
 
