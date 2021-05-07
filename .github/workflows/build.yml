@@ -36,11 +36,17 @@ jobs:
       - name: Install dependencies
         run: sudo npm install --legacy-peer-deps
 
-      # Run GULP to generate css & js files
+      # Install & Run GULP to generate css & js files
       - name: GULP publish
-        uses: elstudio/actions-js-build/build@v4
-        with:
-          args: publish-github
+        run: |
+          sudo npm install gulp-cli
+          gulp publish
+
+#      # Run GULP to generate css & js files
+#      - name: GULP publish
+#        uses: elstudio/actions-js-build/build@v4
+#        with:
+#          args: publish-github
 
       # Setup the Cordova environment & build app
       - name: Setup Cordova
