@@ -46,6 +46,7 @@
     "i18next": "^20.2.2",
     "i18next-http-backend": "^1.2.2",
     "jquery": "^3.6.0",
+    "notify-send": "^0.1.2",
     "postcss": "^8.2.14",
     "skwas-cordova-plugin-datetimepicker": "^2.1.2"
   },

@@ -34,9 +34,7 @@ jobs:
 
       # Install all the project dependencies
       - name: Install dependencies
-        run: |
-          sudo npm install --legacy-peer-deps
-          sudo npm install gulp-notify --force
+        run: sudo npm install --legacy-peer-deps
 
       # Install & Run GULP to generate css & js files
       - name: GULP publish
