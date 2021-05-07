@@ -40,11 +40,13 @@
     "gulp-notify": "^4.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^9.0.0",
-    "gulp-run-command": "0.0.10",
+    "gulp-run-command": "^0.0.10",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-terser": "^2.0.1",
+    "i18next": "^20.2.2",
     "i18next-http-backend": "^1.2.2",
     "jquery": "^3.6.0",
+    "postcss": "^8.2.14",
     "skwas-cordova-plugin-datetimepicker": "^2.1.2"
   },
   "cordova": {
@@ -61,8 +63,5 @@
       "browser",
       "android"
     ]
-  },
-  "dependencies": {
-    "i18next": "^20.2.2"
   }
 }
