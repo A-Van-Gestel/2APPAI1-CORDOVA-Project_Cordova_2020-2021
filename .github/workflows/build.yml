@@ -26,12 +26,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-#      # Setup Node
-#      - name: Setup Node
-#        uses: actions/setup-node@v2
-#        with:
-#          node-version: 12
-
       # Install all the project dependencies
       - name: Install dependencies
         run: |
