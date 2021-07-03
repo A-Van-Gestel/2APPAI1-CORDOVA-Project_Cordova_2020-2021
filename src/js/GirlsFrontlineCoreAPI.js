@@ -85,7 +85,7 @@ let GirlsFrontlineCoreAPI = function () {
         ns: ['gfcore'],
         whitelist: ['ko-KR', 'ja-JP', 'en-US', 'zh-CN'],
         backend: {
-            loadPath: 'https://unpkg.com/girlsfrontline-core@2.7.0/build/i18n/{{lng}}/{{ns}}.json',
+            loadPath: 'https://unpkg.com/girlsfrontline-core@latest/build/i18n/{{lng}}/{{ns}}.json',
             crossDomain: true,
         },
     });
