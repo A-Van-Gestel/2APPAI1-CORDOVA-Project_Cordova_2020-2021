@@ -9,6 +9,7 @@
     "browser": "phonegap serve",
     "android": "cordova run android",
     "icon": "cordova-res android --type icon",
+    "icon-adaptive": "cordova-res android --type adaptive-icon",
     "splash": "cordova-res android --type splash",
     "publish": "gulp publish",
     "JSDoc": "jsdoc -c ./conf.json -r -p -P ./package.json -R ./README.md"
