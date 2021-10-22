@@ -38,7 +38,7 @@ jobs:
           sudo npm install -g npm@v8
 
       # Install Cordova-cli
-      - name: Install dependencies
+      - name: Install Cordova-cli
         run: |
           sudo npm install -g cordova
 
@@ -46,8 +46,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo npm install --legacy-peer-deps
-          sudo npm install gulp-cli
-          sudo npm install notify-send --force
+          sudo npm install -g gulp-cli
+          sudo npm install -g notify-send --force
 
       # Install & Run GULP to generate css & js files
       - name: GULP publish
@@ -71,8 +71,8 @@ jobs:
       # Setup Cordova & Build App
       - name: Setup Cordova & Build App
         run: |
-          cordova platform add android browser &&/
-          cordova build browser --no-telemetry &&/
+          cordova platform add android@v9 browser
+          cordova build browser --no-telemetry
           cordova build android --no-telemetry
 
       - name: Zip Browser release
