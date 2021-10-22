@@ -28,26 +28,25 @@ jobs:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '8'
 
-      # Checkout repo
-      - name: Checkout
-        uses: actions/checkout@v2
-
       # Update npm to version 8
       - name: Update npm to version 8
         run: |
           sudo npm install -g npm@v8
 
       # Install Cordova-cli
-      - name: Install Cordova-cli
+      - name: Install Cordova-cli & gulp-cli
         run: |
-          sudo npm install -g cordova
+          sudo npm install -g cordova gulp-cli
+
+      # Checkout repo
+      - name: Checkout
+        uses: actions/checkout@v2
 
       # Install all the project dependencies
       - name: Install dependencies
         run: |
           sudo npm install --legacy-peer-deps
-          sudo npm install -g gulp-cli
-          sudo npm install -g notify-send --force
+          sudo npm install notify-send --force
 
       # Install & Run GULP to generate css & js files
       - name: GULP publish
@@ -68,8 +67,8 @@ jobs:
 #            cordova build browser --no-telemetry &&/
 #            cordova build android --no-telemetry
 
-      # Setup Cordova & Build App
-      - name: Setup Cordova & Build App
+      # Add Cordova Platforms & Build App
+      - name: Add Cordova Platforms & Build App
         run: |
           cordova platform add android@v9 browser
           cordova build browser --no-telemetry
