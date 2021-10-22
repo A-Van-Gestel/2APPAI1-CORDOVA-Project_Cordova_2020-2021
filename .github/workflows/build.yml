@@ -22,9 +22,20 @@ jobs:
       - name: Install zip
         uses: montudor/action-zip@v1
 
+      # Setup Java version 8
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '8'
+
       # Checkout repo
       - name: Checkout
         uses: actions/checkout@v2
+
+      # Update npm to version 8
+      - name: Update npm to version 8
+        run: |
+          sudo npm install npm@v8
 
       # Install all the project dependencies
       - name: Install dependencies
