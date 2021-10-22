@@ -21,7 +21,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@lipemat/css-mqpacker": "^8.0.1",
-    "@materializecss/materialize": "github:materializecss/materialize#v1-dev",
+    "@materializecss/materialize": "github:materializecss/materialize#v2-dev",
     "browser-sync": "^2.26.14",
     "cordova-android": "^9.1.0",
     "cordova-browser": "^6.0.0",
@@ -65,5 +65,8 @@
       "browser",
       "android"
     ]
+  },
+  "dependencies": {
+    "npm": "^8.1.1"
   }
 }
