@@ -35,7 +35,12 @@ jobs:
       # Update npm to version 8
       - name: Update npm to version 8
         run: |
-          sudo npm install npm@v8
+          sudo npm install -g npm@v8
+
+      # Install Cordova-cli
+      - name: Install dependencies
+        run: |
+          sudo npm install -g cordova
 
       # Install all the project dependencies
       - name: Install dependencies
@@ -54,14 +59,21 @@ jobs:
 #        with:
 #          args: publish-github
 
-      # Setup the Cordova environment & build app
-      - name: Setup Cordova
-        uses: oxr463/setup-cordova@0.0.2
-        with:
-          exec: |
-            cordova platform add android browser &&/
-            cordova build browser --no-telemetry &&/
-            cordova build android --no-telemetry
+#      # Setup the Cordova environment & build app
+#      - name: Setup Cordova
+#        uses: oxr463/setup-cordova@0.0.2
+#        with:
+#          exec: |
+#            cordova platform add android browser &&/
+#            cordova build browser --no-telemetry &&/
+#            cordova build android --no-telemetry
+
+      # Setup Cordova & Build App
+      - name: Setup Cordova & Build App
+        run: |
+          cordova platform add android browser &&/
+          cordova build browser --no-telemetry &&/
+          cordova build android --no-telemetry
 
       - name: Zip Browser release
         run: sudo zip -qq -r browser.zip www
